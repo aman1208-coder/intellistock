@@ -17,7 +17,7 @@ The project is developed by a two-person team using alternating ownership. Each 
 
 ## Getting Started
 
-Copy `backend/.env.example` to `backend/.env`, set the database connection and a private `SECRET_KEY`, then install the backend requirements and run the API from the `backend/` directory:
+Copy `backend/.env.example` to `backend/.env`, set the database connection and a private `SECRET_KEY`, then install the backend requirements and run the API from the `backend/` directory. To create the initial administrator, set a strong `INITIAL_ADMIN_PASSWORD` before the first startup; no default administrator password is enabled.
 
 ```bash
 python -m pip install -r requirements.txt

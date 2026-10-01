@@ -1,5 +1,7 @@
 import secrets
+from typing import Optional
 
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,6 +16,7 @@ class Settings(BaseSettings):
     secret_key: str = secrets.token_urlsafe(32)
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
+    initial_admin_password: Optional[SecretStr] = None
 
 
 settings = Settings()
