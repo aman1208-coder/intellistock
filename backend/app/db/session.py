@@ -14,6 +14,10 @@ SQLITE_URL = "sqlite:///./intellistock.db"
 
 
 def _create_engine(database_url: str) -> Engine:
+    if database_url.startswith("postgresql://"):
+        database_url = database_url.replace(
+            "postgresql://", "postgresql+psycopg2://", 1
+        )
     if database_url.startswith("sqlite"):
         connect_args = {"check_same_thread": False}
     elif database_url.startswith(("postgresql://", "postgresql+")):
