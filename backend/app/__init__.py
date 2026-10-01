@@ -1,0 +1,1 @@
+"""IntelliStock backend application package."""
