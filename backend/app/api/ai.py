@@ -1,21 +1,51 @@
-"""Demand forecasting and dynamic reorder endpoints."""
+"""Demand forecasting, chatbot, and recommendation endpoints."""
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.core.security import get_current_user, require_role
 from app.db.session import get_db
-from app.models import User
+from app.models import Product, User
 from app.schemas.forecast import DemandForecastRead, ReorderAnalysisRead
+from app.services.chatbot import answer_stock_query
 from app.services.forecast_service import (
     ProductNotFoundError,
     forecast_product,
     run_reorder_analysis,
 )
+from app.services.recommendation import get_frequently_bought_together
 
 
 router = APIRouter(prefix="/api/ai", tags=["AI Forecasting"])
 MANAGER_ROLES = ["ADMIN", "WAREHOUSE_MANAGER"]
+
+
+class ChatbotRequest(BaseModel):
+    question: str = Field(..., min_length=1, max_length=500)
+
+
+@router.post("/chatbot")
+def chat_with_inventory_bot(
+    payload: ChatbotRequest,
+    db: Session = Depends(get_db),
+    _current_user: User = Depends(get_current_user),
+) -> dict:
+    return answer_stock_query(db, payload.question)
+
+
+@router.get("/recommendations/{product_id}")
+def get_product_recommendations(
+    product_id: int,
+    db: Session = Depends(get_db),
+    _current_user: User = Depends(get_current_user),
+) -> dict:
+    try:
+        if db.get(Product, product_id) is None:
+            raise ProductNotFoundError("Product not found.")
+        return get_frequently_bought_together(db, product_id)
+    except LookupError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
 
 
 @router.get("/forecast/{product_id}", response_model=DemandForecastRead)
