@@ -35,6 +35,15 @@ const fallbackPriorityQueue: PriorityJob[] = [
   { id: 'job-routine', job_type: 'routine_audit', priority: 3 },
 ];
 
+type ToastKind = 'success' | 'warning' | 'danger' | 'info';
+
+type ToastItem = {
+  id: number;
+  title: string;
+  detail: string;
+  kind: ToastKind;
+};
+
 function Lab() {
   return (
     <motion.section
@@ -72,7 +81,15 @@ function Lab() {
   );
 }
 
-function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
+function BankerLab({
+  warehouses,
+  autoUnsafeKey,
+  onToast,
+}: {
+  warehouses: Warehouse[];
+  autoUnsafeKey?: number;
+  onToast?: (title: string, detail: string, kind: ToastKind) => void;
+}) {
   const [selectedWarehouseId, setSelectedWarehouseId] = useState<number>(warehouses[0]?.id ?? fallbackWarehouses[0].id);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<BankerResponse | null>(null);
@@ -83,12 +100,28 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
     }
   }, [selectedWarehouseId, warehouses]);
 
+  useEffect(() => {
+    if (typeof autoUnsafeKey === 'undefined' || autoUnsafeKey === 0) {
+      return;
+    }
+
+    if (!warehouses.length) {
+      return;
+    }
+
+    setSelectedWarehouseId(warehouses[0].id);
+    void runAllocationCheck({ unsafe: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoUnsafeKey]);
+
   const warehouse = warehouses.find((item) => item.id === selectedWarehouseId) ?? warehouses[0] ?? fallbackWarehouses[0];
 
-  const runAllocationCheck = async () => {
+  const runAllocationCheck = async (options?: { unsafe?: boolean }) => {
     if (!warehouse) {
       return;
     }
+
+    const unsafe = Boolean(options?.unsafe);
 
     const payload: BankerRequest = {
       warehouse_id: warehouse.id,
@@ -108,11 +141,17 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
         dock_bays: 7,
         equipment: 6,
       },
-      request_vector: {
-        capacity: 4,
-        dock_bays: 2,
-        equipment: 2,
-      },
+      request_vector: unsafe
+        ? {
+            capacity: warehouse.total_capacity,
+            dock_bays: 9,
+            equipment: 8,
+          }
+        : {
+            capacity: 4,
+            dock_bays: 2,
+            equipment: 2,
+          },
     };
 
     setLoading(true);
@@ -147,6 +186,11 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
           detail: detailMessage,
           safe_sequence: safeSequence,
         });
+        onToast?.(
+          unsafe ? 'Deadlock prevention triggered' : 'Banker check rejected',
+          unsafe ? 'Unsafe warehouse claim blocked before resource exhaustion.' : detailMessage,
+          'danger',
+        );
         return;
       }
 
@@ -155,15 +199,23 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
         detail: 'Request approved with a safe execution order.',
         safe_sequence: Array.isArray(data.safe_sequence) ? (data.safe_sequence as string[]) : undefined,
       });
+      onToast?.(
+        'Allocation approved',
+        unsafe ? 'Unsafe request was prevented before granting the warehouse claim.' : 'Safe sequence verified for the next allocation.',
+        'success',
+      );
     } catch (error) {
+      const message = `Offline fallback: ${error instanceof Error ? error.message : 'Unable to reach the API service.'}`;
       setResult({
         status: 'rejected',
-        detail: `Offline fallback: ${error instanceof Error ? error.message : 'Unable to reach the API service.'}`,
+        detail: message,
       });
+      onToast?.('Banker check offline', message, 'warning');
     } finally {
       setLoading(false);
     }
   };
+
 
   return (
     <motion.section
@@ -191,7 +243,7 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
           </select>
         </label>
 
-        <button type="button" onClick={runAllocationCheck} disabled={loading}>
+        <button type="button" onClick={() => void runAllocationCheck()} disabled={loading}>
           {loading ? 'Testing safety...' : 'Run Bankers check'}
         </button>
       </div>
@@ -222,9 +274,10 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
           <p>{result.detail ?? 'Allocation state updated.'}</p>
           {result.safe_sequence && result.safe_sequence.length > 0 ? (
             <motion.strong
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.08, duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.97, x: -8 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 26 }}
+              style={{ willChange: 'transform, opacity' }}
             >
               {result.safe_sequence.join(' → ')}
             </motion.strong>
@@ -245,8 +298,39 @@ function BankerLab({ warehouses }: { warehouses: Warehouse[] }) {
   );
 }
 
-function ConcurrencyLab() {
-  const [mode, setMode] = useState<'safe' | 'unsafe'>('safe');
+function ConcurrencyLab({
+  initialMode = 'safe',
+  flashKey,
+  onModeChange,
+  onToast,
+}: {
+  initialMode?: 'safe' | 'unsafe';
+  flashKey?: number;
+  onModeChange?: (mode: 'safe' | 'unsafe') => void;
+  onToast?: (title: string, detail: string, kind: ToastKind) => void;
+}) {
+  const [mode, setMode] = useState<'safe' | 'unsafe'>(initialMode);
+  const [highlightedRows, setHighlightedRows] = useState<string[]>([]);
+
+  useEffect(() => {
+    setMode(initialMode);
+  }, [initialMode]);
+
+  useEffect(() => {
+    if (!flashKey) {
+      return;
+    }
+
+    setMode('safe');
+    setHighlightedRows(['thread-03', 'thread-04', 'thread-05']);
+    onToast?.('Flash sale race check', 'Low-stock inventory was safely serialized under row-level locking.', 'success');
+
+    const timer = window.setTimeout(() => {
+      setHighlightedRows([]);
+    }, 1400);
+
+    return () => window.clearTimeout(timer);
+  }, [flashKey, onToast]);
 
   const threads = Array.from({ length: 8 }, (_, index) => {
     const safeBusy = 32 + index * 10;
@@ -288,17 +372,34 @@ function ConcurrencyLab() {
       </div>
 
       <div className="mode-toggle">
-        <button type="button" className={mode === 'safe' ? 'primary' : ''} onClick={() => setMode('safe')}>
+        <button
+          type="button"
+          className={mode === 'safe' ? 'primary' : ''}
+          onClick={() => {
+            setMode('safe');
+            onModeChange?.('safe');
+          }}
+        >
           Safe mode
         </button>
-        <button type="button" className={mode === 'unsafe' ? 'primary' : ''} onClick={() => setMode('unsafe')}>
+        <button
+          type="button"
+          className={mode === 'unsafe' ? 'primary' : ''}
+          onClick={() => {
+            setMode('unsafe');
+            onModeChange?.('unsafe');
+          }}
+        >
           Unsafe mode
         </button>
       </div>
 
       <div className="timeline-wrap">
         {threads.map((thread, index) => (
-          <div key={thread.id} className="timeline-row">
+          <div
+            key={thread.id}
+            className={`timeline-row ${highlightedRows.includes(thread.id) ? 'row-highlight' : ''}`}
+          >
             <span className="thread-label">{thread.label}</span>
             <div className="timeline-track">
               <motion.div
@@ -317,7 +418,17 @@ function ConcurrencyLab() {
   );
 }
 
-function PrioritySchedulerPanel({ products }: { products: Product[] }) {
+function PrioritySchedulerPanel({
+  products,
+  onQueueCountChange,
+  demoQueueKey,
+  onToast,
+}: {
+  products: Product[];
+  onQueueCountChange?: (count: number) => void;
+  demoQueueKey?: number;
+  onToast?: (title: string, detail: string, kind: ToastKind) => void;
+}) {
   const [jobs, setJobs] = useState<PriorityJob[]>(fallbackPriorityQueue);
   const [selectedProductId, setSelectedProductId] = useState<number>(products[0]?.id ?? fallbackProducts[0].id);
   const [message, setMessage] = useState('Emergency stockouts are prioritized ahead of routine inventory tasks.');
@@ -348,6 +459,46 @@ function PrioritySchedulerPanel({ products }: { products: Product[] }) {
     [jobs],
   );
 
+  useEffect(() => {
+    onQueueCountChange?.(sortedJobs.length);
+  }, [onQueueCountChange, sortedJobs.length]);
+
+  useEffect(() => {
+    if (!demoQueueKey) {
+      return;
+    }
+
+    const routineOne: PriorityJob = {
+      id: `demo-routine-${Date.now()}-1`,
+      job_type: 'routine_audit',
+      priority: 3,
+    };
+    const routineTwo: PriorityJob = {
+      id: `demo-routine-${Date.now()}-2`,
+      job_type: 'routine_audit',
+      priority: 3,
+    };
+
+    setJobs((current) => [routineOne, routineTwo, ...current]);
+    setMessage('Two routine audits were added ahead of the emergency stockout check.');
+    onToast?.('Routine audits queued', 'Two low-priority jobs were positioned in the queue before the emergency task.', 'info');
+
+    const emergencyJob: PriorityJob = {
+      id: `demo-emergency-${Date.now()}`,
+      job_type: 'inventory_check',
+      priority: 1,
+      product_id: selectedProductId ?? products[0]?.id ?? fallbackProducts[0].id,
+    };
+
+    const timer = window.setTimeout(() => {
+      setJobs((current) => [emergencyJob, ...current]);
+      setMessage('Emergency stockout preemption engaged: the critical inventory job jumped to the top of the queue.');
+      onToast?.('Emergency stockout preempted', 'The urgent replenishment task jumped straight to the front of the scheduler.', 'warning');
+    }, 360);
+
+    return () => window.clearTimeout(timer);
+  }, [demoQueueKey, onToast, products, selectedProductId]);
+
   const queueJob = async (kind: QueueKind) => {
     const productId = selectedProductId ?? products[0]?.id ?? fallbackProducts[0].id;
     const payload =
@@ -369,18 +520,36 @@ function PrioritySchedulerPanel({ products }: { products: Product[] }) {
         body: JSON.stringify(payload),
       });
 
-      setJobs((current) => [created, ...current]);
+      const nextJobs = [created, ...jobs];
+      setJobs(nextJobs);
+      onQueueCountChange?.(nextJobs.length);
       setMessage(
         kind === 'inventory_check'
           ? 'Emergency stockout queued and promoted to the head of the scheduler.'
           : 'Routine audit queued behind urgent replenishment tasks.',
       );
+      onToast?.(
+        kind === 'inventory_check' ? 'Emergency job dispatched' : 'Routine audit queued',
+        kind === 'inventory_check'
+          ? 'Critical stockout job was pushed to the front of the scheduler.'
+          : 'A routine audit was queued behind urgent replenishment work.',
+        kind === 'inventory_check' ? 'warning' : 'info',
+      );
     } catch {
-      setJobs((current) => [offlineJob, ...current]);
+      const nextJobs = [offlineJob, ...jobs];
+      setJobs(nextJobs);
+      onQueueCountChange?.(nextJobs.length);
       setMessage(
         kind === 'inventory_check'
           ? 'Offline demo queue: emergency stockout promoted ahead of routine work.'
           : 'Offline demo queue: routine audit sits behind urgent replenishment work.',
+      );
+      onToast?.(
+        kind === 'inventory_check' ? 'Offline job queued' : 'Routine audit queued',
+        kind === 'inventory_check'
+          ? 'The scheduler demo promoted the emergency task without the backend.'
+          : 'The demo queue inserted the audit behind urgent work.',
+        'info',
       );
     }
   };
@@ -436,12 +605,13 @@ function PrioritySchedulerPanel({ products }: { products: Product[] }) {
           {sortedJobs.map((job) => (
             <motion.li
               key={job.id}
-              layout
+              layout="position"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 28 }}
               className="queue-item"
+              style={{ willChange: 'transform, opacity' }}
             >
               <div>
                 <span className={`priority-badge priority-${job.priority}`}>
@@ -470,6 +640,20 @@ function PrioritySchedulerPanel({ products }: { products: Product[] }) {
 export default function Dashboard() {
   const [warehouses, setWarehouses] = useState<Warehouse[]>(fallbackWarehouses);
   const [products, setProducts] = useState<Product[]>(fallbackProducts);
+  const [priorityQueueCount, setPriorityQueueCount] = useState<number>(fallbackPriorityQueue.length);
+  const [demoMode, setDemoMode] = useState<'safe' | 'unsafe'>('safe');
+  const [flashKey, setFlashKey] = useState(0);
+  const [bankerAutoKey, setBankerAutoKey] = useState(0);
+  const [queueDemoKey, setQueueDemoKey] = useState(0);
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
+
+  const pushToast = (title: string, detail: string, kind: ToastKind = 'info') => {
+    const toast = { id: Date.now() + Math.random(), title, detail, kind };
+    setToasts((current) => [...current, toast]);
+    window.setTimeout(() => {
+      setToasts((current) => current.filter((item) => item.id !== toast.id));
+    }, 3500);
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -493,6 +677,23 @@ export default function Dashboard() {
 
     void loadData();
   }, []);
+
+  const handleDemoOne = () => {
+    setDemoMode('safe');
+    setFlashKey((current) => current + 1);
+    pushToast('Flash sale race check', 'Low-stock inventory was routed through the safe locking path.', 'success');
+  };
+
+  const handleDemoTwo = () => {
+    setDemoMode('unsafe');
+    setBankerAutoKey((current) => current + 1);
+    pushToast('Deadlock risk test', 'The banker simulation is evaluating the unsafe allocation path.', 'warning');
+  };
+
+  const handleDemoThree = () => {
+    setQueueDemoKey((current) => current + 1);
+    pushToast('Emergency queue preemption', 'Two routine audits are being staged before the emergency stockout dispatch.', 'info');
+  };
 
   return (
     <motion.div
@@ -524,12 +725,66 @@ export default function Dashboard() {
         </nav>
       </motion.header>
 
+      <motion.div className="system-hud glass-panel" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+        <div className="hud-row">
+          <span className="hud-pill">● DBMS Concurrency: Row-Level Locking (with_for_update)</span>
+          <span className="hud-pill">● OS Daemon: Banker's Deadlock &amp; Priority Queue Active</span>
+          <span className="hud-pill">● AI Engine: 14-Day Demand Forecaster</span>
+        </div>
+        <span className="hud-live-badge">Live queue: {priorityQueueCount}</span>
+      </motion.div>
+
+      <motion.section className="viva-demo-bar glass-panel" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+        <div className="section-heading demo-heading">
+          <div>
+            <span className="eyebrow">Viva demo mode</span>
+            <h2>Scenario playback</h2>
+          </div>
+        </div>
+        <div className="demo-actions">
+          <button type="button" className="demo-button" onClick={handleDemoOne}>
+            Demo 1: Flash Sale Race Condition
+          </button>
+          <button type="button" className="demo-button" onClick={handleDemoTwo}>
+            Demo 2: Warehouse Deadlock Risk
+          </button>
+          <button type="button" className="demo-button" onClick={handleDemoThree}>
+            Demo 3: Emergency Stockout Preemption
+          </button>
+        </div>
+      </motion.section>
+
       <Lab />
-      <BankerLab warehouses={warehouses} />
-      <ConcurrencyLab />
-      <PrioritySchedulerPanel products={products} />
+      <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onToast={pushToast} />
+      <ConcurrencyLab initialMode={demoMode} flashKey={flashKey} onModeChange={setDemoMode} onToast={pushToast} />
+      <PrioritySchedulerPanel
+        products={products}
+        onQueueCountChange={setPriorityQueueCount}
+        demoQueueKey={queueDemoKey}
+        onToast={pushToast}
+      />
       <ProductsTable products={products} />
       <Chatbot products={products} />
+
+      <AnimatePresence>
+        {toasts.length > 0 ? (
+          <motion.div className="toast-stack" initial={false}>
+            {toasts.map((toast) => (
+              <motion.div
+                key={toast.id}
+                className={`toast-item ${toast.kind}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <strong>{toast.title}</strong>
+                <span>{toast.detail}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </motion.div>
   );
 }

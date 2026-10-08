@@ -1,27 +1,65 @@
 # IntelliStock
 
-IntelliStock is an AI-based inventory management system that demonstrates operating-system concurrency control and database transaction safety alongside practical inventory tools. It brings together process synchronization, the Banker's algorithm for warehouse resource allocation, priority scheduling, database row-level locking with `SELECT ... FOR UPDATE`, AI-powered demand forecasting, and a live database chatbot.
+IntelliStock is an AI-based inventory management system that demonstrates operating-system concurrency control and database transaction safety alongside practical inventory tools. It combines process synchronization, the Banker's algorithm for warehouse resource allocation, priority scheduling, row-level locking with `SELECT ... FOR UPDATE`, AI-powered demand forecasting, and a live database chatbot into a single interactive dashboard.
 
-## Architecture
+## Phase 2 Feature Summary
 
-- `backend/`: FastAPI service, application configuration, API routes, and database integration.
-- `frontend/`: Web client for inventory workflows and operational insights.
-- `ml_models/`: Forecasting and AI components.
-- `docker/`: Container and local deployment configuration.
+The project now includes a complete operational dashboard and backend service layer with the following highlights:
 
-The backend is organized into `core/` for configuration and security, `db/` for database setup and shared models, and `api/` for HTTP endpoints.
+- Architecture HUD: live system state banner showing concurrency, OS daemon activity, and AI forecasting status
+- Viva Demo Bar: quick scenario runner for flash-sale race conditions, deadlock avoidance, and emergency stockout preemption
+- Concurrency Waterfall: thread-based visualization of safe vs. unsafe locking behavior
+- Banker's Lab: multi-resource allocation simulation for capacity, dock bays, and equipment
+- Priority Queue Scheduler: non-preemptive priority queue with emergency stockout jumps to the front
+- AI Demand Forecaster: 14-day demand prediction using regression-based forecasting logic
+- Live Database Chatbot: natural-language inventory assistance for stock, capacity, and reorder questions
 
-## Team Workflow
+## System Architecture
 
-The project is developed by a two-person team using alternating ownership. Each phase is implemented on a focused feature branch, verified before it is shared, and merged into `main` so the next member can build on the latest integrated state. Keep commits scoped to the active phase and coordinate before merging concurrent work.
+- `backend/`: FastAPI application, API routes, business logic, database sessions, and security configuration
+- `frontend/`: React + Vite dashboard and interactive monitoring UI
+- `ml_models/`: forecasting and AI reasoning modules
+- `docker/`: containerization and local deployment support
 
-## Getting Started
+## Core Technologies
 
-Copy `backend/.env.example` to `backend/.env`, set the database connection and a private `SECRET_KEY`, then install the backend requirements and run the API from the `backend/` directory. To create the initial administrator, set a strong `INITIAL_ADMIN_PASSWORD` before the first startup; no default administrator password is enabled.
+- FastAPI for server-side APIs and business workflows
+- PostgreSQL / SQLite for persistence and concurrency testing
+- React + Vite for a responsive operational dashboard
+- Tailwind-inspired styling and glassmorphism panels for visual clarity
+- Framer Motion for smooth scenario playback and dashboard animation
+
+## Setup and Execution
+
+### Backend
+
+From the project root, install the backend dependencies and start the API:
 
 ```bash
+cd backend
 python -m pip install -r requirements.txt
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --port 8000
 ```
 
 The API health check is available at `http://127.0.0.1:8000/health`.
+
+### Frontend
+
+From the project root, install the frontend dependencies and run the dashboard:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The React application will be served through the Vite development server for local interaction.
+
+## Project Workflow
+
+The project is organized for phased development and validation. Each feature set is implemented, verified, and merged into the main branch once it passes the relevant build and runtime checks.
+
+## Notes
+
+The dashboard is intentionally designed to demonstrate both ideal safe behavior and risky unsafe states so the user can compare system behavior under concurrency pressure, deadlock risk, and scheduling stress in a controlled visual environment.
+
