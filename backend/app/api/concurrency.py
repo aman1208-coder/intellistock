@@ -13,6 +13,7 @@ from app.services.banker import (
     configure_warehouse_resources,
     get_warehouse_state,
     request_allocation,
+    reset_warehouse_state,
     rollback_allocation,
 )
 from app.services.priority_scheduler import (
@@ -247,6 +248,22 @@ def transact_safe_endpoint(
 ):
     return _run_sale(transact_safe, payload.product_id, payload.quantity, db)
 
+@router.post("/reset-warehouse-state/{warehouse_id}")
+def reset_warehouse_resources(
+    warehouse_id: int,
+    db: Session = Depends(get_db),
+    _current_user: User = Depends(require_role(["ADMIN"])),
+) -> dict:
+    """Release every Banker's allocation for a warehouse so the safety demo can be repeated."""
+    warehouse = db.query(Warehouse).filter(Warehouse.id == warehouse_id).with_for_update().first()
+    if warehouse is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Warehouse not found")
+    state = get_warehouse_state(warehouse_id)
+    held = sum(vector[0] for vector in state["allocation"].values()) if state else 0
+    reset_warehouse_state(warehouse_id)
+    warehouse.available_capacity = min(warehouse.total_capacity, warehouse.available_capacity + held)
+    db.commit()
+    return {"warehouse_id": warehouse_id, "released_capacity": held, "available_capacity": warehouse.available_capacity}
 
 @router.post(
     "/transact-unsafe",

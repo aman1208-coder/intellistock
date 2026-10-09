@@ -5,6 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from app.services.banker import (
     configure_warehouse_resources,
+    get_warehouse_state,
     is_safe_state,
     request_allocation,
     reset_warehouse_state,
@@ -71,6 +72,26 @@ class BankersAlgorithmTests(unittest.TestCase):
                     max_claim=[3, 3, 2],
                 )
             )
+        finally:
+            reset_warehouse_state(warehouse_id)
+
+    def test_reset_warehouse_state_restores_capacity(self) -> None:
+        warehouse_id = 930003
+        try:
+            configure_warehouse_resources(warehouse_id, [9, 6, 4], [9, 6, 4])
+            approved = request_allocation(
+                warehouse_id,
+                [2, 1, 1],
+                process_id="reset-demo",
+                max_claim=[4, 3, 2],
+            )
+            self.assertTrue(approved)
+            state = get_warehouse_state(warehouse_id)
+            self.assertIsNotNone(state)
+            self.assertEqual(state["available"], [7, 5, 3])
+
+            reset_warehouse_state(warehouse_id)
+            self.assertIsNone(get_warehouse_state(warehouse_id))
         finally:
             reset_warehouse_state(warehouse_id)
 
