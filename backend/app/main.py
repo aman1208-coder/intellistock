@@ -11,6 +11,7 @@ from app.api.transactions import router as transactions_router
 from app.api.warehouses import router as warehouses_router
 from app.db.init_db import init_db
 from app.db.session import SessionLocal
+from app.core.config import settings
 
 
 @asynccontextmanager
@@ -24,7 +25,8 @@ app = FastAPI(title="IntelliStock API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_origins=[origin.strip() for origin in settings.cors_origins.split(",") if origin.strip()],
+    allow_origin_regex=r"https://.*\.devtunnels\.ms",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
