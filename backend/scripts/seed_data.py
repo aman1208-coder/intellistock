@@ -87,6 +87,11 @@ PRODUCT_DATA = (
     ("SAFE-004", "First Aid Kit 50-person", "Safety", "64.00", 24, 6),
     ("SAFE-005", "Ear Protection Muffs", "Safety", "24.95", 44, 10),
     ("SAFE-006", "Cut-Resistant Gloves Pair", "Safety", "15.99", 92, 20),
+    ("DEMO-ZERO-001", "Demo Zero-Stock Scanner", "Electronics", "49.99", 0, 5),
+    ("DEMO-ZERO-002", "Demo Zero-Stock Safety Kit", "Safety", "19.99", 0, 4),
+    ("DEMO-LOW-001", "Demo Low-Stock Dock", "Electronics", "29.99", 3, 8),
+    ("DEMO-LOW-002", "Demo Low-Stock Drill", "Hardware", "39.99", 2, 7),
+    ("DEMO-LOW-003", "Demo Low-Stock Gloves", "Safety", "9.99", 4, 10),
 )
 
 CATEGORY_SUPPLIER = {
