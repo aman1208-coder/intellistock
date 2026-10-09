@@ -18,7 +18,7 @@ const previewSuggestions = [
 ];
 
 export default function Chatbot({ products }: { products?: Product[] }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([

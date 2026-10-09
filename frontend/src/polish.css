@@ -1,0 +1,125 @@
+/* Compact cards (so the solar system stays visible) + entrance animations. Transform/opacity only: cheap. */
+
+/* ---------- login ---------- */
+.lg-page { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+.lg-card { width: min(720px, 100%); display: grid; grid-template-columns: .95fr 1fr; border-radius: 22px; overflow: hidden;
+  background: linear-gradient(160deg, rgba(40,22,86,.88), rgba(18,10,40,.9)); border: 1px solid rgba(190,160,255,.28);
+  box-shadow: 0 24px 60px rgba(6,2,20,.6), 0 0 0 1px rgba(255,255,255,.03) inset; }
+.lg-pitch { padding: 26px 26px; background: linear-gradient(180deg, rgba(255,255,255,.04), transparent); border-right: 1px solid rgba(190,160,255,.16); display: flex; flex-direction: column; gap: 14px; }
+.lg-brand { display: flex; align-items: center; gap: 14px; }
+.lg-brand small, .lg-form > small { font-size: 10.5px; letter-spacing: .14em; color: #8fd8f5; }
+.lg-brand h1 { margin: 2px 0 0; font-size: 1.7rem; font-weight: 650; letter-spacing: -.01em; }
+.lg-pitch p { margin: 0; font-size: .92rem; line-height: 1.5; color: #cdbff0; }
+.lg-pitch ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: .88rem; color: #e6dcff; }
+.lg-pitch li { display: flex; align-items: center; gap: 9px; }
+.lg-pitch li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 8px #67e8f9; flex: none; }
+.lg-orbit { position: relative; width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px dashed rgba(196,168,255,.55); animation: lg-spin 9s linear infinite; }
+.lg-orbit::before { content: ''; position: absolute; inset: 13px; border-radius: 50%; background: radial-gradient(circle, #fff3c4, #ff9a2f); box-shadow: 0 0 14px rgba(255,160,50,.8); }
+.lg-orbit i { position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #67e8f9; box-shadow: 0 0 10px #67e8f9; }
+@keyframes lg-spin { to { transform: rotate(360deg); } }
+
+.lg-form { padding: 26px; display: grid; gap: 11px; align-content: start; }
+.lg-form h2 { margin: 0 0 4px; font-size: 1.4rem; font-weight: 650; }
+.lg-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(255,255,255,.06); }
+.lg-tabs button { position: relative; border: 0; background: none; color: #cdbff0; padding: 8px; border-radius: 9px; font: inherit; font-size: .9rem; cursor: pointer; }
+.lg-tabs button[aria-selected='true'] { color: #fff; }
+.lg-pill { position: absolute; inset: 0; border-radius: 9px; background: linear-gradient(135deg, rgba(139,92,246,.75), rgba(217,70,239,.6)); }
+.lg-tabs span:not(.lg-pill) { position: relative; }
+.lg-form input { font: inherit; font-size: .92rem; color: #fff; padding: 10px 12px; border-radius: 10px; background: rgba(8,4,22,.55); border: 1px solid rgba(190,160,255,.22); transition: border-color .2s, box-shadow .2s; }
+.lg-form input::placeholder { color: #8d7db3; }
+.lg-form input:focus { outline: none; border-color: #67e8f9; box-shadow: 0 0 0 3px rgba(103,232,249,.18); }
+.lg-primary { padding: 11px; border: 0; border-radius: 10px; font: inherit; font-weight: 600; color: #fff; cursor: pointer; background: linear-gradient(135deg, #8b5cf6, #d946ef); box-shadow: 0 8px 22px rgba(139,92,246,.4); }
+.lg-primary:disabled { opacity: .6; cursor: wait; }
+.lg-ghost { padding: 9px; border-radius: 10px; font: inherit; font-size: .88rem; color: #d6c8f5; background: transparent; border: 1px solid rgba(190,160,255,.28); cursor: pointer; transition: background .2s; }
+.lg-ghost:hover { background: rgba(255,255,255,.06); }
+.lg-error { margin: 0; font-size: .85rem; color: #ff9db0; }
+.lg-card button:focus-visible { outline: 2px solid #67e8f9; outline-offset: 2px; }
+@media (max-width: 640px) { .lg-card { grid-template-columns: 1fr; } .lg-pitch { border-right: 0; border-bottom: 1px solid rgba(190,160,255,.16); padding: 18px 20px; } .lg-pitch ul { display: none; } .lg-form { padding: 20px; } }
+
+/* ---------- dashboard: smaller cards, more sky ---------- */
+body .dashboard-shell { width: min(1000px, calc(100% - 32px)); margin: 20px auto; gap: 14px; }
+body .glass-panel { padding: 14px 18px; border-radius: 16px; }
+body .tile { padding: 14px 16px; border-radius: 14px; }
+body .kpi strong { font-size: 22px; margin: 4px 0 8px; }
+body .donut { width: 120px; height: 120px; }
+body .kpi-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+body .kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--panel-line);
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(56,31,108,.82), rgba(28,14,60,.87)) !important;
+}
+@media (max-width: 640px) {
+  body .kpi-grid { grid-template-columns: 1fr; }
+}
+/* translucent panels: the sky shows through (no blur, so it stays fast) */
+body .glass-panel { background: linear-gradient(160deg, rgba(46,25,92,.82), rgba(24,12,52,.87)) !important; }
+body .tile { background: linear-gradient(160deg, rgba(56,31,108,.82), rgba(28,14,60,.87)) !important; }
+body .dashboard-shell { text-shadow: 0 1px 8px rgba(6,2,20,.7); }
+.solar-fade { background: linear-gradient(180deg, rgba(7,4,15,0), rgba(7,4,15,.22)) !important; }
+.lbl { opacity: .35 !important; }
+/* "Show scene" button hides every panel so the solar system can be shown full screen */
+.app-layer { transition: opacity .45s; }
+body.scene-only .app-layer { opacity: 0; pointer-events: none; }
+.scene-toggle { position: fixed; left: 16px; bottom: 60px; z-index: 50; border: 1px solid rgba(214,190,255,.3); background: rgba(30,16,60,.9); color: #eadfff; padding: 8px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; }
+
+/* ---------- entrance + hover animations ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes grow { from { transform: scaleX(0); } }
+@keyframes donut-in { from { opacity: 0; transform: rotate(-110deg) scale(.8); } }
+.dashboard-shell > *, .insights > *, .kpi-row > *, .chart-row > *, .cat-grid > * { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+.dashboard-shell > :nth-child(2) { animation-delay: .08s; } .dashboard-shell > :nth-child(3) { animation-delay: .16s; }
+.dashboard-shell > :nth-child(4) { animation-delay: .24s; } .dashboard-shell > :nth-child(5) { animation-delay: .32s; }
+.kpi-row > :nth-child(2), .cat-grid > :nth-child(2) { animation-delay: .08s; } .kpi-row > :nth-child(3), .cat-grid > :nth-child(3) { animation-delay: .16s; }
+.kpi-row > :nth-child(4), .cat-grid > :nth-child(4) { animation-delay: .24s; } .kpi-row > :nth-child(5), .cat-grid > :nth-child(5) { animation-delay: .32s; }
+.meter > div { transform-origin: left; animation: grow 1s cubic-bezier(.2,.7,.2,1) .4s both; }
+.donut { animation: donut-in 1s cubic-bezier(.2,.7,.2,1) .3s both; }
+.tile, .glass-panel { transition: transform .25s, border-color .25s, box-shadow .25s; }
+.tile:hover { transform: translateY(-3px); border-color: rgba(103,232,249,.5); box-shadow: 0 16px 34px rgba(8,2,24,.55), 0 0 22px rgba(139,92,246,.25); }
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-shell > *, .insights > *, .kpi-row > *, .chart-row > *, .cat-grid > *, .meter > div, .donut, .lg-orbit { animation: none !important; }
+  .tile:hover { transform: none; }
+}
+
+body:not(.scene-only) .solar-system { background: transparent; }
+body:not(.scene-only) .solar-sun,
+body:not(.scene-only) .solar-planet { opacity: .18; }
+body:not(.scene-only) .solar-ring { opacity: .55; }
+body:not(.scene-only) .solar-star { opacity: .35 !important; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 18px; }
+.api-error-banner,
+.api-error-inline {
+  border: 1px solid rgba(255, 118, 129, .38);
+  border-radius: 10px;
+  background: rgba(86, 28, 38, .88);
+  color: #ffe2e6;
+  padding: 10px 14px;
+}
+.api-error-banner { width: min(1000px, calc(100% - 32px)); margin: 0 auto 12px; }
+.api-error-inline { margin: 0 0 12px; }
+.forecast-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.forecast-metrics > div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--panel-line); border-radius: 10px; background: rgba(28, 14, 60, .82); }
+.forecast-metrics span { color: var(--text-soft); font-size: .82rem; }
+.forecast-metrics strong { color: var(--text-main); font-size: 1.25rem; }
+.forecast-chart { display: grid; grid-template-columns: repeat(14, minmax(24px, 1fr)); gap: 5px; min-height: 150px; margin-top: 16px; align-items: end; overflow-x: auto; }
+.forecast-day { display: grid; grid-template-rows: 1fr auto; gap: 5px; height: 150px; min-width: 24px; text-align: center; }
+.forecast-bar-track { display: flex; align-items: end; justify-content: center; height: 100%; border-bottom: 1px solid var(--panel-line); }
+.forecast-bar-track > span { width: min(100%, 18px); min-height: 4px; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #67e8f9, #8b5cf6); }
+.forecast-day small { color: var(--text-soft); font-size: .65rem; }
+.forecast-footnote,.empty-state { color: var(--text-soft); margin: 12px 0 0; }
+.concurrency-controls { align-items: end; }
+.concurrency-controls label { flex: 1; }
+@media (max-width: 640px) {
+  .forecast-metrics { grid-template-columns: 1fr; }
+  .concurrency-controls { flex-direction: column; align-items: stretch; }
+}
+
+/* readable cards: mostly solid so text never gets lost, a little sky still glows through the edges */
+body .lg-card { background: linear-gradient(160deg, rgba(40,22,86,.93), rgba(18,10,40,.95)) !important; }
+body .lg-form input { background: rgba(8,4,22,.75); }
+body .lg-pitch { background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); }
