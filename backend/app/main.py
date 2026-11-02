@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.auth import router as auth_router
-from app.api.ai import router as ai_router
+from app.api.ai import assistant_router, router as ai_router
 from app.api.concurrency import router as concurrency_router
 from app.api.products import router as products_router
 from app.api.transactions import router as transactions_router
@@ -34,6 +34,7 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(ai_router)
+app.include_router(assistant_router)
 app.include_router(concurrency_router)
 app.include_router(products_router)
 app.include_router(warehouses_router)

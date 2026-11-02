@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { BankerRequest, BankerResponse, PriorityJob, Product, Warehouse } from './api';
+import type { BankerRequest, BankerResponse, PriorityJob, Product, UserRole, Warehouse } from './api';
 import { ApiError, fetchJson } from './api';
 import Chatbot from './Chatbot';
 import Insights from './Insights';
@@ -422,11 +422,13 @@ function ConcurrencyLab({
 
 function PrioritySchedulerPanel({
   products,
+  canManage,
   onQueueCountChange,
   demoQueueKey,
   onToast,
 }: {
   products: Product[];
+  canManage: boolean;
   onQueueCountChange?: (count: number) => void;
   demoQueueKey?: number;
   onToast?: (title: string, detail: string, kind: ToastKind) => void;
@@ -547,7 +549,7 @@ function PrioritySchedulerPanel({
         </div>
       </div>
 
-      <div className="scheduler-controls">
+      {canManage ? <div className="scheduler-controls">
         <label>
           Product
           <select value={selectedProductId} onChange={(event) => setSelectedProductId(Number(event.target.value))}>
@@ -567,7 +569,7 @@ function PrioritySchedulerPanel({
             Queue routine audit
           </button>
         </div>
-      </div>
+      </div> : null}
 
       <div className="queue-banner">{message}</div>
 
@@ -608,7 +610,8 @@ function PrioritySchedulerPanel({
   );
 }
 
-export default function Dashboard({ onLogout, username }: { onLogout: () => void; username: string }) {
+export default function Dashboard({ onLogout, username, role }: { onLogout: () => void; username: string; role: UserRole }) {
+  const canManage = role === 'ADMIN' || role === 'WAREHOUSE_MANAGER';
   const [warehouses, setWarehouses] = useState<Warehouse[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [priorityQueueCount, setPriorityQueueCount] = useState<number>(0);
@@ -703,7 +706,7 @@ export default function Dashboard({ onLogout, username }: { onLogout: () => void
             transition={{ type: 'spring', stiffness: 300, damping: 18 }}
           >
             <span className="user-indicator" aria-label="Active user" />
-            <span>👤 {username}</span>
+            <span>👤 {username} · {role.replace('_', ' ')}</span>
           </motion.div>
 
           <button type="button" className="logout-button" onClick={onLogout}>
@@ -739,7 +742,7 @@ export default function Dashboard({ onLogout, username }: { onLogout: () => void
         </div>
       </motion.div>
 
-      <motion.section className="viva-demo-bar glass-panel" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+      {canManage ? <motion.section className="viva-demo-bar glass-panel" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
         <div className="section-heading demo-heading">
           <div>
             <span className="eyebrow">Viva demo mode</span>
@@ -778,15 +781,16 @@ export default function Dashboard({ onLogout, username }: { onLogout: () => void
             Demo 3: Emergency Stockout Preemption
           </motion.button>
         </div>
-      </motion.section>
+      </motion.section> : null}
 
-      <Insights products={products} warehouses={warehouses} />
-      <ForecastPanel products={products} />
+      <Insights products={products} warehouses={warehouses} activeWorkflows={priorityQueueCount} />
+      <ForecastPanel products={products} canManage={canManage} />
       <TransactionsPanel products={products} refreshKey={transactionRefreshKey} />
-      <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onWarehousesReload={refreshWarehouses} onToast={pushToast} />
-      <ConcurrencyLab products={products} initialMode={demoMode} flashKey={flashKey} onModeChange={setDemoMode} onSaleComplete={refreshAfterInventoryChange} onToast={pushToast} />
+      {canManage ? <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onWarehousesReload={refreshWarehouses} onToast={pushToast} /> : null}
+      {canManage ? <ConcurrencyLab products={products} initialMode={demoMode} flashKey={flashKey} onModeChange={setDemoMode} onSaleComplete={refreshAfterInventoryChange} onToast={pushToast} /> : null}
       <PrioritySchedulerPanel
         products={products}
+        canManage={canManage}
         onQueueCountChange={setPriorityQueueCount}
         demoQueueKey={queueDemoKey}
         onToast={pushToast}
@@ -794,6 +798,7 @@ export default function Dashboard({ onLogout, username }: { onLogout: () => void
       <ProductsTable
         products={products}
         warehouses={warehouses}
+        canManage={canManage}
         onRefresh={refreshAfterInventoryChange}
         onToast={pushToast}
       />

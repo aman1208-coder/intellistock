@@ -6,6 +6,8 @@ export interface Warehouse {
   available_capacity: number;
 }
 
+export type UserRole = 'ADMIN' | 'WAREHOUSE_MANAGER' | 'STAFF';
+
 export interface Product {
   id: number;
   name: string;
@@ -102,6 +104,7 @@ export interface PriorityJob {
 
 export interface ChatbotItem {
   product_id?: number;
+  sku?: string;
   name?: string;
   warehouse_id?: number;
   stock_quantity?: number;
@@ -164,8 +167,8 @@ export function authHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
-export async function login(username: string, password: string): Promise<{ access_token: string }> {
-  const payload = await fetchJson<{ access_token: string }>('/api/auth/login', {
+export async function login(username: string, password: string): Promise<{ access_token: string; role: UserRole }> {
+  const payload = await fetchJson<{ access_token: string; role: UserRole }>('/api/auth/login', {
     method: 'POST',
     body: JSON.stringify({ username, password }),
   });
@@ -182,14 +185,14 @@ export async function register(email: string, username: string, password: string
 }
 
 export async function askChatbot(question: string): Promise<ChatbotResponse> {
-  return fetchJson<ChatbotResponse>('/api/ai/chatbot', {
+  return fetchJson<ChatbotResponse>('/api/chatbot/query', {
     method: 'POST',
     body: JSON.stringify({ question }),
   });
 }
 
 export async function fetchProductRecommendations(productId: number): Promise<RecommendationResponse> {
-  return fetchJson<RecommendationResponse>(`/api/ai/recommendations/${productId}`);
+  return fetchJson<RecommendationResponse>(`/api/recommendations/${productId}`);
 }
 
 export const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';

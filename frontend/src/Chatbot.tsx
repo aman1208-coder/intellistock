@@ -11,10 +11,9 @@ type ChatMessage = {
 };
 
 const previewSuggestions = [
+  'Which items are low in stock?',
   'Show me zero-stock items',
-  'List threshold warnings',
   'Check warehouse capacity',
-  'What is pending reorder activity?',
 ];
 
 export default function Chatbot({ products }: { products?: Product[] }) {
@@ -25,7 +24,7 @@ export default function Chatbot({ products }: { products?: Product[] }) {
     {
       id: 'welcome',
       role: 'assistant',
-      text: 'Ask about zero-stock products, reorder thresholds, warehouse capacity, or pending reorders.',
+      text: 'Ask about a product SKU, low stock, warehouse capacity, or pending reorders.',
     },
   ]);
 
@@ -114,7 +113,7 @@ export default function Chatbot({ products }: { products?: Product[] }) {
                     void submitQuestion();
                   }
                 }}
-                placeholder="Ask about stock levels..."
+                placeholder={products?.[0]?.sku ? `Ask about ${products[0].sku} or low stock...` : 'Ask about stock levels...'}
               />
               <button type="button" className="primary" onClick={() => void submitQuestion()}>
                 Send

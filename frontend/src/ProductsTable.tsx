@@ -23,11 +23,13 @@ const emptyAddForm = {
 export default function ProductsTable({
   products,
   warehouses,
+  canManage,
   onRefresh,
   onToast,
 }: {
   products: Product[];
   warehouses: Warehouse[];
+  canManage: boolean;
   onRefresh?: () => Promise<void> | void;
   onToast?: (title: string, detail: string, kind: 'success' | 'warning' | 'danger' | 'info') => void;
 }) {
@@ -42,11 +44,22 @@ export default function ProductsTable({
   const [adjustForm, setAdjustForm] = useState({ type: 'PURCHASE' as 'PURCHASE' | 'SALE', quantity: '10' });
   const [isCreating, setIsCreating] = useState(false);
   const [isAdjusting, setIsAdjusting] = useState(false);
+  const [search, setSearch] = useState('');
+  const [warehouseFilter, setWarehouseFilter] = useState('all');
 
   const warehouseMap = useMemo(
     () => Object.fromEntries((warehouses || []).map((warehouse) => [warehouse.id, warehouse])),
     [warehouses],
   );
+  const visibleProducts = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return products.filter((product) => {
+      const matchesSearch = !query || [product.name, product.sku, product.category]
+        .some((value) => value?.toLowerCase().includes(query));
+      const matchesWarehouse = warehouseFilter === 'all' || String(product.warehouse_id) === warehouseFilter;
+      return matchesSearch && matchesWarehouse;
+    });
+  }, [products, search, warehouseFilter]);
 
   const viewInsights = async (productId: number) => {
     if (expandedId === productId && recommendations[productId]) {
@@ -169,7 +182,7 @@ export default function ProductsTable({
           <h2>Products</h2>
         </div>
 
-        <motion.button
+        {canManage ? <motion.button
           type="button"
           className="primary product-add-button"
           onClick={() => setShowAddModal(true)}
@@ -178,7 +191,22 @@ export default function ProductsTable({
           style={{ perspective: 1000, transformStyle: 'preserve-3d' }}
         >
           + Add Product
-        </motion.button>
+        </motion.button> : null}
+      </div>
+
+      <div className="inventory-filters flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <label>
+          Search inventory
+          <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, SKU, or category" />
+        </label>
+        <label>
+          Warehouse
+          <select value={warehouseFilter} onChange={(event) => setWarehouseFilter(event.target.value)}>
+            <option value="all">All warehouses</option>
+            {warehouses.map((warehouse) => <option key={warehouse.id} value={warehouse.id}>{warehouse.name}</option>)}
+          </select>
+        </label>
+        <span>{visibleProducts.length} of {products.length} SKUs</span>
       </div>
 
       <div className="table-wrap">
@@ -189,23 +217,23 @@ export default function ProductsTable({
               <th>Warehouse</th>
               <th>Stock</th>
               <th>Threshold</th>
-              <th>Actions</th>
+              {canManage ? <th>Actions</th> : null}
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => {
+            {visibleProducts.map((product) => {
               const warehouse = warehouseMap[product.warehouse_id];
               const stockPercent = Math.min(100, Math.max(0, (product.stock_quantity / Math.max(product.reorder_threshold || 1, 1)) * 100));
 
               return (
                 <Fragment key={product.id}>
                   <tr>
-                    <td>
+                    {canManage ? <td>
                       <div className="product-cell">
                         <strong>{product.name}</strong>
                         <small>{product.sku ?? 'SKU pending'}</small>
                       </div>
-                    </td>
+                    </td> : null}
                     <td>{warehouse ? warehouse.name : `Warehouse ${product.warehouse_id}`}</td>
                     <td>
                       <div className="stock-wrap">
@@ -246,7 +274,7 @@ export default function ProductsTable({
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <td colSpan={5}>
+                        <td colSpan={canManage ? 5 : 4}>
                           <div className="insights-card">
                             {loadingId === product.id ? (
                               <span>Loading related items...</span>
@@ -271,6 +299,9 @@ export default function ProductsTable({
                 </Fragment>
               );
             })}
+            {!visibleProducts.length && (
+              <tr><td colSpan={5}>No products match the current search and warehouse filters.</td></tr>
+            )}
           </tbody>
         </table>
       </div>

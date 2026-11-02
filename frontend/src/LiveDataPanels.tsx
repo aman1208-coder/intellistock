@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { fetchJson, type DemandForecast, type InventoryTransaction, type Product } from './api';
 
-export function ForecastPanel({ products }: { products: Product[] }) {
+export function ForecastPanel({ products, canManage }: { products: Product[]; canManage: boolean }) {
   const [productId, setProductId] = useState(products[0]?.id ?? 0);
   const [forecast, setForecast] = useState<DemandForecast | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [reorderLoading, setReorderLoading] = useState(false);
+  const [reorderMessage, setReorderMessage] = useState('');
 
   useEffect(() => {
     if (products.length && !products.some((product) => product.id === productId)) {
@@ -37,6 +39,22 @@ export function ForecastPanel({ products }: { products: Product[] }) {
 
   const maximumDemand = Math.max(...(forecast?.daily_forecast.map((day) => day.predicted_demand) ?? [0]), 1);
 
+  const runReorderAnalysis = async () => {
+    setReorderLoading(true);
+    setReorderMessage('');
+    try {
+      const result = await fetchJson<{ products_analyzed: number; reorders_created: number }>(
+        '/api/ai/run-reorder-analysis',
+        { method: 'POST' },
+      );
+      setReorderMessage(`${result.reorders_created} reorder(s) queued across ${result.products_analyzed} analyzed products.`);
+    } catch (requestError) {
+      setReorderMessage(requestError instanceof Error ? requestError.message : 'Reorder analysis failed.');
+    } finally {
+      setReorderLoading(false);
+    }
+  };
+
   return (
     <section className="glass-panel forecast-panel" id="forecast">
       <div className="section-heading">
@@ -50,9 +68,15 @@ export function ForecastPanel({ products }: { products: Product[] }) {
             {products.map((product) => <option key={product.id} value={product.id}>{product.name}</option>)}
           </select>
         </label>
+        {canManage ? (
+          <button type="button" className="primary" onClick={() => void runReorderAnalysis()} disabled={reorderLoading || !products.length}>
+            {reorderLoading ? 'Analyzing…' : 'Analyze & queue restocks'}
+          </button>
+        ) : null}
       </div>
 
       {error ? <p className="api-error-inline" role="alert">Forecast unavailable: {error}</p> : null}
+      {reorderMessage ? <p className="forecast-footnote" role="status">{reorderMessage}</p> : null}
       {!products.length && !error ? <p className="empty-state">No products are available for forecasting.</p> : null}
       {loading && !forecast ? <p className="empty-state">Loading forecast…</p> : null}
       {forecast ? (

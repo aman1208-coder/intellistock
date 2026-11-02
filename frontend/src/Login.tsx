@@ -1,12 +1,12 @@
 import { FormEvent, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { login, register } from './api';
+import { login, register, type UserRole } from './api';
 import './polish.css';
 
 type Mode = 'login' | 'register';
 const POINTS = ['Realtime stock health', 'Warehouse-aware demand planning', 'Safe allocation and queue monitoring'];
 
-export default function Login({ onDone }: { onDone: (username: string) => void }) {
+export default function Login({ onDone }: { onDone: (username: string, role: UserRole) => void }) {
   const [mode, setMode] = useState<Mode>('login');
   const [form, setForm] = useState({ username: '', email: '', password: '' });
   const [error, setError] = useState('');
@@ -21,8 +21,8 @@ export default function Login({ onDone }: { onDone: (username: string) => void }
     setError('');
     try {
       if (mode === 'register') await register(form.email, form.username, form.password);
-      await login(form.username.trim(), form.password);
-      onDone(form.username.trim());
+      const session = await login(form.username.trim(), form.password);
+      onDone(form.username.trim(), session.role);
     } catch (err) {
       const msg = err instanceof Error ? err.message : '';
       setError(msg && msg !== 'Failed to fetch' ? msg : 'Cannot reach the API. Start the backend on port 8000, or continue with demo data.');

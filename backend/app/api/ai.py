@@ -1,12 +1,16 @@
 """Demand forecasting, chatbot, and recommendation endpoints."""
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.core.security import get_current_user, require_role
 from app.db.session import get_db
 from app.models import Product, User
+from app.schemas.assistant import (
+    ChatbotRequest,
+    ChatbotResponse,
+    RecommendationResponse,
+)
 from app.schemas.forecast import DemandForecastRead, ReorderAnalysisRead
 from app.services.chatbot import answer_stock_query
 from app.services.forecast_service import (
@@ -18,14 +22,12 @@ from app.services.recommendation import get_frequently_bought_together
 
 
 router = APIRouter(prefix="/api/ai", tags=["AI Forecasting"])
+assistant_router = APIRouter(tags=["AI Assistant"])
 MANAGER_ROLES = ["ADMIN", "WAREHOUSE_MANAGER"]
 
 
-class ChatbotRequest(BaseModel):
-    question: str = Field(..., min_length=1, max_length=500)
-
-
-@router.post("/chatbot")
+@router.post("/chatbot", response_model=ChatbotResponse)
+@assistant_router.post("/api/chatbot/query", response_model=ChatbotResponse)
 def chat_with_inventory_bot(
     payload: ChatbotRequest,
     db: Session = Depends(get_db),
@@ -34,7 +36,11 @@ def chat_with_inventory_bot(
     return answer_stock_query(db, payload.question)
 
 
-@router.get("/recommendations/{product_id}")
+@router.get("/recommendations/{product_id}", response_model=RecommendationResponse)
+@assistant_router.get(
+    "/api/recommendations/{product_id}",
+    response_model=RecommendationResponse,
+)
 def get_product_recommendations(
     product_id: int,
     db: Session = Depends(get_db),

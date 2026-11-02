@@ -5,10 +5,11 @@ function getCategoryPalette(index: number) {
   return palette[index % palette.length];
 }
 
-export default function Insights({ products, warehouses }: { products: Product[]; warehouses: Warehouse[] }) {
+export default function Insights({ products, warehouses, activeWorkflows }: { products: Product[]; warehouses: Warehouse[]; activeWorkflows: number }) {
   const totals = products.reduce(
     (accumulator, product) => {
       accumulator.units += product.stock_quantity;
+      accumulator.valuation += product.stock_quantity * Number(product.unit_price ?? 0);
       if (product.stock_quantity <= (product.reorder_threshold ?? 0)) {
         accumulator.lowStock += 1;
       }
@@ -19,6 +20,7 @@ export default function Insights({ products, warehouses }: { products: Product[]
     {
       units: 0,
       lowStock: 0,
+      valuation: 0,
       categoryMap: {} as Record<string, number>,
     },
   );
@@ -46,24 +48,24 @@ export default function Insights({ products, warehouses }: { products: Product[]
       <div className="insights-grid">
         <div className="kpi-grid">
           <div className="kpi-card subtle">
-            <span>Total units</span>
-            <strong>{totals.units}</strong>
-            <small>Across all active SKUs</small>
+            <span>Total SKUs</span>
+            <strong>{products.length}</strong>
+            <small>{totals.units} units on hand</small>
           </div>
           <div className="kpi-card highlight">
             <span>Low stock</span>
             <strong>{totals.lowStock}</strong>
-            <small>Products below threshold</small>
+            <small>At or below reorder point</small>
           </div>
           <div className="kpi-card">
-            <span>Warehouses</span>
-            <strong>{warehouses.length}</strong>
-            <small>Live fulfillment nodes</small>
+            <span>Inventory valuation</span>
+            <strong>{totals.valuation.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}</strong>
+            <small>At current unit prices</small>
           </div>
           <div className="kpi-card">
-            <span>Categories</span>
-            <strong>{totalCategories}</strong>
-            <small>Inventory segments</small>
+            <span>Active workflows</span>
+            <strong>{activeWorkflows}</strong>
+            <small>Queued inventory tasks</small>
           </div>
         </div>
 
