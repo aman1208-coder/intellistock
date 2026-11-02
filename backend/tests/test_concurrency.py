@@ -11,6 +11,7 @@ from threading import Barrier
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.pool import StaticPool
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 if str(BACKEND_DIR) not in sys.path:
@@ -29,6 +30,76 @@ TEST_DATABASE_URL = os.getenv("TEST_DATABASE_URL", "")
 POSTGRES_TESTS_AVAILABLE = TEST_DATABASE_URL.startswith(
     ("postgresql://", "postgresql+")
 )
+
+
+class InventoryConcurrencySqliteTests(unittest.TestCase):
+    """Check transactional stock invariants; SQLite does not provide row locks."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.engine = create_engine(
+            "sqlite://",
+            connect_args={"check_same_thread": False},
+            poolclass=StaticPool,
+        )
+        Base.metadata.create_all(bind=cls.engine)
+        cls.SessionLocal = sessionmaker(bind=cls.engine, expire_on_commit=False)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.engine.dispose()
+
+    def setUp(self) -> None:
+        with self.SessionLocal() as db:
+            warehouse = Warehouse(
+                name=f"SQLite Race Warehouse {id(self)}",
+                location="Concurrency Test",
+                total_capacity=10,
+                available_capacity=9,
+            )
+            supplier = Supplier(
+                name=f"SQLite Race Supplier {id(self)}",
+                contact_email=f"sqlite-race-{id(self)}@example.test",
+                supply_terms="Test only",
+            )
+            db.add_all([warehouse, supplier])
+            db.flush()
+            product = Product(
+                sku=f"SQLITE-RACE-{id(self)}",
+                name="SQLite concurrency invariant item",
+                category="Test",
+                unit_price=1,
+                stock_quantity=1,
+                reorder_threshold=0,
+                warehouse_id=warehouse.id,
+                supplier_id=supplier.id,
+            )
+            db.add(product)
+            db.commit()
+            self.product_id = product.id
+            self.warehouse_id = warehouse.id
+            self.supplier_id = supplier.id
+
+    def tearDown(self) -> None:
+        with self.SessionLocal() as db:
+            db.query(Transaction).filter_by(product_id=self.product_id).delete()
+            db.query(Product).filter_by(id=self.product_id).delete()
+            db.query(Warehouse).filter_by(id=self.warehouse_id).delete()
+            db.query(Supplier).filter_by(id=self.supplier_id).delete()
+            db.commit()
+
+    def test_safe_sale_rejects_overdraft_and_preserves_stock(self) -> None:
+        with self.SessionLocal() as db:
+            with self.assertRaises(InsufficientStockException):
+                transact_safe(db, self.product_id, 2)
+
+        with self.SessionLocal() as db:
+            product = db.get(Product, self.product_id)
+            transaction_count = db.query(Transaction).filter_by(
+                product_id=self.product_id
+            ).count()
+            self.assertEqual(product.stock_quantity, 1)
+            self.assertEqual(transaction_count, 0)
 
 
 @unittest.skipUnless(

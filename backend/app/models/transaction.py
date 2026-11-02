@@ -1,5 +1,5 @@
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 
 from sqlalchemy import DateTime, Enum, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
@@ -20,4 +20,8 @@ class Transaction(Base):
     warehouse_id: Mapped[int] = mapped_column(ForeignKey("warehouses.id"), nullable=False)
     type: Mapped[TransactionType] = mapped_column(Enum(TransactionType), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, nullable=False)
-    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, nullable=False)
+    timestamp: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc),
+        nullable=False,
+    )
