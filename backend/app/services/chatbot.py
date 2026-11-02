@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from sqlalchemy.orm import Session
@@ -83,6 +84,50 @@ def _pending_reorder_summary(db: Session) -> list[dict[str, Any]]:
     ]
 
 
+def _product_status_summary(db: Session, question: str) -> dict[str, Any] | None:
+    normalized = _normalize_question(question)
+    products = db.query(Product).order_by(Product.id).all()
+    product = next(
+        (
+            item
+            for item in products
+            if re.search(
+                rf"(?<!\w){re.escape(item.sku.casefold())}(?!\w)",
+                normalized,
+            )
+        ),
+        None,
+    )
+    if product is None:
+        return None
+
+    stock_status = (
+        "out_of_stock"
+        if product.stock_quantity == 0
+        else "low_stock"
+        if product.stock_quantity <= product.reorder_threshold
+        else "in_stock"
+    )
+    item = {
+        "product_id": product.id,
+        "sku": product.sku,
+        "name": product.name,
+        "stock_quantity": product.stock_quantity,
+        "reorder_threshold": product.reorder_threshold,
+        "warehouse_id": product.warehouse_id,
+        "status": stock_status,
+    }
+    return {
+        "answer": (
+            f"{product.name} ({product.sku}) has {product.stock_quantity} unit(s) "
+            f"in stock; its reorder threshold is {product.reorder_threshold}. "
+            f"Status: {stock_status.replace('_', ' ')}."
+        ),
+        "kind": "product_status",
+        "items": [item],
+    }
+
+
 def answer_stock_query(db: Session, question: str) -> dict[str, Any]:
     """Answer inventory questions using the current database state."""
     if not question or not question.strip():
@@ -93,6 +138,10 @@ def answer_stock_query(db: Session, question: str) -> dict[str, Any]:
         }
 
     normalized = _normalize_question(question)
+    product_status = _product_status_summary(db, normalized)
+    if product_status is not None:
+        return product_status
+
     zero_stock = _zero_stock_summary(db)
     threshold_items = _threshold_warning_summary(db)
     warehouse_capacity = _warehouse_capacity_summary(db)
@@ -112,7 +161,7 @@ def answer_stock_query(db: Session, question: str) -> dict[str, Any]:
             "items": zero_stock,
         }
 
-    if any(token in normalized for token in ("threshold", "warning", "low stock", "reorder")):
+    if any(token in normalized for token in ("threshold", "warning", "low stock", "low in stock", "reorder")):
         answer = (
             f"{len(threshold_items)} product(s) are at or below their reorder threshold: "
             + ", ".join(item["name"] for item in threshold_items[:5])
