@@ -11,6 +11,7 @@ class ChatbotResponse(BaseModel):
     answer: str
     kind: str
     items: Any
+    sources: list[str] = Field(default_factory=list)
 
 
 class RecommendationItem(BaseModel):

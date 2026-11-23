@@ -2,6 +2,8 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import time
+from fastapi import Request
 
 from app.api.auth import router as auth_router
 from app.api.ai import assistant_router, router as ai_router
@@ -12,6 +14,8 @@ from app.api.warehouses import router as warehouses_router
 from app.db.init_db import init_db
 from app.db.session import SessionLocal
 from app.core.config import settings
+from app.api.observability import router as observability_router
+from app.services.observability import observability_store
 
 
 @asynccontextmanager
@@ -39,6 +43,16 @@ app.include_router(concurrency_router)
 app.include_router(products_router)
 app.include_router(warehouses_router)
 app.include_router(transactions_router)
+app.include_router(observability_router)
+
+
+@app.middleware("http")
+async def observability_middleware(request: Request, call_next):
+    started = time.perf_counter()
+    response = await call_next(request)
+    latency_ms = (time.perf_counter() - started) * 1000
+    observability_store.record_request(request.url.path, latency_ms)
+    return response
 
 
 @app.get("/health")

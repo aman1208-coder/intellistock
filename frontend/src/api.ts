@@ -121,6 +121,58 @@ export interface ChatbotResponse {
   answer: string;
   kind: string;
   items?: ChatbotItem[] | Record<string, unknown>;
+  sources?: string[];
+}
+
+export interface ObservabilityStatus {
+  collector: 'ebpf' | 'fallback';
+  kernel_version: string;
+  probes_loaded: string[];
+  last_update: string | null;
+  enabled: boolean;
+}
+
+export interface DbLatency {
+  p50_ms: number;
+  p95_ms: number;
+  p99_ms: number;
+  slow_query_count: number;
+  threshold_ms: number;
+  samples: number;
+}
+
+export interface NetworkStats {
+  retransmits: number;
+  resets: number;
+  connection_failures: number;
+  connection_rate: number;
+  tcp_rtt_p95_ms: number;
+}
+
+export interface SecurityEvent {
+  timestamp: string;
+  pid: number;
+  comm: string;
+  type: string;
+  details: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+}
+
+export interface ObservabilityMetrics {
+  collector: 'ebpf' | 'fallback';
+  timestamp: string;
+  cpu: Record<string, unknown>;
+  syscalls: Record<string, unknown>;
+  db_latency: DbLatency;
+  network: NetworkStats;
+  app_latency: {
+    p50_ms: number;
+    p95_ms: number;
+    p99_ms: number;
+    samples: number;
+    routes: Record<string, { p95_ms: number; samples: number }>;
+  };
+  last_update: string | null;
 }
 
 export interface RecommendationItem {
@@ -189,6 +241,18 @@ export async function askChatbot(question: string): Promise<ChatbotResponse> {
     method: 'POST',
     body: JSON.stringify({ question }),
   });
+}
+
+export async function fetchObservabilityStatus(): Promise<ObservabilityStatus> {
+  return fetchJson<ObservabilityStatus>('/api/observability/status');
+}
+
+export async function fetchObservabilityMetrics(): Promise<ObservabilityMetrics> {
+  return fetchJson<ObservabilityMetrics>('/api/observability/metrics');
+}
+
+export async function fetchSecurityEvents(limit = 50): Promise<SecurityEvent[]> {
+  return fetchJson<SecurityEvent[]>(`/api/observability/security-events?limit=${limit}`);
 }
 
 export async function fetchProductRecommendations(productId: number): Promise<RecommendationResponse> {

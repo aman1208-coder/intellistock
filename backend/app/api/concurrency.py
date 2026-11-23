@@ -1,5 +1,6 @@
 """Banker's allocation, priority scheduling, and sale-concurrency endpoints."""
 
+import time
 from typing import List, Literal, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -28,6 +29,7 @@ from app.services.inventory_concurrency import (
     transact_safe,
     transact_unsafe,
 )
+from app.services.observability import observability_store
 
 
 router = APIRouter(prefix="/api/inventory", tags=["Inventory Concurrency"])
@@ -97,8 +99,11 @@ _api_scheduler = priority_scheduler
 
 
 def _run_sale(sale, product_id: int, quantity: int, db: Session):
+    started = time.perf_counter()
     try:
-        return sale(db, product_id, quantity)
+        result = sale(db, product_id, quantity)
+        observability_store.record_db_latency((time.perf_counter() - started) * 1000)
+        return result
     except ProductNotFoundException as exc:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

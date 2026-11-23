@@ -6,6 +6,7 @@ import Chatbot from './Chatbot';
 import Insights from './Insights';
 import { ForecastPanel, TransactionsPanel } from './LiveDataPanels';
 import ProductsTable from './ProductsTable';
+import Observability from './Observability';
 
 type NavItem = [string, string];
 
@@ -13,6 +14,7 @@ type QueueKind = 'inventory_check' | 'routine_audit';
 
 const navItems: NavItem[] = [
   ['overview', 'Overview'],
+  ['observability', 'Observability'],
   ['forecast', 'Demand forecast'],
   ['sync', 'Live transactions'],
   ['banker', "Banker's lab"],
@@ -784,6 +786,7 @@ export default function Dashboard({ onLogout, username, role }: { onLogout: () =
       </motion.section> : null}
 
       <Insights products={products} warehouses={warehouses} activeWorkflows={priorityQueueCount} />
+      <Observability products={products} />
       <ForecastPanel products={products} canManage={canManage} />
       <TransactionsPanel products={products} refreshKey={transactionRefreshKey} />
       {canManage ? <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onWarehousesReload={refreshWarehouses} onToast={pushToast} /> : null}
