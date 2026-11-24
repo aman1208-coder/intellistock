@@ -32,50 +32,125 @@ The project now includes a complete operational dashboard and backend service la
 
 ## Setup and Execution
 
-### Local Setup
+### Option A: SQLite demo (no Docker)
 
-Requirements: Python, Node.js/npm, and Docker Desktop with Docker Compose.
+Requirements: Python, Node.js/npm, and PowerShell. Run the commands below from the repository root unless a step says otherwise. This option needs no Docker or PostgreSQL.
 
-1. Configure local environment files. Do not commit either `.env` file or real credentials.
+1. Create and activate a backend virtual environment, then install runtime dependencies:
 
-```powershell
-Copy-Item backend/.env.example backend/.env
-Copy-Item frontend/.env.example frontend/.env
-```
+   ```powershell
+   python -m venv backend\.venv
+   .\backend\.venv\Scripts\Activate.ps1
+   python -m pip install -r backend\requirements.txt
+   ```
 
-Edit `backend/.env`: set a unique `SECRET_KEY`, `INITIAL_ADMIN_PASSWORD` (before first startup), and matching PostgreSQL password in `DATABASE_URL` and `POSTGRES_PASSWORD`. Keep `CORS_ORIGINS` set to the frontend origin, normally `http://localhost:5173`. Edit `frontend/.env` to set `VITE_API_BASE_URL=http://localhost:8000`.
+2. Copy both example environment files. Generate unique local secrets and configure SQLite. The PowerShell snippet writes values directly to the untracked backend `.env`; it does not print them.
 
-`ALLOW_PUBLIC_REGISTRATION` defaults to `false`. New accounts must be created through `POST /api/auth/register` by an authenticated ADMIN. Set `ALLOW_PUBLIC_REGISTRATION=true` only when intentional; unauthenticated sign-ups can create STAFF accounts only. The request cannot assign a role. The sign-in screen directs users without accounts to an administrator.
+   ```powershell
+   Copy-Item backend\.env.example backend\.env
+   Copy-Item frontend\.env.example frontend\.env
 
-`APP_ENV` defaults to `development`. Development warns when example secrets are still configured; observability ingest returns `503` until `OBSERVABILITY_INGEST_SECRET` is replaced with a random value of at least 32 characters. In `APP_ENV=production`, the service refuses to start unless `SECRET_KEY` (explicit, at least 32 characters), `INITIAL_ADMIN_PASSWORD` (at least 12 characters), and `OBSERVABILITY_INGEST_SECRET` (at least 32 characters) are non-placeholder values. Generate these values locally with a password manager or secure secret generator and put them in your local `.env`; do not paste them into chat or commit them.
+   function New-RandomHex {
+     $bytes = New-Object byte[] 32
+     $rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+     try {
+       $rng.GetBytes($bytes)
+       return [BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+     } finally {
+       $rng.Dispose()
+     }
+   }
 
-`ALLOW_SQLITE_FALLBACK` defaults to true in development and false in production. If enabled and PostgreSQL is unavailable during startup, the backend logs a warning and reports `active_database: sqlite` in `/health` and `/api/observability/status`; writes then go to the local SQLite file. In production with fallback disabled, startup fails with a clear error instead. For a deterministic SQLite-only demo, set `DATABASE_URL=sqlite:///./intellistock.db` and `ALLOW_SQLITE_FALLBACK=true` in the backend environment.
+   $values = @{
+     SECRET_KEY = New-RandomHex
+     INITIAL_ADMIN_PASSWORD = New-RandomHex
+     OBSERVABILITY_INGEST_SECRET = New-RandomHex
+     DATABASE_URL = 'sqlite:///./intellistock.db'
+     ALLOW_SQLITE_FALLBACK = 'true'
+   }
+   $envPath = Join-Path (Get-Location) 'backend\.env'
+   $content = Get-Content -LiteralPath $envPath -Raw
+   foreach ($key in $values.Keys) {
+     $pattern = '(?m)^' + [regex]::Escape($key) + '=.*$'
+     $content = [regex]::Replace($content, $pattern, "$key=$($values[$key])")
+   }
+   [System.IO.File]::WriteAllText($envPath, $content, [System.Text.UTF8Encoding]::new($false))
+   Remove-Variable values, content
+   Remove-Item Function:\New-RandomHex
+   ```
 
-2. Start PostgreSQL from the project root:
+   The required settings are `SECRET_KEY`, `INITIAL_ADMIN_PASSWORD`, `OBSERVABILITY_INGEST_SECRET`, `DATABASE_URL=sqlite:///./intellistock.db`, and `ALLOW_SQLITE_FALLBACK=true`. Keep `CORS_ORIGINS` at `http://localhost:5173` and `VITE_API_BASE_URL` at `http://localhost:8000` for the default local setup. Do not commit either `.env` file. The admin password is read from `backend/.env` when the first admin is created; it is not replaced automatically on later starts.
 
-```powershell
-docker compose --env-file backend/.env -f docker/docker-compose.yml up -d db
-```
+   `APP_ENV` defaults to `development`. Example or missing ingest secrets produce a warning and disable ingest until a real secret is configured. Production requires non-placeholder secrets: `SECRET_KEY` (at least 32 characters), `INITIAL_ADMIN_PASSWORD` (at least 12 characters), and `OBSERVABILITY_INGEST_SECRET` (at least 32 characters). `ALLOW_PUBLIC_REGISTRATION` defaults to `false`; new users must be created by an authenticated ADMIN.
 
-3. Install backend requirements and seed the database. Run these commands from `backend/`; seeding creates missing reference/demo rows and creates the first admin when `INITIAL_ADMIN_PASSWORD` is configured.
+3. Seed the local database from the backend directory. This creates demo rows and the initial admin account:
 
-```powershell
-python -m pip install -r requirements.txt
-python -m scripts.seed_data
-python -m uvicorn app.main:app --reload --port 8000
-```
+   ```powershell
+   Set-Location backend
+   python -m scripts.seed_data
+   ```
 
-The API health check is `http://localhost:8000/health`. Log in at `http://localhost:5173` with username `admin` and the `INITIAL_ADMIN_PASSWORD` configured before the first database initialization. An admin account is only created on first startup when that variable is set; an existing admin password is not replaced automatically.
+4. Start the backend in this terminal:
 
-4. In another terminal, install and start the frontend:
+   ```powershell
+   python -m uvicorn app.main:app --reload --port 8000
+   ```
 
-```powershell
-cd frontend
-npm install
-npm run dev -- --host 0.0.0.0
-```
+   The health endpoint is `http://localhost:8000/health`; it reports `active_database: sqlite`.
 
-If Docker/PostgreSQL is unavailable and you only need a local feature walkthrough, set `DATABASE_URL=sqlite:///./intellistock.db` in `backend/.env`, then run the backend install, seed, and Uvicorn commands above without starting Compose. The app can start against SQLite, but SQLite ignores the row-level `SELECT ... FOR UPDATE` lock, so do not use this fallback to demonstrate the safe-vs-unsafe PostgreSQL concurrency result. This does not avoid downloading Python/npm dependencies on a fresh machine.
+5. Open a second terminal at the repository root and install/start the frontend:
+
+   ```powershell
+   Set-Location frontend
+   npm install
+   npm run dev -- --host 0.0.0.0
+   ```
+
+6. Open `http://localhost:5173` and sign in with username `admin` and the `INITIAL_ADMIN_PASSWORD` stored in `backend/.env`.
+
+SQLite does not support row-level locking. The safe-vs-unsafe concurrency comparison is meaningful only with PostgreSQL; use Option B for that demo. The SQLite path remains suitable for the inventory, forecast, chatbot, and fallback observability walkthrough.
+
+### Option B: PostgreSQL with Docker Compose
+
+Requirements: Python, Node.js/npm, PowerShell, and Docker Desktop with Docker Compose.
+
+1. Create/activate the backend virtual environment and install runtime dependencies as in Option A step 1. Copy `backend/.env.example` and `frontend/.env.example` to `.env` as in Option A step 2, then set the three required secrets there. Generate and write a matching PostgreSQL password without printing it:
+
+   ```powershell
+   $bytes = New-Object byte[] 32
+   $rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+   try {
+     $rng.GetBytes($bytes)
+     $dbPassword = [BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+   } finally {
+     $rng.Dispose()
+   }
+   $envPath = Join-Path (Get-Location) 'backend\.env'
+   $content = Get-Content -LiteralPath $envPath -Raw
+   $content = [regex]::Replace($content, '(?m)^POSTGRES_PASSWORD=.*$', "POSTGRES_PASSWORD=$dbPassword")
+   $content = [regex]::Replace($content, '(?m)^DATABASE_URL=.*$', "DATABASE_URL=postgresql://postgres:$dbPassword@localhost:5432/intellistock")
+   $content = [regex]::Replace($content, '(?m)^ALLOW_SQLITE_FALLBACK=.*$', 'ALLOW_SQLITE_FALLBACK=false')
+   [System.IO.File]::WriteAllText($envPath, $content, [System.Text.UTF8Encoding]::new($false))
+   Remove-Variable bytes, dbPassword, content
+   ```
+
+   Keep `CORS_ORIGINS=http://localhost:5173`. The same generated password is used for `POSTGRES_PASSWORD` and the URL; hex encoding makes it safe in the URL.
+
+2. Start PostgreSQL from the repository root:
+
+   ```powershell
+   docker compose --env-file backend/.env -f docker/docker-compose.yml up -d db
+   ```
+
+3. Seed the database and start the backend in the activated environment:
+
+   ```powershell
+   Set-Location backend
+   python -m scripts.seed_data
+   python -m uvicorn app.main:app --reload --port 8000
+   ```
+
+4. In a second terminal, install and start the frontend as in Option A step 5. Sign in at `http://localhost:5173` with username `admin` and the `INITIAL_ADMIN_PASSWORD` in `backend/.env`.
 
 For a VS Code dev tunnel, expose the frontend port. Set `VITE_API_BASE_URL=` (empty) and restart Vite to send browser requests through its same-origin `/api` proxy; this avoids requiring the browser to reach the workspace's `localhost:8000`. If you expose the API separately and set `VITE_API_BASE_URL` to that tunnel URL instead, `CORS_ORIGINS` must include the frontend origin (the `https://*.devtunnels.ms` pattern is allowed by default).
 
@@ -83,12 +158,15 @@ For a VS Code dev tunnel, expose the frontend port. Set `VITE_API_BASE_URL=` (em
 
 Safe and unsafe modes send eight parallel requests to the real sale endpoints. SQLite ignores row-level `SELECT ... FOR UPDATE`, so the locking comparison (including the unsafe lost-update race) is meaningful only on PostgreSQL. The UI displays each request's measured latency and HTTP status.
 
-Run tests from the project root:
+### Running tests
+
+Run these commands from the repository root. The development requirements install the test runner and the TestClient transport dependency used by the current Starlette version.
 
 ```powershell
-cd backend
+Set-Location backend
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
-cd ../frontend
+Set-Location ..\frontend
 npx tsc -b
 npm run build
 ```
