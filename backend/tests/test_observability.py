@@ -46,6 +46,32 @@ class ObservabilityTests(unittest.TestCase):
             store = ObservabilityStore()
         self.assertEqual(store.collector, "fallback")
 
+    def test_ebpf_only_sources_require_received_samples_and_active_collector(self) -> None:
+        store = ObservabilityStore()
+        self.assertFalse(store.has_security_event_data())
+        self.assertFalse(store.has_network_data())
+
+        store.ingest({
+            "collector": "ebpf",
+            "security_events": [],
+            "network": {
+                "retransmits": 0,
+                "resets": 0,
+                "connection_failures": 0,
+            },
+        })
+        self.assertTrue(store.has_security_event_data())
+        self.assertTrue(store.has_network_data())
+
+        store.ingest({
+            "collector": "fallback",
+            "security_events": [{"severity": "high", "type": "openat"}],
+            "network": {"retransmits": 10},
+        })
+        self.assertFalse(store.has_security_event_data())
+        self.assertFalse(store.has_network_data())
+        self.assertEqual(store.security_events.snapshot(), [])
+
     def test_ingest_rejects_missing_secret(self) -> None:
         payload = ObservabilityIngest(collector="ebpf")
         with patch("app.api.observability.settings.observability_ingest_secret", "a" * 32):

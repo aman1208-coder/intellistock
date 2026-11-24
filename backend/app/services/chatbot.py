@@ -246,32 +246,76 @@ def _grounded_intent(db: Session, question: str, intent: str) -> dict[str, Any]:
         return {"answer": "No recommendation was retrieved because no product identifier was provided.", "kind": "recommendation", "items": [], "sources": ["db:transactions"]}
 
     snapshot = observability_store.snapshot()
+    collector = snapshot.get("collector", "fallback")
     db_latency = snapshot["db_latency"]
     network = snapshot["network"] or {}
     app_latency = snapshot["app_latency"]
     cpu = snapshot["cpu"] or {}
-    events = observability_store.security_events.snapshot(limit=100)
     if intent == "slow_database":
         if not db_latency.get("available", db_latency.get("samples", 0) > 0):
-            return {"answer": "Database latency is unavailable because no live DB timing samples have been recorded yet.", "kind": intent, "items": db_latency, "sources": ["fallback:db_latency"]}
+            return {"answer": "Database latency is unavailable because no live DB timing samples have been recorded yet.", "kind": intent, "items": db_latency, "sources": []}
         answer = f"Database latency is p50 {db_latency['p50_ms']:.1f} ms, p95 {db_latency['p95_ms']:.1f} ms, and p99 {db_latency['p99_ms']:.1f} ms; {db_latency['slow_query_count']} queries exceeded {db_latency['threshold_ms']} ms."
-        return {"answer": answer, "kind": intent, "items": db_latency, "sources": ["ebpf:db_latency", "fallback:db_latency"]}
+        source = "ebpf:db_latency" if collector == "ebpf" else "fallback:db_latency"
+        return {"answer": answer, "kind": intent, "items": db_latency, "sources": [source]}
     if intent == "api_latency":
         return {"answer": f"App-level request latency is p50 {app_latency['p50_ms']:.1f} ms and p95 {app_latency['p95_ms']:.1f} ms across {app_latency['samples']} samples.", "kind": intent, "items": app_latency, "sources": ["app-middleware"]}
     if intent == "network_issues":
-        if not network:
-            return {"answer": "Network telemetry is unavailable in the active collector; no live TCP measurements have been received.", "kind": intent, "items": {}, "sources": []}
-        return {"answer": f"TCP telemetry reports {network.get('retransmits', 0)} retransmits, {network.get('resets', 0)} resets, and {network.get('connection_failures', 0)} connection failures.", "kind": intent, "items": network, "sources": ["ebpf:network", "fallback:network"]}
+        if collector != "ebpf":
+            return {"answer": "Network telemetry is unavailable without an active eBPF collector; network issue counts cannot be assessed.", "kind": intent, "items": {}, "sources": []}
+        if not observability_store.has_network_data():
+            return {"answer": "Network telemetry is unavailable because no eBPF network measurements have been received yet.", "kind": intent, "items": {}, "sources": []}
+        labels = {
+            "retransmits": "retransmits",
+            "resets": "resets",
+            "connection_failures": "connection failures",
+        }
+        measurements = [
+            f"{network[key]} {label}" if network.get(key) is not None else f"{label} unavailable"
+            for key, label in labels.items()
+        ]
+        return {"answer": "TCP telemetry reports " + ", ".join(measurements) + ".", "kind": intent, "items": network, "sources": ["ebpf:network"]}
     if intent == "security_events":
+        if collector != "ebpf":
+            return {"answer": "Security-event monitoring is unavailable without an active eBPF collector; suspicious activity cannot be assessed.", "kind": intent, "items": {}, "sources": []}
+        if not observability_store.has_security_event_data():
+            return {"answer": "Security-event monitoring is unavailable because no security-event data has been received from eBPF.", "kind": intent, "items": {}, "sources": []}
+        events = observability_store.security_events.snapshot(limit=100)
         counts = {severity: sum(1 for event in events if event.get("severity") == severity) for severity in ("critical", "high", "medium", "low")}
-        return {"answer": f"Recent security events: {counts['critical']} critical, {counts['high']} high, {counts['medium']} medium, and {counts['low']} low.", "kind": intent, "items": counts, "sources": ["ebpf:security_events"]}
+        if not any(counts.values()):
+            answer = "No security events were recorded in the monitored window."
+        else:
+            answer = f"Recent security events: {counts['critical']} critical, {counts['high']} high, {counts['medium']} medium, and {counts['low']} low."
+        return {"answer": answer, "kind": intent, "items": counts, "sources": ["ebpf:security_events"]}
     if intent == "system_health_overview":
-        if not db_latency.get("available", db_latency.get("samples", 0) > 0) and not app_latency.get("samples") and not cpu and not network:
+        db_available = bool(db_latency.get("available", db_latency.get("samples", 0) > 0))
+        app_samples = int(app_latency.get("samples", 0) or 0)
+        network_available = collector == "ebpf" and observability_store.has_network_data()
+        if not db_available and not app_samples and not cpu and not network_available:
             return {"answer": "System telemetry is not available yet. The fallback collector is active, but it has not recorded enough live request, database, CPU, or network samples.", "kind": intent, "items": snapshot, "sources": []}
-        cpu_value = cpu.get("process_percent", "unavailable")
-        likely = "database" if db_latency["p95_ms"] >= app_latency["p95_ms"] else "application/network"
-        answer = f"The app p95 is {app_latency['p95_ms']:.1f} ms; DB p95 is {db_latency['p95_ms']:.1f} ms; CPU is {cpu_value}; TCP has {network.get('retransmits', 0)} retransmits. Based on these live values, the likely bottleneck is {likely}."
-        return {"answer": answer, "kind": intent, "items": {"cpu": cpu, "db_latency": db_latency, "network": network, "app_latency": app_latency}, "sources": ["app-middleware", "ebpf:db_latency", "ebpf:network"]}
+        app_value = f"{app_latency['p95_ms']:.1f} ms" if app_samples else "unavailable"
+        db_value = f"{db_latency['p95_ms']:.1f} ms" if db_available else "unavailable"
+        cpu_percent = cpu.get("process_percent")
+        cpu_value = f"{cpu_percent}%" if cpu_percent is not None else "unavailable"
+        sources: list[str] = []
+        if app_samples:
+            sources.append("app-middleware")
+        if db_available:
+            sources.append("ebpf:db_latency" if collector == "ebpf" else "fallback:db_latency")
+        if cpu_percent is not None:
+            sources.append("ebpf:cpu" if collector == "ebpf" else "fallback:psutil")
+        if network_available:
+            sources.append("ebpf:network")
+            retransmits = network.get("retransmits")
+            tcp_value = f"{retransmits} retransmits" if retransmits is not None else "retransmit count unavailable"
+        else:
+            tcp_value = "TCP telemetry unavailable without eBPF"
+        if db_available and app_samples:
+            likely = "database" if db_latency["p95_ms"] >= app_latency["p95_ms"] else "application"
+            conclusion = f"The likely bottleneck is {likely}."
+        else:
+            conclusion = "There are not enough app and database timing samples to identify a bottleneck."
+        answer = f"The app p95 is {app_value}; DB p95 is {db_value}; CPU is {cpu_value}; {tcp_value}. {conclusion}"
+        return {"answer": answer, "kind": intent, "items": {"cpu": cpu, "db_latency": db_latency, "network": network if network_available else None, "app_latency": app_latency}, "sources": sources}
     return {"answer": "I can help with live inventory and system-health questions.", "kind": "help", "items": [], "sources": []}
 
 

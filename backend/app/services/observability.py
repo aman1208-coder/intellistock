@@ -117,6 +117,8 @@ class ObservabilityStore:
         self.db_latencies_ms: deque[float] = deque(maxlen=1000)
         self.security_events = RingBuffer(max_items=1000)
         self.security_events_total = 0
+        self.security_data_received = False
+        self.network_data_received = False
         self.history_samples = RingBuffer(max_items=HISTORY_MAX_SAMPLES)
         self.request_counts: dict[str, int] = {}
         self._last_history_sample_monotonic: float | None = None
@@ -155,15 +157,31 @@ class ObservabilityStore:
         with self._lock:
             requested_collector = payload.get("collector", "ebpf")
             self.collector = "ebpf" if requested_collector == "ebpf" else "fallback"
+            if self.collector == "ebpf":
+                if "security_events" in payload:
+                    self.security_data_received = True
+                network = payload.get("network")
+                if isinstance(network, dict) and any(
+                    network.get(key) is not None
+                    for key in (
+                        "retransmits",
+                        "resets",
+                        "connection_failures",
+                        "connection_rate",
+                        "tcp_rtt_p95_ms",
+                    )
+                ):
+                    self.network_data_received = True
             for key in ("cpu", "syscalls", "db_latency", "network"):
                 if key in payload:
                     if key == "db_latency" and not payload[key].get("samples"):
                         continue
                     self.metrics[key] = payload[key]
             self.probes_loaded = list(payload.get("probes_loaded") or self.probes_loaded)
-            for event in payload.get("security_events", []):
-                self.security_events.append(event)
-                self.security_events_total += 1
+            if self.collector == "ebpf":
+                for event in payload.get("security_events", []):
+                    self.security_events.append(event)
+                    self.security_events_total += 1
             self.last_update = utc_now()
             self._record_history_sample_locked()
 
@@ -365,6 +383,16 @@ class ObservabilityStore:
                 "last_update": self.last_update,
                 "enabled": settings.observability_enabled,
             }
+
+    def has_security_event_data(self) -> bool:
+        with self._lock:
+            self._refresh_collector_state()
+            return self.collector == "ebpf" and self.security_data_received
+
+    def has_network_data(self) -> bool:
+        with self._lock:
+            self._refresh_collector_state()
+            return self.collector == "ebpf" and self.network_data_received
 
 
 observability_store = ObservabilityStore()
