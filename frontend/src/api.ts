@@ -184,6 +184,39 @@ export interface ObservabilityMetrics {
   last_update: string | null;
 }
 
+export interface ObservabilityHistorySample {
+  timestamp: string;
+  app_request_p50_ms: number | null;
+  app_request_p95_ms: number | null;
+  syscalls_per_second: number | null;
+  runq_p95_us: number | null;
+  db_latency_p95_ms: number | null;
+  tcp_retransmits: number | null;
+  cpu_percent: number | null;
+  security_events_count: number | null;
+}
+
+export interface BreakdownCount {
+  name: string;
+  count: number;
+  percentage: number;
+}
+
+export interface RouteBreakdown {
+  route: string;
+  count: number;
+  p95_ms: number | null;
+  samples: number;
+}
+
+export interface ObservabilityBreakdown {
+  collector: 'ebpf' | 'fallback';
+  syscalls_by_name: BreakdownCount[];
+  security_by_severity: BreakdownCount[];
+  security_by_type: BreakdownCount[];
+  requests_by_route: RouteBreakdown[];
+}
+
 export interface RecommendationItem {
   product_id: number;
   product_name: string;
@@ -259,6 +292,14 @@ export async function fetchObservabilityStatus(): Promise<ObservabilityStatus> {
 
 export async function fetchObservabilityMetrics(): Promise<ObservabilityMetrics> {
   return fetchJson<ObservabilityMetrics>('/api/observability/metrics');
+}
+
+export async function fetchObservabilityHistory(minutes = 10): Promise<ObservabilityHistorySample[]> {
+  return fetchJson<ObservabilityHistorySample[]>(`/api/observability/history?minutes=${minutes}`);
+}
+
+export async function fetchObservabilityBreakdown(): Promise<ObservabilityBreakdown> {
+  return fetchJson<ObservabilityBreakdown>('/api/observability/breakdown');
 }
 
 export async function fetchSecurityEvents(limit = 50): Promise<SecurityEvent[]> {

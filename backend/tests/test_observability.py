@@ -4,9 +4,12 @@ import sys
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from fastapi import HTTPException
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 PROJECT_ROOT = BACKEND_DIR.parent
@@ -16,6 +19,8 @@ for import_path in (str(BACKEND_DIR), str(PROJECT_ROOT)):
 
 from app.services.observability import ObservabilityStore, RingBuffer
 from app.api.observability import _ingest_secret_is_configured, ingest
+from app.api import observability as observability_api
+from app.core.security import get_current_user
 from app.schemas.observability import ObservabilityIngest
 from app.schemas.user import LoginRequest
 
@@ -106,6 +111,82 @@ class ObservabilityTests(unittest.TestCase):
             LoginRequest(username="u" * 256, password="valid-password")
         with self.assertRaises(ValueError):
             LoginRequest(username="admin", password="é" * 37)
+
+
+class ObservabilityHistoryApiTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.store = ObservabilityStore()
+        patcher = patch.object(observability_api, "observability_store", self.store)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        self.app = FastAPI()
+        self.app.include_router(observability_api.router)
+        self.app.dependency_overrides[get_current_user] = lambda: SimpleNamespace(id=1)
+        self.client = TestClient(self.app)
+        self.addCleanup(self.client.close)
+
+    def test_history_and_breakdown_require_authentication(self) -> None:
+        app = FastAPI()
+        app.include_router(observability_api.router)
+        with TestClient(app) as client:
+            self.assertEqual(client.get("/api/observability/history").status_code, 401)
+            self.assertEqual(client.get("/api/observability/breakdown").status_code, 401)
+
+    def test_history_minutes_are_bounded(self) -> None:
+        for minutes in (1, 30):
+            with self.subTest(minutes=minutes):
+                self.assertEqual(self.client.get(f"/api/observability/history?minutes={minutes}").status_code, 200)
+        for minutes in (0, 31):
+            with self.subTest(minutes=minutes):
+                self.assertEqual(self.client.get(f"/api/observability/history?minutes={minutes}").status_code, 422)
+
+    def test_fallback_history_uses_null_for_unavailable_metrics(self) -> None:
+        response = self.client.get("/api/observability/history?minutes=1")
+
+        self.assertEqual(response.status_code, 200, response.text)
+        self.assertEqual(len(response.json()), 1)
+        sample = response.json()[0]
+        self.assertIsNone(sample["app_request_p50_ms"])
+        self.assertIsNone(sample["app_request_p95_ms"])
+        self.assertIsNone(sample["syscalls_per_second"])
+        self.assertIsNone(sample["runq_p95_us"])
+        self.assertIsNone(sample["db_latency_p95_ms"])
+        self.assertIsNone(sample["tcp_retransmits"])
+        self.assertIsNone(sample["cpu_percent"])
+        self.assertIsNone(sample["security_events_count"])
+
+    def test_history_length_is_capped_at_900_samples(self) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        for index in range(905):
+            self.store.history_samples.append({"timestamp": now, "app_request_p95_ms": float(index)})
+
+        response = self.client.get("/api/observability/history?minutes=30")
+
+        self.assertEqual(response.status_code, 200, response.text)
+        self.assertEqual(len(response.json()), 900)
+
+    def test_breakdown_totals_match_source_counts(self) -> None:
+        syscall_counts = {"0": 10, "1": 9, "2": 8, "3": 7, "4": 6, "5": 5, "8": 4, "9": 3, "257": 2, "9999": 1}
+        events = [
+            {"timestamp": "now", "pid": 1, "comm": "api", "type": "openat", "details": "sensitive access", "severity": "high"},
+            {"timestamp": "now", "pid": 2, "comm": "sh", "type": "process_exec", "details": "program executed", "severity": "medium"},
+        ]
+        self.store.ingest({"collector": "ebpf", "syscalls": {"counts": syscall_counts}, "security_events": events})
+        self.store.record_request("/api/products", 12.0)
+        self.store.record_request("/api/products", 24.0)
+        self.store.record_request("/api/transactions", 31.0)
+
+        response = self.client.get("/api/observability/breakdown")
+
+        self.assertEqual(response.status_code, 200, response.text)
+        breakdown = response.json()
+        self.assertEqual(sum(item["count"] for item in breakdown["syscalls_by_name"]), sum(syscall_counts.values()))
+        self.assertEqual(len(breakdown["syscalls_by_name"]), 9)
+        self.assertEqual(sum(item["count"] for item in breakdown["security_by_severity"]), len(events))
+        self.assertEqual(sum(item["count"] for item in breakdown["security_by_type"]), len(events))
+        self.assertEqual(sum(item["count"] for item in breakdown["requests_by_route"]), 3)
+        self.assertIn("read", {item["name"] for item in breakdown["syscalls_by_name"]})
+        self.assertIn("other", {item["name"] for item in breakdown["syscalls_by_name"]})
 
 
 if __name__ == "__main__":

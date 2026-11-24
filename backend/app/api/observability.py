@@ -8,6 +8,8 @@ from app.core.config import is_placeholder_secret, settings
 from app.core.security import get_current_user
 from app.models import User
 from app.schemas.observability import (
+    ObservabilityBreakdown,
+    ObservabilityHistory,
     ObservabilityIngest,
     ObservabilityMetrics,
     ObservabilityStatus,
@@ -29,6 +31,19 @@ def get_status(_current_user: User = Depends(get_current_user)) -> dict:
 @router.get("/metrics", response_model=ObservabilityMetrics)
 def get_metrics(_current_user: User = Depends(get_current_user)) -> dict:
     return observability_store.snapshot()
+
+
+@router.get("/history", response_model=ObservabilityHistory)
+def get_history(
+    minutes: int = Query(default=10, ge=1, le=30),
+    _current_user: User = Depends(get_current_user),
+) -> list[dict]:
+    return observability_store.history_snapshot(minutes=minutes)
+
+
+@router.get("/breakdown", response_model=ObservabilityBreakdown)
+def get_breakdown(_current_user: User = Depends(get_current_user)) -> dict:
+    return observability_store.breakdown()
 
 
 @router.get("/db-latency")

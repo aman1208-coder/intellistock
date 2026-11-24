@@ -67,6 +67,42 @@ class ObservabilityMetrics(BaseModel):
     last_update: str | None = None
 
 
+class ObservabilityHistorySample(BaseModel):
+    timestamp: str = Field(max_length=64)
+    app_request_p50_ms: float | None = Field(default=None, ge=0)
+    app_request_p95_ms: float | None = Field(default=None, ge=0)
+    syscalls_per_second: float | None = Field(default=None, ge=0)
+    runq_p95_us: float | None = Field(default=None, ge=0)
+    db_latency_p95_ms: float | None = Field(default=None, ge=0)
+    tcp_retransmits: int | None = Field(default=None, ge=0)
+    cpu_percent: float | None = Field(default=None, ge=0)
+    security_events_count: int | None = Field(default=None, ge=0)
+
+
+ObservabilityHistory = Annotated[list[ObservabilityHistorySample], Field(max_length=900)]
+
+
+class BreakdownCount(BaseModel):
+    name: str = Field(min_length=1, max_length=80)
+    count: int = Field(ge=0)
+    percentage: float = Field(ge=0, le=100)
+
+
+class RouteBreakdown(BaseModel):
+    route: str = Field(min_length=1, max_length=128)
+    count: int = Field(ge=0)
+    p95_ms: float | None = Field(default=None, ge=0)
+    samples: int = Field(ge=0, le=100)
+
+
+class ObservabilityBreakdown(BaseModel):
+    collector: Literal["ebpf", "fallback"]
+    syscalls_by_name: list[BreakdownCount] = Field(max_length=9)
+    security_by_severity: list[BreakdownCount] = Field(max_length=4)
+    security_by_type: list[BreakdownCount] = Field(max_length=100)
+    requests_by_route: list[RouteBreakdown] = Field(max_length=100)
+
+
 class ObservabilityIngest(BaseModel):
     collector: Literal["ebpf", "fallback"] = "ebpf"
     cpu: CpuMetrics = Field(default_factory=CpuMetrics)

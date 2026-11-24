@@ -99,6 +99,8 @@ The two database row-lock integration tests skip unless `TEST_DATABASE_URL` poin
 
 The backend uses application timing and best-effort process sampling by default. See [docs/EBPF_INTEGRATION.md](docs/EBPF_INTEGRATION.md) for the optional Linux/WSL2 collector, its limitations, and demo steps. Keep `OBSERVABILITY_INGEST_SECRET` private and configure the same value for the API and collector. The optional BCC sidecar is not required for Windows/macOS or normal API startup.
 
+The Observability panel includes rolling latency and syscall charts, route request bars, and security-event breakdowns. The app-latency and route charts work with the SQLite/fallback demo; syscall, TCP and security-event charts need the optional eBPF collector. See [docs/METRICS_CHARTS.md](docs/METRICS_CHARTS.md) for data sources, interpretation, and a repeatable demo.
+
 The chatbot classifier is an offline scikit-learn model. The training corpus is a small hand-curated set; its scores are indicative, not a guarantee of real-world intent recognition. On the fixed split, validation accuracy/macro-F1 were **0.898 / 0.900**. On 76 separate hand-written questions, accuracy/macro-F1 were **0.974 / 0.972**. A fresh 40-question blind set scored **0.975 / 0.975** once; one recommendation question was classified as out of scope. These small evaluation sets are not broad production benchmarks. See [the full evaluation and misses](docs/CHATBOT_EVALUATION.md). Rebuild the dataset with `python ml_models/chatbot/build_dataset.py`, then train with `python ml_models/chatbot/train.py` from the repository root. `model.joblib` is a pickle-based artifact: only load a copy produced from this trusted repository and training script, never an externally supplied model file.
 
 ## Project Workflow

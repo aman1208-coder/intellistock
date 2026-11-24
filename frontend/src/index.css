@@ -1067,3 +1067,167 @@ button.primary {
     grid-template-columns: 1fr;
   }
 }
+
+.observability-charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.chart-card {
+  min-width: 0;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid rgba(191, 213, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(129, 149, 189, 0.07);
+}
+
+.chart-heading {
+  min-height: 58px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.chart-heading h3 {
+  margin: 0;
+  color: #edf5ff;
+  font-size: 1rem;
+}
+
+.chart-heading p {
+  margin: 4px 0 0;
+  color: rgba(209, 224, 255, 0.68);
+  font-size: 0.75rem;
+}
+
+.chart-download {
+  flex: 0 0 auto;
+  border: 1px solid rgba(160, 188, 248, 0.2);
+  border-radius: 9px;
+  padding: 6px 9px;
+  color: #d7eaff;
+  background: rgba(128, 146, 173, 0.12);
+  font-size: 0.72rem;
+}
+
+.chart-download:hover,
+.chart-download:focus-visible {
+  border-color: rgba(96, 215, 255, 0.7);
+  outline: 2px solid rgba(96, 215, 255, 0.45);
+  outline-offset: 2px;
+}
+
+.chart-svg-scroll {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-color: rgba(126, 203, 255, 0.38) transparent;
+}
+
+.observability-chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: Inter, 'Segoe UI', sans-serif;
+}
+
+.line-svg,
+.bar-svg {
+  min-width: 560px;
+}
+
+.donut-svg {
+  min-width: 480px;
+}
+
+.chart-gridline {
+  stroke: rgba(188, 210, 246, 0.12);
+  stroke-dasharray: 3 5;
+}
+
+.chart-axis {
+  stroke: rgba(188, 210, 246, 0.38);
+  stroke-width: 1;
+}
+
+.chart-tick,
+.chart-axis-title {
+  fill: rgba(206, 224, 250, 0.68);
+  font-size: 11px;
+}
+
+.chart-legend-label,
+.chart-route-label,
+.chart-value-label {
+  fill: #e8f2ff;
+  font-size: 11px;
+}
+
+.chart-route-label {
+  font-size: 10px;
+}
+
+.chart-value-label {
+  font-weight: 700;
+}
+
+.donut-total {
+  fill: #f1f7ff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.chart-bar-track {
+  fill: rgba(192, 214, 248, 0.12);
+}
+
+.chart-empty {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  border: 1px dashed rgba(181, 206, 255, 0.2);
+  border-radius: 12px;
+  color: rgba(209, 224, 255, 0.72);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 760px) {
+  .observability-charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .chart-card {
+    padding: 13px;
+  }
+
+  .chart-heading {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chart-card,
+  .chart-card * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

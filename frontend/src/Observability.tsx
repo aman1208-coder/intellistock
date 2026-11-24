@@ -1,39 +1,54 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
 import {
   fetchJson,
+  fetchObservabilityBreakdown,
+  fetchObservabilityHistory,
   fetchObservabilityMetrics,
   fetchObservabilityStatus,
   fetchSecurityEvents,
+  type ObservabilityBreakdown,
+  type ObservabilityHistorySample,
   type ObservabilityMetrics,
   type ObservabilityStatus,
   type Product,
   type SecurityEvent,
 } from './api';
+import BarChart from './charts/BarChart';
+import DonutChart from './charts/DonutChart';
+import LineChart, { type LineSeries } from './charts/LineChart';
 
 export default function Observability({ products }: { products: Product[] }) {
+  const reduceMotion = useReducedMotion();
   const [status, setStatus] = useState<ObservabilityStatus | null>(null);
   const [metrics, setMetrics] = useState<ObservabilityMetrics | null>(null);
   const [events, setEvents] = useState<SecurityEvent[]>([]);
+  const [history, setHistory] = useState<ObservabilityHistorySample[]>([]);
+  const [breakdown, setBreakdown] = useState<ObservabilityBreakdown | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadHighlight, setLoadHighlight] = useState(false);
+  const [refreshTick, setRefreshTick] = useState(0);
 
   useEffect(() => {
     let active = true;
     const refresh = async () => {
       try {
-        const [nextStatus, nextMetrics, nextEvents] = await Promise.all([
+        const [nextStatus, nextMetrics, nextEvents, nextHistory, nextBreakdown] = await Promise.all([
           fetchObservabilityStatus(),
           fetchObservabilityMetrics(),
           fetchSecurityEvents(30),
+          fetchObservabilityHistory(10),
+          fetchObservabilityBreakdown(),
         ]);
         if (active) {
           setStatus(nextStatus);
           setMetrics(nextMetrics);
           setEvents(nextEvents);
+          setHistory(nextHistory);
+          setBreakdown(nextBreakdown);
         }
       } catch {
-        // The dashboard keeps its last successful snapshot if the API is briefly unavailable.
+        // Keep the last complete snapshot if the API is briefly unavailable.
       }
     };
     void refresh();
@@ -42,7 +57,7 @@ export default function Observability({ products }: { products: Product[] }) {
       active = false;
       window.clearInterval(timer);
     };
-  }, []);
+  }, [refreshTick]);
 
   const runLoad = async () => {
     if (!products.length) return;
@@ -57,8 +72,8 @@ export default function Observability({ products }: { products: Product[] }) {
           }).catch(() => null),
         ),
       );
-      await new Promise((resolve) => window.setTimeout(resolve, 500));
-      setMetrics(await fetchObservabilityMetrics());
+      await new Promise((resolve) => window.setTimeout(resolve, 2200));
+      setRefreshTick((tick) => tick + 1);
     } finally {
       setLoading(false);
       window.setTimeout(() => setLoadHighlight(false), 1800);
@@ -76,13 +91,48 @@ export default function Observability({ products }: { products: Product[] }) {
       : status?.collector === 'ebpf'
         ? 'No run-queue samples'
         : 'CPU unavailable';
+  const needsEbpfMessage = status?.collector === 'fallback'
+    ? 'Unavailable in fallback mode (needs eBPF)'
+    : 'No data yet';
+
+  const latencySeries = useMemo<LineSeries[]>(() => [
+    {
+      key: 'app', label: 'App request p95', color: '#60d7ff',
+      values: history.map((sample) => sample.app_request_p95_ms),
+    },
+    {
+      key: 'db', label: history.some((sample) => sample.db_latency_p95_ms != null) ? 'DB p95' : 'DB p95 (no samples)', color: '#ffc36b',
+      values: history.map((sample) => sample.db_latency_p95_ms),
+    },
+    {
+      key: 'runq',
+      label: status?.collector === 'fallback'
+        ? 'Run queue p95 (needs eBPF)'
+        : history.some((sample) => sample.runq_p95_us != null)
+          ? 'Run queue p95 (µs → ms)'
+          : 'Run queue p95 (no samples)',
+      color: '#b99cff',
+      values: history.map((sample) => sample.runq_p95_us == null ? null : sample.runq_p95_us / 1000),
+    },
+  ], [history, status?.collector]);
+
+  const syscallRateSeries = useMemo<LineSeries[]>(() => [{
+    key: 'syscalls', label: 'Syscalls / second', color: '#65e6ae',
+    values: history.map((sample) => sample.syscalls_per_second),
+  }], [history]);
+
+  const retransmitSeries = useMemo<LineSeries[]>(() => [{
+    key: 'retransmits', label: 'TCP retransmits', color: '#ff8298',
+    values: history.map((sample) => sample.tcp_retransmits),
+  }], [history]);
 
   return (
     <motion.section
       className={`glass-panel observability-panel ${loadHighlight ? 'load-highlight' : ''}`}
       id="observability"
-      initial={{ opacity: 0, y: 15 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.24 }}
     >
       <div className="section-heading">
         <div>
@@ -117,12 +167,12 @@ export default function Observability({ products }: { products: Product[] }) {
         </div>
         <div className="metric-card">
           <span>TCP network</span>
-          <strong>{network?.retransmits ?? 0} retransmits</strong>
-          <small>{metrics?.collector === 'ebpf' ? 'Resets and connection failures unavailable' : `${network?.resets ?? 0} resets · ${network?.connection_failures ?? 0} failures`}</small>
+          <strong>{metrics?.collector === 'ebpf' && network?.retransmits != null ? `${network.retransmits} retransmits` : 'Retransmits unavailable'}</strong>
+          <small>{metrics?.collector === 'ebpf' ? 'Resets and connection failures unavailable' : 'Network counters unavailable in fallback mode'}</small>
         </div>
         <div className="metric-card">
           <span>App latency p95</span>
-          <strong>{metrics ? `${metrics.app_latency.p95_ms.toFixed(1)} ms` : 'Waiting...'}</strong>
+          <strong>{metrics?.app_latency.samples ? `${metrics.app_latency.p95_ms.toFixed(1)} ms` : 'No request samples'}</strong>
           <small>{metrics?.app_latency.samples ?? 0} request samples</small>
         </div>
       </div>
@@ -149,6 +199,66 @@ export default function Observability({ products }: { products: Product[] }) {
             ))}
           </div>
         )}
+      </div>
+
+      <div className="observability-charts" aria-label="Live observability charts">
+        <LineChart
+          title="Latency over time"
+          description="Rolling 10-minute window · y-axis in ms; run-queue µs converted to ms."
+          samples={history}
+          series={latencySeries}
+          valueSuffix="ms"
+          area
+          emptyMessage="No data yet"
+          filename="intellistock-latency.svg"
+        />
+        <LineChart
+          title="Syscalls per second"
+          description="Rate derived from successive eBPF syscall counters."
+          samples={history}
+          series={syscallRateSeries}
+          valueSuffix="calls/s"
+          area
+          emptyMessage={needsEbpfMessage}
+          filename="intellistock-syscalls-per-second.svg"
+        />
+        <DonutChart
+          title="Syscalls by type"
+          description="Top eight x86_64 syscall names; remaining calls are grouped as other."
+          segments={breakdown?.syscalls_by_name ?? []}
+          emptyMessage={needsEbpfMessage}
+          filename="intellistock-syscalls-by-type.svg"
+        />
+        <DonutChart
+          title="Security events by severity"
+          description="Severity counts from the bounded recent event buffer."
+          segments={breakdown?.security_by_severity ?? []}
+          emptyMessage={needsEbpfMessage}
+          filename="intellistock-security-by-severity.svg"
+        />
+        <DonutChart
+          title="Security events by type"
+          description="Recent security-event types, including openat and process execution."
+          segments={breakdown?.security_by_type ?? []}
+          emptyMessage={needsEbpfMessage}
+          filename="intellistock-security-by-type.svg"
+        />
+        <BarChart
+          title="Requests by route"
+          description="Request totals since API startup; p95 uses the latest 100 route samples."
+          routes={breakdown?.requests_by_route ?? []}
+          emptyMessage="No data yet"
+          filename="intellistock-requests-by-route.svg"
+        />
+        <LineChart
+          title="TCP retransmits over time"
+          description="Host-wide cumulative retransmit counter from the TCP tracepoint."
+          samples={history}
+          series={retransmitSeries}
+          valueSuffix="retransmits"
+          emptyMessage={needsEbpfMessage}
+          filename="intellistock-tcp-retransmits.svg"
+        />
       </div>
     </motion.section>
   );
