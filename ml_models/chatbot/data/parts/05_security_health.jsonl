@@ -118,3 +118,9 @@
 {"text":"Show me the overall backend condition after the latest traffic.","intent":"system_health_overview"}
 {"text":"Are there any system-wide warnings at the moment?","intent":"system_health_overview"}
 {"text":"How are our main services performing right now?","intent":"system_health_overview"}
+{"text":"Give me a broad status of platform stability and live telemetry coverage.","intent":"system_health_overview"}
+{"text":"Is any major component reporting degradation at present?","intent":"system_health_overview"}
+{"text":"What does the whole monitoring picture look like after today's traffic?","intent":"system_health_overview"}
+{"text":"Are the connected services healthy enough for the next demo?","intent":"system_health_overview"}
+{"text":"Point out the weakest part of the stack from current measurements.","intent":"system_health_overview"}
+{"text":"Is our platform broadly stable or are there warning signs?","intent":"system_health_overview"}

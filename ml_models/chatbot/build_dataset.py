@@ -13,6 +13,10 @@ ROOT = Path(__file__).resolve().parent
 PARTS = ROOT / "data" / "parts"
 OUTPUT = ROOT / "data" / "intents.jsonl"
 EVALUATION = ROOT / "eval" / "handwritten.jsonl"
+HEALTH_PART = "05_security_health.jsonl"
+CHITCHAT_PART = "06_chitchat.jsonl"
+# Preserve the frozen corpus row order while keeping each authored batch on-topic.
+CHITCHAT_INTERLEAVE_AFTER_TEXT = "Let's kick off today's shift together."
 
 
 def normalize(text: str) -> str:
@@ -48,28 +52,51 @@ def main() -> None:
     eval_normalized = [normalize(row["text"]) for row in eval_rows]
     seen_by_intent: dict[str, list[str]] = {}
     accepted: list[dict[str, str]] = []
+    deferred_health: list[dict[str, str]] = []
     exact_removed = near_removed = eval_near_removed = 0
 
+    def add_row(row: dict[str, str]) -> None:
+        nonlocal exact_removed, near_removed, eval_near_removed
+        text = normalize(row["text"])
+        if not text:
+            return
+        if text in eval_normalized or any(near_duplicate(text, question) for question in eval_normalized):
+            eval_near_removed += 1
+            return
+        existing = seen_by_intent.setdefault(row["intent"], [])
+        if text in existing:
+            exact_removed += 1
+            return
+        if any(near_duplicate(text, previous) for previous in existing):
+            near_removed += 1
+            return
+        existing.append(text)
+        accepted.append(row)
+
     for path in part_paths:
-        for row in load_jsonl(path):
-            text = normalize(row["text"])
-            if not text:
-                continue
-            if text in eval_normalized:
-                eval_near_removed += 1
-                continue
-            if any(near_duplicate(text, question) for question in eval_normalized):
-                eval_near_removed += 1
-                continue
-            existing = seen_by_intent.setdefault(row["intent"], [])
-            if text in existing:
-                exact_removed += 1
-                continue
-            if any(near_duplicate(text, previous) for previous in existing):
-                near_removed += 1
-                continue
-            existing.append(text)
-            accepted.append(row)
+        rows = load_jsonl(path)
+        if path.name == HEALTH_PART:
+            health_seen = 0
+            for row in rows:
+                if row["intent"] == "system_health_overview":
+                    health_seen += 1
+                    if health_seen > 60:
+                        deferred_health.append(row)
+                        continue
+                add_row(row)
+        elif path.name == CHITCHAT_PART:
+            for row in rows:
+                add_row(row)
+                if row["text"] == CHITCHAT_INTERLEAVE_AFTER_TEXT:
+                    for health_row in deferred_health:
+                        add_row(health_row)
+                    deferred_health.clear()
+        else:
+            for row in rows:
+                add_row(row)
+
+    if deferred_health:
+        raise SystemExit("The health supplement could not be inserted into the chitchat batch order")
 
     counts = Counter(row["intent"] for row in accepted)
     expected = {

@@ -69,12 +69,6 @@
 {"text":"A cheerful hello from the loading dock.","intent":"greeting"}
 {"text":"I'm here again whenever you're ready.","intent":"greeting"}
 {"text":"Let's kick off today's shift together.","intent":"greeting"}
-{"text":"Give me a broad status of platform stability and live telemetry coverage.","intent":"system_health_overview"}
-{"text":"Is any major component reporting degradation at present?","intent":"system_health_overview"}
-{"text":"What does the whole monitoring picture look like after today's traffic?","intent":"system_health_overview"}
-{"text":"Are the connected services healthy enough for the next demo?","intent":"system_health_overview"}
-{"text":"Point out the weakest part of the stack from current measurements.","intent":"system_health_overview"}
-{"text":"Is our platform broadly stable or are there warning signs?","intent":"system_health_overview"}
 {"text":"Hey, good to see you.","intent":"greeting"}
 {"text":"Good morning, assistant.","intent":"greeting"}
 {"text":"Hello again, are you ready?","intent":"greeting"}
