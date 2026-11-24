@@ -7,6 +7,7 @@ import Insights from './Insights';
 import { ForecastPanel, TransactionsPanel } from './LiveDataPanels';
 import ProductsTable from './ProductsTable';
 import Observability from './Observability';
+import BrandMark from './components/BrandMark';
 
 type NavItem = [string, string];
 
@@ -694,7 +695,7 @@ export default function Dashboard({ onLogout, username, role }: { onLogout: () =
         transition={{ duration: 0.4 }}
       >
         <div className="brand-wrap">
-          <div className="brand-mark">I</div>
+          <BrandMark />
           <div>
             <span className="brand-tag">IntelliStock</span>
             <strong>Interactive OS control center</strong>

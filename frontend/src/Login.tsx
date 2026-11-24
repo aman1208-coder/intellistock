@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { login, type UserRole } from './api';
+import BrandMark from './components/BrandMark';
 import './polish.css';
 
 const POINTS = ['Realtime stock health', 'Warehouse-aware demand planning', 'Safe allocation and queue monitoring'];
@@ -41,7 +42,7 @@ export default function Login({ onDone }: { onDone: (username: string, role: Use
       >
         <div className="lg-pitch">
           <div className="lg-brand">
-            <span className="lg-orbit" aria-hidden="true"><i /></span>
+            <BrandMark size={44} />
             <div><small>WAREHOUSE INTELLIGENCE</small><h1>IntelliStock</h1></div>
           </div>
           <motion.p {...rise(0)}>Track fulfillment, replenishment risk and inventory flow from a single control room.</motion.p>

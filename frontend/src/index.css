@@ -539,14 +539,10 @@ select {
 }
 
 .brand-mark {
+  display: block;
+  flex: none;
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #70d6ff, #7c5cff);
-  color: #08131d;
-  font-weight: 800;
 }
 
 .brand-tag {
