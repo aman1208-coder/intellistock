@@ -67,6 +67,15 @@ export default function Observability({ products }: { products: Product[] }) {
 
   const db = metrics?.db_latency;
   const network = metrics?.network;
+  const syscallIds = Object.keys(metrics?.syscalls.counts ?? {}).length;
+  const schedulerP95 = metrics?.cpu.runq_p95_us;
+  const cpuSummary = metrics?.cpu.process_percent != null
+    ? `${metrics.cpu.process_percent.toFixed(1)}% CPU`
+    : schedulerP95 != null
+      ? `Run queue p95 ${schedulerP95.toFixed(1)} µs`
+      : status?.collector === 'ebpf'
+        ? 'No run-queue samples'
+        : 'CPU unavailable';
 
   return (
     <motion.section
@@ -98,18 +107,18 @@ export default function Observability({ products }: { products: Product[] }) {
       <div className="observability-grid">
         <div className="metric-card">
           <span>DB latency p50 / p95 / p99</span>
-          <strong>{db ? `${db.p50_ms.toFixed(1)} / ${db.p95_ms.toFixed(1)} / ${db.p99_ms.toFixed(1)} ms` : 'Waiting...'}</strong>
-          <small>{db?.slow_query_count ?? 0} slow queries above {db?.threshold_ms ?? 200} ms</small>
+          <strong>{db && db.samples > 0 ? `${db.p50_ms.toFixed(1)} / ${db.p95_ms.toFixed(1)} / ${db.p99_ms.toFixed(1)} ms` : 'No DB samples'}</strong>
+          <small>{db && db.samples > 0 ? `${db.slow_query_count} slow queries above ${db.threshold_ms} ms` : 'Database query timing unavailable in this collector snapshot'}</small>
         </div>
         <div className="metric-card">
-          <span>CPU and syscalls</span>
-          <strong>{metrics?.cpu?.process_percent != null ? `${String(metrics.cpu.process_percent)}% CPU` : 'Fallback active'}</strong>
-          <small>{Object.keys(metrics?.syscalls ?? {}).length} syscall series</small>
+          <span>CPU / scheduler</span>
+          <strong>{cpuSummary}</strong>
+          <small>{syscallIds} syscall IDs · syscall p95 {metrics?.syscalls.p95_us != null ? `${metrics.syscalls.p95_us.toFixed(1)} µs` : 'unavailable'}</small>
         </div>
         <div className="metric-card">
           <span>TCP network</span>
           <strong>{network?.retransmits ?? 0} retransmits</strong>
-          <small>{network?.resets ?? 0} resets · {network?.connection_failures ?? 0} failures</small>
+          <small>{metrics?.collector === 'ebpf' ? 'Resets and connection failures unavailable' : `${network?.resets ?? 0} resets · ${network?.connection_failures ?? 0} failures`}</small>
         </div>
         <div className="metric-card">
           <span>App latency p95</span>

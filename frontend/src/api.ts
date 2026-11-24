@@ -162,8 +162,16 @@ export interface SecurityEvent {
 export interface ObservabilityMetrics {
   collector: 'ebpf' | 'fallback';
   timestamp: string;
-  cpu: Record<string, unknown>;
-  syscalls: Record<string, unknown>;
+  cpu: {
+    process_percent?: number | null;
+    rss_bytes?: number | null;
+    runq_p95_us?: number | null;
+  };
+  syscalls: {
+    counts?: Record<string, number>;
+    latency_histogram_log2_us?: Record<string, number>;
+    p95_us?: number | null;
+  };
   db_latency: DbLatency;
   network: NetworkStats;
   app_latency: {
