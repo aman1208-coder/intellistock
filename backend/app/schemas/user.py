@@ -4,6 +4,8 @@ from app.models.user import UserRole
 
 
 class UserCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     email: str = Field(max_length=255)
     username: str = Field(min_length=3, max_length=100)
     password: str = Field(min_length=8, max_length=72)

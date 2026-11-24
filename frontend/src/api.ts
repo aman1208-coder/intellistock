@@ -232,6 +232,7 @@ export async function login(username: string, password: string): Promise<{ acces
 export async function register(email: string, username: string, password: string): Promise<{ id: number } | unknown> {
   return fetchJson('/api/auth/register', {
     method: 'POST',
+    headers: authHeaders(),
     body: JSON.stringify({ email, username, password }),
   });
 }

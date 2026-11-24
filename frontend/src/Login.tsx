@@ -1,14 +1,12 @@
 import { FormEvent, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { login, register, type UserRole } from './api';
+import { login, type UserRole } from './api';
 import './polish.css';
 
-type Mode = 'login' | 'register';
 const POINTS = ['Realtime stock health', 'Warehouse-aware demand planning', 'Safe allocation and queue monitoring'];
 
 export default function Login({ onDone }: { onDone: (username: string, role: UserRole) => void }) {
-  const [mode, setMode] = useState<Mode>('login');
-  const [form, setForm] = useState({ username: '', email: '', password: '' });
+  const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const [shake, setShake] = useState(0);
@@ -20,7 +18,6 @@ export default function Login({ onDone }: { onDone: (username: string, role: Use
     setBusy(true);
     setError('');
     try {
-      if (mode === 'register') await register(form.email, form.username, form.password);
       const session = await login(form.username.trim(), form.password);
       onDone(form.username.trim(), session.role);
     } catch (err) {
@@ -53,22 +50,14 @@ export default function Login({ onDone }: { onDone: (username: string, role: Use
 
         <motion.form className="lg-form" onSubmit={submit} animate={calm || !shake ? {} : { x: [0, -8, 8, -5, 5, 0] }} transition={{ duration: 0.4 }} key={`f${shake}`}>
           <small>SECURE ACCESS</small>
-          <h2>{mode === 'login' ? 'Welcome back' : 'Create account'}</h2>
-          <div className="lg-tabs" role="tablist">
-            {(['login', 'register'] as Mode[]).map((m) => (
-              <button key={m} type="button" role="tab" aria-selected={mode === m} onClick={() => { setMode(m); setError(''); }}>
-                {mode === m && <motion.span layoutId="lg-tab" className="lg-pill" transition={{ type: 'spring', stiffness: 400, damping: 32 }} />}
-                <span>{m === 'login' ? 'Sign in' : 'Register'}</span>
-              </button>
-            ))}
-          </div>
-          <input aria-label="Username or email" placeholder={mode === 'login' ? 'Username or email' : 'Username'} value={form.username} onChange={set('username')} autoComplete="username" required />
-          {mode === 'register' && <input aria-label="Email" type="email" placeholder="Email" value={form.email} onChange={set('email')} autoComplete="email" required />}
-          <input aria-label="Password" type="password" placeholder="Password" value={form.password} onChange={set('password')} autoComplete={mode === 'login' ? 'current-password' : 'new-password'} required />
+          <h2>Welcome back</h2>
+          <input aria-label="Username or email" placeholder="Username or email" value={form.username} onChange={set('username')} autoComplete="username" required />
+          <input aria-label="Password" type="password" placeholder="Password" value={form.password} onChange={set('password')} autoComplete="current-password" required />
           {error && <p className="lg-error" role="alert">{error}</p>}
           <motion.button className="lg-primary" disabled={busy} whileHover={calm ? undefined : { scale: 1.02 }} whileTap={calm ? undefined : { scale: 0.98 }}>
-            {busy ? 'Please wait' : mode === 'login' ? 'Sign in' : 'Create account'}
+            {busy ? 'Please wait' : 'Sign in'}
           </motion.button>
+          <p className="lg-account-note">New accounts are created by an administrator. Contact your administrator to request access.</p>
         </motion.form>
       </motion.section>
     </main>

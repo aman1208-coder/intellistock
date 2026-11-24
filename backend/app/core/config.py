@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     initial_admin_password: Optional[SecretStr] = None
+    allow_public_registration: bool = False
     cors_origins: str = "http://localhost:3000,http://localhost:5173"
     observability_enabled: bool = True
     observability_ingest_secret: str = ""

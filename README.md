@@ -45,6 +45,8 @@ Copy-Item frontend/.env.example frontend/.env
 
 Edit `backend/.env`: set a unique `SECRET_KEY`, `INITIAL_ADMIN_PASSWORD` (before first startup), and matching PostgreSQL password in `DATABASE_URL` and `POSTGRES_PASSWORD`. Keep `CORS_ORIGINS` set to the frontend origin, normally `http://localhost:5173`. Edit `frontend/.env` to set `VITE_API_BASE_URL=http://localhost:8000`.
 
+`ALLOW_PUBLIC_REGISTRATION` defaults to `false`. New accounts must be created through `POST /api/auth/register` by an authenticated ADMIN. Set `ALLOW_PUBLIC_REGISTRATION=true` only when intentional; unauthenticated sign-ups can create STAFF accounts only. The request cannot assign a role. The sign-in screen directs users without accounts to an administrator.
+
 2. Start PostgreSQL from the project root:
 
 ```powershell
