@@ -1,0 +1,120 @@
+{"text":"Which products are commonly bought in the same order?","intent":"recommendation"}
+{"text":"Suggest a product bundle for customers buying a barcode scanner.","intent":"recommendation"}
+{"text":"What items pair well with a cordless drill?","intent":"recommendation"}
+{"text":"Show cross-sell ideas based on our transaction history.","intent":"recommendation"}
+{"text":"Product recommendations?","intent":"recommendation"}
+{"text":"Which supplies do customers tend to purchase together?","intent":"recommendation"}
+{"text":"Can you suggest related products for SKU ELEC-001?","intent":"recommendation"}
+{"text":"What else is often in the basket with packaging tape?","intent":"recommendation"}
+{"text":"Find products that have strong co-purchase patterns.","intent":"recommendation"}
+{"text":"Give me a bundle suggestion for safety glasses.","intent":"recommendation"}
+{"text":"Which items are frequently ordered alongside copy paper?","intent":"recommendation"}
+{"text":"Recommend complementary inventory for the handheld scanner.","intent":"recommendation"}
+{"text":"What products should we offer together at checkout?","intent":"recommendation"}
+{"text":"Show the most common pairings in past sales.","intent":"recommendation"}
+{"text":"Do customers who buy boxes also buy tape?","intent":"recommendation"}
+{"text":"What would you bundle with the first aid kit?","intent":"recommendation"}
+{"text":"List products often purchased with HARD-001.","intent":"recommendation"}
+{"text":"Can sales history suggest a companion item for this SKU?","intent":"recommendation"}
+{"text":"Which product combinations show up most often?","intent":"recommendation"}
+{"text":"What add-on products are popular with label printers?","intent":"recommendation"}
+{"text":"Suggest related goods for the safety vest.","intent":"recommendation"}
+{"text":"What else should I offer with a shipping document pouch?","intent":"recommendation"}
+{"text":"Find commonly co-ordered products in the database.","intent":"recommendation"}
+{"text":"Are there products that are usually bought as a set?","intent":"recommendation"}
+{"text":"Recommend an inventory bundle for customers ordering work gloves.","intent":"recommendation"}
+{"text":"Show me cross-sell options tied to past purchases.","intent":"recommendation"}
+{"text":"Which items complement the thermal labels?","intent":"recommendation"}
+{"text":"What tends to sell together with a socket set?","intent":"recommendation"}
+{"text":"Suggest a related product based on SKU PACK-002 purchases.","intent":"recommendation"}
+{"text":"Which products have the strongest purchase association?","intent":"recommendation"}
+{"text":"Can we see popular combinations for office supplies?","intent":"recommendation"}
+{"text":"What other stock should be displayed beside the utility knife?","intent":"recommendation"}
+{"text":"Find a sensible add-on for customers buying a calculator.","intent":"recommendation"}
+{"text":"Which products are good candidates for a joint promotion?","intent":"recommendation"}
+{"text":"What do buyers usually add when ordering bubble wrap?","intent":"recommendation"}
+{"text":"Give me a related-item suggestion for the drill.","intent":"recommendation"}
+{"text":"Do we have any useful cross-sell pairs in recent orders?","intent":"recommendation"}
+{"text":"Which products are frequently ordered in combination?","intent":"recommendation"}
+{"text":"Recommend another item for a customer buying ear protection.","intent":"recommendation"}
+{"text":"What else could go in a box-and-tape bundle?","intent":"recommendation"}
+{"text":"Can you find products associated with SAFE-001?","intent":"recommendation"}
+{"text":"Show related products from prior transactions.","intent":"recommendation"}
+{"text":"Which goods make a useful bundle with a tablet?","intent":"recommendation"}
+{"text":"I need recommendations based on what customers buy together.","intent":"recommendation"}
+{"text":"What companion product would fit an order for worklights?","intent":"recommendation"}
+{"text":"What is usually purchased along with a tape measure?","intent":"recommendation"}
+{"text":"Suggest products to pair with a padded mailer.","intent":"recommendation"}
+{"text":"Which items share the same customer baskets?","intent":"recommendation"}
+{"text":"Can the sales records show popular product pairings?","intent":"recommendation"}
+{"text":"Find bundle ideas for a packing station.","intent":"recommendation"}
+{"text":"What related products should we recommend for HARD-002?","intent":"recommendation"}
+{"text":"Are markers often bought with clipboards?","intent":"recommendation"}
+{"text":"Show me items that commonly accompany the inventory tablet.","intent":"recommendation"}
+{"text":"Which safety products are commonly ordered together?","intent":"recommendation"}
+{"text":"Recommend an extra purchase for customers ordering corrugated boxes.","intent":"recommendation"}
+{"text":"What pairings could increase the average order size?","intent":"recommendation"}
+{"text":"List frequently bought-together product pairs.","intent":"recommendation"}
+{"text":"Find a product match for the Wi-Fi access point.","intent":"recommendation"}
+{"text":"What related item should accompany a first aid kit order?","intent":"recommendation"}
+{"text":"Suggest a bundle using our actual product catalog.","intent":"recommendation"}
+{"text":"How does Banker's algorithm decide a request is safe?","intent":"how_does_it_work"}
+{"text":"Explain the safe sequence idea in Banker's algorithm.","intent":"how_does_it_work"}
+{"text":"Why does the inventory sale use a row lock?","intent":"how_does_it_work"}
+{"text":"What does SELECT FOR UPDATE do in PostgreSQL?","intent":"how_does_it_work"}
+{"text":"How does priority scheduling choose the next job?","intent":"how_does_it_work"}
+{"text":"Explain deadlock avoidance in simple terms.","intent":"how_does_it_work"}
+{"text":"What is Banker's algorithm used for in this lab?","intent":"how_does_it_work"}
+{"text":"Why do concurrent sales lock the product row?","intent":"how_does_it_work"}
+{"text":"What is the difference between a safe and unsafe resource state?","intent":"how_does_it_work"}
+{"text":"Can you explain the FOR UPDATE clause to a student?","intent":"how_does_it_work"}
+{"text":"How does the scheduler handle an emergency stockout task?","intent":"how_does_it_work"}
+{"text":"What causes a database deadlock?","intent":"how_does_it_work"}
+{"text":"Why is a safe resource sequence important?","intent":"how_does_it_work"}
+{"text":"How does row-level locking prevent a lost update?","intent":"how_does_it_work"}
+{"text":"What happens when two sales update the same product together?","intent":"how_does_it_work"}
+{"text":"Explain non-preemptive priority scheduling.","intent":"how_does_it_work"}
+{"text":"When would Banker's algorithm deny a resource request?","intent":"how_does_it_work"}
+{"text":"How does the demo avoid deadlock before granting resources?","intent":"how_does_it_work"}
+{"text":"Why is SELECT FOR UPDATE used before changing stock?","intent":"how_does_it_work"}
+{"text":"What is the point of locking a row inside a transaction?","intent":"how_does_it_work"}
+{"text":"How does an unsafe sale race lose an inventory update?","intent":"how_does_it_work"}
+{"text":"Could you describe the Banker's safety check?","intent":"how_does_it_work"}
+{"text":"What does the available vector mean in the Banker's lab?","intent":"how_does_it_work"}
+{"text":"How are maximum and allocated resources used to find a safe state?","intent":"how_does_it_work"}
+{"text":"Why can a deadlock-free system still be unsafe?","intent":"how_does_it_work"}
+{"text":"Tell me how row locks serialize competing stock updates.","intent":"how_does_it_work"}
+{"text":"What is the purpose of a database transaction around a sale?","intent":"how_does_it_work"}
+{"text":"How does priority affect jobs waiting in the queue?","intent":"how_does_it_work"}
+{"text":"Why does an emergency stockout task jump ahead of normal work?","intent":"how_does_it_work"}
+{"text":"Explain the difference between deadlock prevention and avoidance.","intent":"how_does_it_work"}
+{"text":"How does the lab show safe resource allocation?","intent":"how_does_it_work"}
+{"text":"What protects the product count when multiple users sell at once?","intent":"how_does_it_work"}
+{"text":"Why do we check a safe sequence before allocating resources?","intent":"how_does_it_work"}
+{"text":"What would happen if a sale skipped SELECT FOR UPDATE?","intent":"how_does_it_work"}
+{"text":"How can two database transactions overwrite each other's changes?","intent":"how_does_it_work"}
+{"text":"What is the role of the need matrix in Banker's algorithm?","intent":"how_does_it_work"}
+{"text":"How does the demo decide which scheduled task runs first?","intent":"how_does_it_work"}
+{"text":"Explain why locking only one product row helps concurrency.","intent":"how_does_it_work"}
+{"text":"When does the scheduler preempt a regular inventory task?","intent":"how_does_it_work"}
+{"text":"What is a safe state in operating systems?","intent":"how_does_it_work"}
+{"text":"How does Banker's algorithm avoid circular waiting?","intent":"how_does_it_work"}
+{"text":"Can you explain the row lock in the safe sale endpoint?","intent":"how_does_it_work"}
+{"text":"Why might a transaction wait for another sale to finish?","intent":"how_does_it_work"}
+{"text":"What does FOR UPDATE lock while a transaction is running?","intent":"how_does_it_work"}
+{"text":"How does the priority queue order jobs with different urgency?","intent":"how_does_it_work"}
+{"text":"What makes a resource request unsafe under Banker's algorithm?","intent":"how_does_it_work"}
+{"text":"How are deadlocks demonstrated in the concurrency lab?","intent":"how_does_it_work"}
+{"text":"Why does PostgreSQL need row locks for concurrent stock sales?","intent":"how_does_it_work"}
+{"text":"What is the difference between row locking and no locking?","intent":"how_does_it_work"}
+{"text":"Can a safe sequence prove that all processes can finish?","intent":"how_does_it_work"}
+{"text":"How should I interpret the resource allocation graph?","intent":"how_does_it_work"}
+{"text":"What is the Banker's algorithm checking before it grants resources?","intent":"how_does_it_work"}
+{"text":"Explain priority scheduling with the stockout example.","intent":"how_does_it_work"}
+{"text":"Why do database updates need atomic transactions?","intent":"how_does_it_work"}
+{"text":"How do locks stop overselling the last unit?","intent":"how_does_it_work"}
+{"text":"What's the difference between a deadlock and a race condition?","intent":"how_does_it_work"}
+{"text":"How does a process release resources in the safety algorithm?","intent":"how_does_it_work"}
+{"text":"FOR UPDATE meaning?","intent":"how_does_it_work"}
+{"text":"How does a database establish that a sequence of processes is safe?","intent":"how_does_it_work"}
+{"text":"Why does the scheduler keep normal jobs non-preemptive?","intent":"how_does_it_work"}

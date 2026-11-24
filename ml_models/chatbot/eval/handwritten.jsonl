@@ -1,0 +1,76 @@
+{"text":"Which items have no units left in stock?","intent":"zero_stock"}
+{"text":"Show me products that are completely sold out.","intent":"zero_stock"}
+{"text":"Anything at zero inventory right now?","intent":"zero_stock"}
+{"text":"List the SKUs with empty shelves, please.","intent":"zero_stock"}
+{"text":"What needs reordering because it fell below its threshold?","intent":"low_stock_threshold"}
+{"text":"Show products whose stock is running low.","intent":"low_stock_threshold"}
+{"text":"Any reorder warnings I should review?","intent":"low_stock_threshold"}
+{"text":"Which items are under their minimum quantity?","intent":"low_stock_threshold"}
+{"text":"How much room is still available in each warehouse?","intent":"warehouse_capacity"}
+{"text":"Can I see the remaining storage capacity by location?","intent":"warehouse_capacity"}
+{"text":"Is there enough dock space for another delivery?","intent":"warehouse_capacity"}
+{"text":"Show the warehouse capacity figures.","intent":"warehouse_capacity"}
+{"text":"Which replenishment requests are still waiting for approval?","intent":"pending_reorders"}
+{"text":"Do we have any open purchase orders waiting to be processed?","intent":"pending_reorders"}
+{"text":"List the reorder jobs that have not been completed.","intent":"pending_reorders"}
+{"text":"Any pending restock requests?","intent":"pending_reorders"}
+{"text":"How many units of SKU-123 are available?","intent":"product_status"}
+{"text":"Check the current inventory status for SKU-ABC.","intent":"product_status"}
+{"text":"Is SKU-77 still in stock, or has it sold out?","intent":"product_status"}
+{"text":"Tell me the stock and reorder point for SKU-900.","intent":"product_status"}
+{"text":"Which products are forecast to run out over the next two weeks?","intent":"demand_forecast"}
+{"text":"Can you predict stock needs for the coming 14 days?","intent":"demand_forecast"}
+{"text":"Show the demand outlook and upcoming stock risks.","intent":"demand_forecast"}
+{"text":"What items may need replenishment soon based on the forecast?","intent":"demand_forecast"}
+{"text":"What products are often purchased together?","intent":"recommendation"}
+{"text":"Suggest an item to pair with SKU-123.","intent":"recommendation"}
+{"text":"Show cross-sell ideas based on previous orders.","intent":"recommendation"}
+{"text":"Which products tend to appear in the same basket?","intent":"recommendation"}
+{"text":"Are database queries taking longer than usual?","intent":"slow_database"}
+{"text":"What are the latest PostgreSQL latency measurements?","intent":"slow_database"}
+{"text":"Show me DB p95 and p99 timings.","intent":"slow_database"}
+{"text":"Is the database the reason requests are slow?","intent":"slow_database"}
+{"text":"How long are API requests taking right now?","intent":"api_latency"}
+{"text":"The app feels sluggish; can you check request response times?","intent":"api_latency"}
+{"text":"Show the backend's recent p95 latency.","intent":"api_latency"}
+{"text":"What is the current service response time?","intent":"api_latency"}
+{"text":"Are there TCP retransmits or dropped connections?","intent":"network_issues"}
+{"text":"Check whether the service is seeing network errors.","intent":"network_issues"}
+{"text":"How many connection resets have been recorded?","intent":"network_issues"}
+{"text":"Any signs of network trouble in the latest telemetry?","intent":"network_issues"}
+{"text":"Show recent security alerts and their severity.","intent":"security_events"}
+{"text":"Has the collector reported suspicious activity?","intent":"security_events"}
+{"text":"Were there any high-severity security events today?","intent":"security_events"}
+{"text":"List the latest threat detections.","intent":"security_events"}
+{"text":"Give me an overview of the application's health.","intent":"system_health_overview"}
+{"text":"Are the app, database, and network all running normally?","intent":"system_health_overview"}
+{"text":"Summarize the current system status and likely bottleneck.","intent":"system_health_overview"}
+{"text":"How is the service doing overall?","intent":"system_health_overview"}
+{"text":"Why does Banker's algorithm look for a safe sequence?","intent":"how_does_it_work"}
+{"text":"Explain how row locking prevents two sales overwriting each other.","intent":"how_does_it_work"}
+{"text":"What is the point of priority scheduling in this demo?","intent":"how_does_it_work"}
+{"text":"How does a database lock differ from running without one?","intent":"how_does_it_work"}
+{"text":"Hey, can you help me?","intent":"greeting"}
+{"text":"Good morning!","intent":"greeting"}
+{"text":"Hi there","intent":"greeting"}
+{"text":"helo, anyone there?","intent":"greeting"}
+{"text":"Can you recommend a good movie for tonight?","intent":"out_of_scope"}
+{"text":"What is the weather in Mumbai tomorrow?","intent":"out_of_scope"}
+{"text":"Write a short poem about the sea.","intent":"out_of_scope"}
+{"text":"Who won the cricket match last night?","intent":"out_of_scope"}
+{"text":"asdf qwer blarg??","intent":"out_of_scope"}
+{"text":"stck??","intent":"out_of_scope"}
+{"text":"db p95?","intent":"slow_database"}
+{"text":"sku 88 stock?","intent":"product_status"}
+{"text":"low stk pls","intent":"low_stock_threshold"}
+{"text":"forecast 2w?","intent":"demand_forecast"}
+{"text":"tcp drops?","intent":"network_issues"}
+{"text":"api slow rn","intent":"api_latency"}
+{"text":"pending POs?","intent":"pending_reorders"}
+{"text":"warehouse space left?","intent":"warehouse_capacity"}
+{"text":"security alerts?","intent":"security_events"}
+{"text":"health check pls","intent":"system_health_overview"}
+{"text":"items at zero?","intent":"zero_stock"}
+{"text":"cross sell ideas?","intent":"recommendation"}
+{"text":"how do locks work?","intent":"how_does_it_work"}
+{"text":"hiya","intent":"greeting"}

@@ -1,0 +1,120 @@
+{"text":"Show the latest security events.","intent":"security_events"}
+{"text":"Were any high-severity alerts raised?","intent":"security_events"}
+{"text":"Did someone open the env file?","intent":"security_events"}
+{"text":"Has the collector detected an intrusion attempt?","intent":"security_events"}
+{"text":"Any suspicious process activity on the backend?","intent":"security_events"}
+{"text":"List recent security alerts by severity.","intent":"security_events"}
+{"text":"Who touched the env file according to the audit events?","intent":"security_events"}
+{"text":"Were there attempts to read protected files?","intent":"security_events"}
+{"text":"Check for unusual process launches.","intent":"security_events"}
+{"text":"Do we have any threat detections today?","intent":"security_events"}
+{"text":"Show me recent file access warnings.","intent":"security_events"}
+{"text":"Have any critical security events been recorded?","intent":"security_events"}
+{"text":"Did a process try to access a sensitive path?","intent":"security_events"}
+{"text":"I need the current security event counts.","intent":"security_events"}
+{"text":"Has anything triggered the security monitor?","intent":"security_events"}
+{"text":"Review the most recent intrusion alerts.","intent":"security_events"}
+{"text":"Any suspicious executable activity?","intent":"security_events"}
+{"text":"Which security events were marked high or critical?","intent":"security_events"}
+{"text":"Show the latest audit detections from the collector.","intent":"security_events"}
+{"text":"Did anyone attempt an unauthorized file read?","intent":"security_events"}
+{"text":"What security warnings came in during the last run?","intent":"security_events"}
+{"text":"List the detected security incidents without exposing file contents.","intent":"security_events"}
+{"text":"Are there any alerts about unexpected process execution?","intent":"security_events"}
+{"text":"Check whether the security feed contains new events.","intent":"security_events"}
+{"text":"Has the monitor seen access to a restricted file?","intent":"security_events"}
+{"text":"What threats were detected on this machine?","intent":"security_events"}
+{"text":"Show me the critical alert total.","intent":"security_events"}
+{"text":"Were there any suspicious file opens?","intent":"security_events"}
+{"text":"Tell me about recent policy violations.","intent":"security_events"}
+{"text":"Did the backend process open an unexpected file?","intent":"security_events"}
+{"text":"Are any security events waiting for review?","intent":"security_events"}
+{"text":"Look for intrusion indicators in the event stream.","intent":"security_events"}
+{"text":"Has the audit monitor flagged unusual access?","intent":"security_events"}
+{"text":"Which processes caused security alerts?","intent":"security_events"}
+{"text":"How many high severity events were seen?","intent":"security_events"}
+{"text":"Check for suspicious activity around the app process.","intent":"security_events"}
+{"text":"Did the collector report access to secrets?","intent":"security_events"}
+{"text":"Show security detections from the most recent interval.","intent":"security_events"}
+{"text":"Any unusual openat events from the backend?","intent":"security_events"}
+{"text":"Can you summarize the security incidents by level?","intent":"security_events"}
+{"text":"Have there been failed attempts to inspect protected files?","intent":"security_events"}
+{"text":"List alerts related to unexpected command execution.","intent":"security_events"}
+{"text":"Was an environment file access event captured?","intent":"security_events"}
+{"text":"Do the logs show an unrecognized process?","intent":"security_events"}
+{"text":"I want to inspect suspicious host events.","intent":"security_events"}
+{"text":"Has anything touched a protected path recently?","intent":"security_events"}
+{"text":"Were security events generated during the load test?","intent":"security_events"}
+{"text":"Show the severity breakdown for security alerts.","intent":"security_events"}
+{"text":"Did any process attempt to read credentials?","intent":"security_events"}
+{"text":"Check for signs of unauthorized access.","intent":"security_events"}
+{"text":"Which new events look security-related?","intent":"security_events"}
+{"text":"Are there any warnings about file access?","intent":"security_events"}
+{"text":"Can I see event summaries without secret values?","intent":"security_events"}
+{"text":"What did the host monitor flag as suspicious?","intent":"security_events"}
+{"text":"Did we record an unexpected binary launch?","intent":"security_events"}
+{"text":"Show me today's intrusion and access alerts.","intent":"security_events"}
+{"text":"Is the security event stream empty or active?","intent":"security_events"}
+{"text":"What kind of suspicious operations were detected?","intent":"security_events"}
+{"text":"Were there alerts about reading the backend env file?","intent":"security_events"}
+{"text":"Any new host security events?","intent":"security_events"}
+{"text":"How healthy is the application right now?","intent":"system_health_overview"}
+{"text":"Give me an overview of app, database, and network health.","intent":"system_health_overview"}
+{"text":"Is the system operating normally?","intent":"system_health_overview"}
+{"text":"Summarize the current service health metrics.","intent":"system_health_overview"}
+{"text":"Overall health?","intent":"system_health_overview"}
+{"text":"What is the likely bottleneck in the application?","intent":"system_health_overview"}
+{"text":"Show a high-level status for the backend services.","intent":"system_health_overview"}
+{"text":"Are CPU, database, and network measurements available?","intent":"system_health_overview"}
+{"text":"How is the whole system doing under the current load?","intent":"system_health_overview"}
+{"text":"Tell me whether the app looks healthy or degraded.","intent":"system_health_overview"}
+{"text":"Is anything unhealthy in the current system snapshot?","intent":"system_health_overview"}
+{"text":"Provide a quick operational health check.","intent":"system_health_overview"}
+{"text":"What's the overall status of IntelliStock?","intent":"system_health_overview"}
+{"text":"Can you summarize service performance and telemetry?","intent":"system_health_overview"}
+{"text":"Do current metrics show a system problem?","intent":"system_health_overview"}
+{"text":"How are the application and database performing together?","intent":"system_health_overview"}
+{"text":"Check the latest health indicators for the backend.","intent":"system_health_overview"}
+{"text":"Is the system stable after the concurrency demo?","intent":"system_health_overview"}
+{"text":"Which component appears to be slowing the service?","intent":"system_health_overview"}
+{"text":"Give me a broad health summary, not a single metric.","intent":"system_health_overview"}
+{"text":"What does the telemetry say about overall system condition?","intent":"system_health_overview"}
+{"text":"Are the API, DB, and host all responding?","intent":"system_health_overview"}
+{"text":"Show me current CPU and latency health at a glance.","intent":"system_health_overview"}
+{"text":"Does the backend have enough live measurements for a health check?","intent":"system_health_overview"}
+{"text":"How is the service holding up right now?","intent":"system_health_overview"}
+{"text":"Check for an overall performance regression.","intent":"system_health_overview"}
+{"text":"What part of the stack looks least healthy?","intent":"system_health_overview"}
+{"text":"Is the app healthy after the latest requests?","intent":"system_health_overview"}
+{"text":"Review the system health overview panel values.","intent":"system_health_overview"}
+{"text":"Tell me whether the API or database is the current bottleneck.","intent":"system_health_overview"}
+{"text":"Are there live system metrics to review?","intent":"system_health_overview"}
+{"text":"Show an operational snapshot across the stack.","intent":"system_health_overview"}
+{"text":"How are the key services doing as a whole?","intent":"system_health_overview"}
+{"text":"Check whether the app is healthy, slow, or unavailable.","intent":"system_health_overview"}
+{"text":"I need the current system-wide status.","intent":"system_health_overview"}
+{"text":"Do we have any health data from the active collector?","intent":"system_health_overview"}
+{"text":"Summarize recent CPU, DB, API, and network behavior.","intent":"system_health_overview"}
+{"text":"Is the backend running well overall?","intent":"system_health_overview"}
+{"text":"What's the system health after running eight sales?","intent":"system_health_overview"}
+{"text":"Look at the system metrics and identify any concern.","intent":"system_health_overview"}
+{"text":"Can I get a top-level health report for the demo?","intent":"system_health_overview"}
+{"text":"How are service dependencies behaving?","intent":"system_health_overview"}
+{"text":"Is the system showing signs of stress?","intent":"system_health_overview"}
+{"text":"Give me the overall health picture for the warehouse app.","intent":"system_health_overview"}
+{"text":"What is the current backend status across all metrics?","intent":"system_health_overview"}
+{"text":"Are all monitored components reporting?","intent":"system_health_overview"}
+{"text":"Tell me if any part of the application needs attention.","intent":"system_health_overview"}
+{"text":"How healthy is the full stack at this moment?","intent":"system_health_overview"}
+{"text":"Show a concise status for CPU, API timing, and DB timing.","intent":"system_health_overview"}
+{"text":"Is there a current issue affecting system stability?","intent":"system_health_overview"}
+{"text":"What does the latest app health snapshot show?","intent":"system_health_overview"}
+{"text":"Can you check overall service health for me?","intent":"system_health_overview"}
+{"text":"Are we seeing any broad performance issues?","intent":"system_health_overview"}
+{"text":"Give me the app's general condition right now.","intent":"system_health_overview"}
+{"text":"Health check pls","intent":"system_health_overview"}
+{"text":"Is the application running smoothly from end to end?","intent":"system_health_overview"}
+{"text":"What do the current observability metrics say about health?","intent":"system_health_overview"}
+{"text":"Show me the overall backend condition after the latest traffic.","intent":"system_health_overview"}
+{"text":"Are there any system-wide warnings at the moment?","intent":"system_health_overview"}
+{"text":"How are our main services performing right now?","intent":"system_health_overview"}

@@ -1,0 +1,187 @@
+{"text":"Which products are completely out of stock?","intent":"zero_stock"}
+{"text":"Show me the empty shelves in the inventory list.","intent":"zero_stock"}
+{"text":"Do we have any zero-stock items today?","intent":"zero_stock"}
+{"text":"List every SKU with no units available.","intent":"zero_stock"}
+{"text":"What has sold out?","intent":"zero_stock"}
+{"text":"Can you find products whose quantity is exactly zero?","intent":"zero_stock"}
+{"text":"Any stockouts I should know about?","intent":"zero_stock"}
+{"text":"Which items can the warehouse no longer fulfill?","intent":"zero_stock"}
+{"text":"Show products with an empty inventory balance.","intent":"zero_stock"}
+{"text":"Tell me what is unavailable because stock ran out.","intent":"zero_stock"}
+{"text":"Are any products showing zero on hand?","intent":"zero_stock"}
+{"text":"Find the completely depleted SKUs.","intent":"zero_stock"}
+{"text":"Which products have nothing left to sell?","intent":"zero_stock"}
+{"text":"Could you list the items that have run out?","intent":"zero_stock"}
+{"text":"What's at zero inventory right now?","intent":"zero_stock"}
+{"text":"Show me the products that are out of stock across all locations.","intent":"zero_stock"}
+{"text":"Are there any empty-stock records in the catalog?","intent":"zero_stock"}
+{"text":"Find items with no remaining units in storage.","intent":"zero_stock"}
+{"text":"Which SKUs have a stock count of 0?","intent":"zero_stock"}
+{"text":"I need the list of products we cannot ship for lack of stock.","intent":"zero_stock"}
+{"text":"Anything fully depleted?","intent":"zero_stock"}
+{"text":"Show the sold-out products, not low-stock ones.","intent":"zero_stock"}
+{"text":"Which inventory lines have reached zero?","intent":"zero_stock"}
+{"text":"Are we out of any supplies?","intent":"zero_stock"}
+{"text":"Give me the current stockout list.","intent":"zero_stock"}
+{"text":"Can I see all products with no available quantity?","intent":"zero_stock"}
+{"text":"What items have been exhausted from the warehouse?","intent":"zero_stock"}
+{"text":"List the zero balance products for me.","intent":"zero_stock"}
+{"text":"Which products have no on-hand inventory?","intent":"zero_stock"}
+{"text":"Has anything gone completely out of stock?","intent":"zero_stock"}
+{"text":"I want to check which goods are unavailable today.","intent":"zero_stock"}
+{"text":"Show every product with an on-hand count of zero.","intent":"zero_stock"}
+{"text":"What stock has been used up entirely?","intent":"zero_stock"}
+{"text":"Are any catalog items sold out at the moment?","intent":"zero_stock"}
+{"text":"Which products are missing from the shelves because none remain?","intent":"zero_stock"}
+{"text":"Can you identify the zero quantity SKUs?","intent":"zero_stock"}
+{"text":"Show me the out-of-stock report.","intent":"zero_stock"}
+{"text":"Do any products have no inventory left?","intent":"zero_stock"}
+{"text":"Find the items with zero units on hand, please.","intent":"zero_stock"}
+{"text":"What can't we fulfill because the shelf is empty?","intent":"zero_stock"}
+{"text":"List products that are fully sold through.","intent":"zero_stock"}
+{"text":"Is anything showing as unavailable due to zero stock?","intent":"zero_stock"}
+{"text":"Which items have been depleted to nothing?","intent":"zero_stock"}
+{"text":"Please show the current stockout products.","intent":"zero_stock"}
+{"text":"Are there zero-stock products in the demo inventory?","intent":"zero_stock"}
+{"text":"Show me any SKU with an empty quantity field set to zero.","intent":"zero_stock"}
+{"text":"Which goods have completely run dry?","intent":"zero_stock"}
+{"text":"I need to know what is out of stock before taking orders.","intent":"zero_stock"}
+{"text":"Find products with no sellable units remaining.","intent":"zero_stock"}
+{"text":"Anything sold out in our current inventory?","intent":"zero_stock"}
+{"text":"Can you check for items at zero stock?","intent":"zero_stock"}
+{"text":"Which SKUs are unavailable because inventory is empty?","intent":"zero_stock"}
+{"text":"Show me anything with nothing in the warehouse.","intent":"zero_stock"}
+{"text":"List the products whose inventory has been exhausted.","intent":"zero_stock"}
+{"text":"Is there a product with an on-hand quantity of zero?","intent":"zero_stock"}
+{"text":"What has no units in stock today?","intent":"zero_stock"}
+{"text":"Which line items are completely depleted right now?","intent":"zero_stock"}
+{"text":"Show all stockout alerts from the inventory data.","intent":"zero_stock"}
+{"text":"Can you tell me which products have run out entirely?","intent":"zero_stock"}
+{"text":"Do we have any products with an empty shelf balance?","intent":"zero_stock"}
+{"text":"zero stock?","intent":"zero_stock"}
+{"text":"Which products are below their reorder threshold?","intent":"low_stock_threshold"}
+{"text":"Show me the items that need replenishment soon.","intent":"low_stock_threshold"}
+{"text":"Which SKUs are running low but still have units left?","intent":"low_stock_threshold"}
+{"text":"List products at or under their minimum stock level.","intent":"low_stock_threshold"}
+{"text":"Low stock?","intent":"low_stock_threshold"}
+{"text":"What should I restock before we run out?","intent":"low_stock_threshold"}
+{"text":"Find inventory quantities below the reorder point.","intent":"low_stock_threshold"}
+{"text":"Any low-stock warnings on the dashboard?","intent":"low_stock_threshold"}
+{"text":"Which products have crossed their minimum quantity?","intent":"low_stock_threshold"}
+{"text":"Show me the restock alerts for items still on hand.","intent":"low_stock_threshold"}
+{"text":"What merchandise is close to running out?","intent":"low_stock_threshold"}
+{"text":"Tell me which items are under the safety-stock level.","intent":"low_stock_threshold"}
+{"text":"Do we have anything below its stocking threshold?","intent":"low_stock_threshold"}
+{"text":"Give me a list of products that need a reorder soon.","intent":"low_stock_threshold"}
+{"text":"Which items have fallen to their reorder level?","intent":"low_stock_threshold"}
+{"text":"Can you flag the products with low quantities?","intent":"low_stock_threshold"}
+{"text":"I want to see the current replenishment warnings.","intent":"low_stock_threshold"}
+{"text":"Show all items with stock at or below the threshold.","intent":"low_stock_threshold"}
+{"text":"Which goods are running short in the warehouse?","intent":"low_stock_threshold"}
+{"text":"Are any products approaching a stockout?","intent":"low_stock_threshold"}
+{"text":"What's below minimum inventory right now?","intent":"low_stock_threshold"}
+{"text":"Find the products we should top up this week.","intent":"low_stock_threshold"}
+{"text":"Show stock warnings, excluding products already at zero.","intent":"low_stock_threshold"}
+{"text":"Which products have less stock than their reorder threshold?","intent":"low_stock_threshold"}
+{"text":"Restock list, please.","intent":"low_stock_threshold"}
+{"text":"Tell me what is low before it becomes unavailable.","intent":"low_stock_threshold"}
+{"text":"Are there any items under the desired stock level?","intent":"low_stock_threshold"}
+{"text":"Can I get the below-threshold inventory report?","intent":"low_stock_threshold"}
+{"text":"Which supplies need replenishing based on current counts?","intent":"low_stock_threshold"}
+{"text":"Show me the SKUs with less than their minimum quantity.","intent":"low_stock_threshold"}
+{"text":"Is anything running low in the product catalog?","intent":"low_stock_threshold"}
+{"text":"List products that are low but not sold out.","intent":"low_stock_threshold"}
+{"text":"What should the purchasing team reorder based on stock levels?","intent":"low_stock_threshold"}
+{"text":"Find the items at risk of running out soon.","intent":"low_stock_threshold"}
+{"text":"Which products need a top-up today?","intent":"low_stock_threshold"}
+{"text":"Show inventory alerts for quantities below minimum.","intent":"low_stock_threshold"}
+{"text":"Any SKUs below their restock trigger?","intent":"low_stock_threshold"}
+{"text":"Can you check what is understocked?","intent":"low_stock_threshold"}
+{"text":"I need the low quantity list, not the open purchase orders.","intent":"low_stock_threshold"}
+{"text":"Which stock counts have dipped under the reorder line?","intent":"low_stock_threshold"}
+{"text":"Show products with only a few units remaining.","intent":"low_stock_threshold"}
+{"text":"What needs a restock alert right now?","intent":"low_stock_threshold"}
+{"text":"Tell me which SKUs are at their minimum stock level.","intent":"low_stock_threshold"}
+{"text":"Are any products below the amount we normally keep on hand?","intent":"low_stock_threshold"}
+{"text":"Could you review the items that have low inventory?","intent":"low_stock_threshold"}
+{"text":"What is under the reorder threshold today?","intent":"low_stock_threshold"}
+{"text":"Show me products that may stock out if sales continue.","intent":"low_stock_threshold"}
+{"text":"Which lines need replenishment while they still have stock?","intent":"low_stock_threshold"}
+{"text":"Find the items with a low stock count.","intent":"low_stock_threshold"}
+{"text":"Any replenishment flags?","intent":"low_stock_threshold"}
+{"text":"Which products are short of their target inventory?","intent":"low_stock_threshold"}
+{"text":"List the low-stock SKUs for today's review.","intent":"low_stock_threshold"}
+{"text":"Show me what has dipped below its restock point.","intent":"low_stock_threshold"}
+{"text":"The shelf is getting thin; what should we replenish?","intent":"low_stock_threshold"}
+{"text":"Which items need attention because their quantity is low?","intent":"low_stock_threshold"}
+{"text":"Do any stock levels call for a reorder?","intent":"low_stock_threshold"}
+{"text":"How many products are under their minimum level?","intent":"low_stock_threshold"}
+{"text":"What stock should I top up before the next shift?","intent":"low_stock_threshold"}
+{"text":"Show me the under-threshold items, please.","intent":"low_stock_threshold"}
+{"text":"Which products are below the quantity we aim to maintain?","intent":"low_stock_threshold"}
+{"text":"Low stk list?","intent":"low_stock_threshold"}
+{"text":"Which SKUs have crossed the configured minimum but still have stock?","intent":"low_stock_threshold"}
+{"text":"Flag products whose on-hand quantity is under the safety floor.","intent":"low_stock_threshold"}
+{"text":"Show items below their target shelf quantity, excluding empty products.","intent":"low_stock_threshold"}
+{"text":"What inventory is under its warning level today?","intent":"low_stock_threshold"}
+{"text":"Tell me which remaining stock counts are beneath the set minimum.","intent":"low_stock_threshold"}
+{"text":"Show the reorder requests that are still pending.","intent":"pending_reorders"}
+{"text":"Which purchase orders are waiting for action?","intent":"pending_reorders"}
+{"text":"Do we have any open replenishment requests?","intent":"pending_reorders"}
+{"text":"List restock orders that have not been completed yet.","intent":"pending_reorders"}
+{"text":"Pending reorders?","intent":"pending_reorders"}
+{"text":"What purchase requests are awaiting approval?","intent":"pending_reorders"}
+{"text":"Show me the reorder backlog by status.","intent":"pending_reorders"}
+{"text":"Which replenishment jobs are still open?","intent":"pending_reorders"}
+{"text":"Are there any unprocessed supplier orders?","intent":"pending_reorders"}
+{"text":"Tell me how many reorder records remain pending.","intent":"pending_reorders"}
+{"text":"What orders are waiting in the restock queue?","intent":"pending_reorders"}
+{"text":"Can I see open purchase orders that need review?","intent":"pending_reorders"}
+{"text":"Find all pending reorder logs.","intent":"pending_reorders"}
+{"text":"Which restock requests have not been fulfilled?","intent":"pending_reorders"}
+{"text":"Show incomplete purchase orders for inventory.","intent":"pending_reorders"}
+{"text":"Is anything waiting in the purchasing queue?","intent":"pending_reorders"}
+{"text":"List reorder records that still need processing.","intent":"pending_reorders"}
+{"text":"How many open replenishment orders are there?","intent":"pending_reorders"}
+{"text":"I need to review the pending stock orders.","intent":"pending_reorders"}
+{"text":"Are any supplier reorders awaiting action?","intent":"pending_reorders"}
+{"text":"Show the outstanding restock requests.","intent":"pending_reorders"}
+{"text":"Which purchase orders have not moved forward?","intent":"pending_reorders"}
+{"text":"Can you list the unapproved reorder requests?","intent":"pending_reorders"}
+{"text":"What inventory orders are still outstanding?","intent":"pending_reorders"}
+{"text":"Find requests in the pending state, please.","intent":"pending_reorders"}
+{"text":"Give me the backlog of products already ordered for restock.","intent":"pending_reorders"}
+{"text":"Are there old reorder requests we have not closed?","intent":"pending_reorders"}
+{"text":"Which replenishment orders are awaiting a supplier update?","intent":"pending_reorders"}
+{"text":"Show me orders that were created but remain unfinished.","intent":"pending_reorders"}
+{"text":"What reorders still need a buyer's attention?","intent":"pending_reorders"}
+{"text":"How many restock jobs are waiting to be completed?","intent":"pending_reorders"}
+{"text":"Display all pending purchase requests for stock.","intent":"pending_reorders"}
+{"text":"Any outstanding reorder slips?","intent":"pending_reorders"}
+{"text":"Check the status of our open restock orders.","intent":"pending_reorders"}
+{"text":"Which order records are still marked pending?","intent":"pending_reorders"}
+{"text":"I want the pending orders list, not low stock warnings.","intent":"pending_reorders"}
+{"text":"Are any replenishment requests waiting to be sent?","intent":"pending_reorders"}
+{"text":"Show inventory orders not yet completed.","intent":"pending_reorders"}
+{"text":"Tell me what the purchasing team still has to process.","intent":"pending_reorders"}
+{"text":"Find the restock orders with no completion yet.","intent":"pending_reorders"}
+{"text":"Can you check if we have pending supplier reorders?","intent":"pending_reorders"}
+{"text":"Which open requests will add stock to the warehouse?","intent":"pending_reorders"}
+{"text":"Show outstanding purchase order records.","intent":"pending_reorders"}
+{"text":"What remains in the reorder queue?","intent":"pending_reorders"}
+{"text":"List the inventory replenishments awaiting approval.","intent":"pending_reorders"}
+{"text":"Are there any stock orders waiting for confirmation?","intent":"pending_reorders"}
+{"text":"Review the pending reorder status for me.","intent":"pending_reorders"}
+{"text":"Show requests that were raised but not closed.","intent":"pending_reorders"}
+{"text":"Do we have unfulfilled purchase orders on file?","intent":"pending_reorders"}
+{"text":"I need the number of open restock requests.","intent":"pending_reorders"}
+{"text":"Which replenishment entries are still marked pending?","intent":"pending_reorders"}
+{"text":"Can you pull the current purchase order backlog?","intent":"pending_reorders"}
+{"text":"What is waiting for the procurement team?","intent":"pending_reorders"}
+{"text":"Show me the incomplete reorder requests from the database.","intent":"pending_reorders"}
+{"text":"Any restock orders with an unfinished status?","intent":"pending_reorders"}
+{"text":"Which orders are queued but not fulfilled yet?","intent":"pending_reorders"}
+{"text":"Pending PO list?","intent":"pending_reorders"}
+{"text":"How many orders are awaiting restock fulfillment?","intent":"pending_reorders"}
+{"text":"Show requests for replenishment that remain unresolved.","intent":"pending_reorders"}
+{"text":"Do any purchase orders still need to be received?","intent":"pending_reorders"}

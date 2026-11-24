@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import json
-import random
+import re
+from collections import Counter
 from pathlib import Path
 
 import joblib
@@ -18,57 +19,24 @@ MODEL_PATH = ROOT / "model.joblib"
 METRICS_PATH = ROOT / "metrics.json"
 
 
-TEMPLATES = {
-    "zero_stock": ["show zero stock items", "which products are out of stock", "list empty inventory", "items with 0 stock", "what is sold out", "koi stock khatam hai"],
-    "low_stock_threshold": ["which items are low in stock", "show reorder warnings", "below threshold products", "kam stock wala list", "items needing reorder"],
-    "warehouse_capacity": ["check warehouse capacity", "how much dock space is free", "warehouse available space", "godown capacity dikhao", "capacity status"],
-    "pending_reorders": ["show pending reorder records", "purchase order backlog", "what reorders are waiting", "pending reorders list", "baaki reorder"],
-    "product_status": ["what is the status of SKU-", "check stock for SKU-", "product SKU- details", "tell me SKU- inventory", "is SKU- in stock"],
-    "demand_forecast": ["which products run out in 14 days", "14 day demand forecast", "forecast stock risk", "kal se demand prediction", "next 14 days demand"],
-    "recommendation": ["recommend products bought together", "frequently bought with SKU-", "related product suggestions", "cross sell recommendation", "recommend next item"],
-    "slow_database": ["why is the database slow", "show DB latency", "is PostgreSQL delayed", "p95 database latency", "database query is slow"],
-    "api_latency": ["why is the app slow right now", "check API latency", "request response slow", "backend speed", "app p95 latency"],
-    "network_issues": ["any network issues", "TCP retransmits", "connection failures", "network latency", "reset and drop stats"],
-    "security_events": ["any suspicious activity", "show security events", "recent high severity alerts", "did anyone access secrets", "threat events"],
-    "system_health_overview": ["system health overview", "how is everything running", "overall backend health", "CPU database network status", "current system status"],
-    "how_does_it_work": ["how does Bankers algorithm work", "explain row locking", "why select for update", "priority scheduling concept", "lock versus no lock"],
-    "greeting": ["hello", "hi", "hey assistant", "good morning", "namaste", "helo"],
-    "out_of_scope": ["tell me a joke", "what is the weather", "write a poem", "who won the match", "random unrelated question"],
-}
-
-
-PREFIXES = ["please ", "can you ", "could you ", "just ", "quickly ", ""]
-SUFFIXES = [" now", " please", " in the dashboard", " for me", " right now", ""]
-
-
-def build_data() -> list[dict[str, str]]:
-    random.seed(2026)
-    rows: list[dict[str, str]] = []
-    for intent, templates in TEMPLATES.items():
-        for index in range(40):
-            base = templates[index % len(templates)]
-            text = f"{random.choice(PREFIXES)}{base}{random.choice(SUFFIXES)}"
-            text = text.replace("  ", " ").strip()
-            if index % 7 == 0:
-                text = text.replace("stock", "stok").replace("database", "datbase")
-            rows.append({"text": text, "intent": intent})
-    random.shuffle(rows)
+def ensure_dataset() -> list[dict[str, str]]:
+    if not DATA_PATH.exists():
+        raise FileNotFoundError(f"Training data is required at {DATA_PATH}; run build_dataset.py first")
+    with DATA_PATH.open("r", encoding="utf-8") as handle:
+        rows = [json.loads(line) for line in handle if line.strip()]
+    counts = Counter(row.get("intent") for row in rows)
+    if not rows or any(not isinstance(row.get("text"), str) or not row["text"].strip() for row in rows):
+        raise ValueError("Training rows must contain non-empty text and intent fields")
+    below_minimum = {intent: count for intent, count in counts.items() if count < 60}
+    if below_minimum:
+        raise ValueError(f"Every intent needs at least 60 examples; found {below_minimum}")
+    normalized = [" ".join(re.sub(r"[^a-z0-9 ]", " ", row["text"].casefold()).split()) for row in rows]
+    if len(normalized) != len(set(normalized)):
+        raise ValueError("Training data contains normalized duplicate text")
     return rows
 
 
-def ensure_dataset() -> list[dict[str, str]]:
-    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if not DATA_PATH.exists():
-        rows = build_data()
-        with DATA_PATH.open("w", encoding="utf-8") as handle:
-            for row in rows:
-                handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-    with DATA_PATH.open("r", encoding="utf-8") as handle:
-        return [json.loads(line) for line in handle if line.strip()]
-
-
 def main() -> None:
-    random.seed(2026)
     rows = ensure_dataset()
     texts = [row["text"] for row in rows]
     labels = [row["intent"] for row in rows]
@@ -109,6 +77,8 @@ def main() -> None:
     METRICS_PATH.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     print(f"accuracy={accuracy:.4f}")
     print(f"macro_f1={macro_f1:.4f}")
+    print(f"validation_accuracy={metrics['validation_accuracy']:.4f}")
+    print(f"validation_macro_f1={metrics['validation_macro_f1']:.4f}")
     print("confusion_matrix:")
     print(json.dumps(metrics["confusion_matrix"]))
     print(f"saved={MODEL_PATH}")

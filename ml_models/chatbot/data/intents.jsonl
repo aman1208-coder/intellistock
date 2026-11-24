@@ -1,600 +1,980 @@
-{"text": "quickly check API latency", "intent": "api_latency"}
-{"text": "could you app p95 latency in the dashboard", "intent": "api_latency"}
-{"text": "please TCP retransmits in the dashboard", "intent": "network_issues"}
-{"text": "could you request response slow please", "intent": "api_latency"}
-{"text": "could you 14 day demand forecast for me", "intent": "demand_forecast"}
-{"text": "could you koi stock khatam hai for me", "intent": "zero_stock"}
-{"text": "could you is PostgreSQL delayed", "intent": "slow_database"}
-{"text": "can you reset and drop stats for me", "intent": "network_issues"}
-{"text": "could you kam stock wala list right now", "intent": "low_stock_threshold"}
-{"text": "good morning for me", "intent": "greeting"}
-{"text": "please items with 0 stock right now", "intent": "zero_stock"}
-{"text": "quickly write a poem right now", "intent": "out_of_scope"}
-{"text": "can you check API latency", "intent": "api_latency"}
-{"text": "could you request response slow in the dashboard", "intent": "api_latency"}
-{"text": "just what is the status of SKU- please", "intent": "product_status"}
-{"text": "please below threshold products", "intent": "low_stock_threshold"}
-{"text": "can you datbase query is slow", "intent": "slow_database"}
-{"text": "could you hi now", "intent": "greeting"}
-{"text": "lock versus no lock", "intent": "how_does_it_work"}
-{"text": "could you network latency now", "intent": "network_issues"}
-{"text": "what is the weather right now", "intent": "out_of_scope"}
-{"text": "just backend speed for me", "intent": "api_latency"}
-{"text": "quickly what is the status of SKU- for me", "intent": "product_status"}
-{"text": "could you write a poem right now", "intent": "out_of_scope"}
-{"text": "just lock versus no lock in the dashboard", "intent": "how_does_it_work"}
-{"text": "why is the database slow", "intent": "slow_database"}
-{"text": "could you database query is slow now", "intent": "slow_database"}
-{"text": "could you show security events for me", "intent": "security_events"}
-{"text": "can you purchase order backlog", "intent": "pending_reorders"}
-{"text": "just show security events", "intent": "security_events"}
-{"text": "can you backend speed for me", "intent": "api_latency"}
-{"text": "please kam stock wala list please", "intent": "low_stock_threshold"}
-{"text": "just show security events please", "intent": "security_events"}
-{"text": "14 day demand forecast right now", "intent": "demand_forecast"}
-{"text": "quickly CPU database network status now", "intent": "system_health_overview"}
-{"text": "just show reorder warnings right now", "intent": "low_stock_threshold"}
-{"text": "can you any network issues in the dashboard", "intent": "network_issues"}
-{"text": "quickly write a poem please", "intent": "out_of_scope"}
-{"text": "please what is the status of SKU- in the dashboard", "intent": "product_status"}
-{"text": "please recent high severity alerts", "intent": "security_events"}
-{"text": "please frequently bought with SKU- please", "intent": "recommendation"}
-{"text": "just show pending reorder records now", "intent": "pending_reorders"}
-{"text": "just below threshold products in the dashboard", "intent": "low_stock_threshold"}
-{"text": "just good morning right now", "intent": "greeting"}
-{"text": "quickly how is everything running now", "intent": "system_health_overview"}
-{"text": "threat events for me", "intent": "security_events"}
-{"text": "could you what is sold out in the dashboard", "intent": "zero_stock"}
-{"text": "just which products are out of stok right now", "intent": "zero_stock"}
-{"text": "can you below threshold products in the dashboard", "intent": "low_stock_threshold"}
-{"text": "can you current system status in the dashboard", "intent": "system_health_overview"}
-{"text": "could you network latency in the dashboard", "intent": "network_issues"}
-{"text": "please hey assistant please", "intent": "greeting"}
-{"text": "check API latency", "intent": "api_latency"}
-{"text": "which products are out of stock", "intent": "zero_stock"}
-{"text": "who won the match", "intent": "out_of_scope"}
-{"text": "could you explain row locking", "intent": "how_does_it_work"}
-{"text": "reset and drop stats right now", "intent": "network_issues"}
-{"text": "quickly any network issues in the dashboard", "intent": "network_issues"}
-{"text": "please warehouse available space for me", "intent": "warehouse_capacity"}
-{"text": "could you is PostgreSQL delayed", "intent": "slow_database"}
-{"text": "can you who won the match right now", "intent": "out_of_scope"}
-{"text": "can you which items are low in stok please", "intent": "low_stock_threshold"}
-{"text": "can you any suspicious activity right now", "intent": "security_events"}
-{"text": "just threat events please", "intent": "security_events"}
-{"text": "can you check warehouse capacity now", "intent": "warehouse_capacity"}
-{"text": "please warehouse available space right now", "intent": "warehouse_capacity"}
-{"text": "please tell me a joke for me", "intent": "out_of_scope"}
-{"text": "could you show zero stock items for me", "intent": "zero_stock"}
-{"text": "can you why is the app slow right now for me", "intent": "api_latency"}
-{"text": "just list empty inventory please", "intent": "zero_stock"}
-{"text": "quickly show security events right now", "intent": "security_events"}
-{"text": "could you app p95 latency please", "intent": "api_latency"}
-{"text": "quickly what is sold out in the dashboard", "intent": "zero_stock"}
-{"text": "could you what is the status of SKU- now", "intent": "product_status"}
-{"text": "could you which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "could you related product suggestions please", "intent": "recommendation"}
-{"text": "which items are low in stock right now", "intent": "low_stock_threshold"}
-{"text": "could you app p95 latency", "intent": "api_latency"}
-{"text": "please how much dock space is free now", "intent": "warehouse_capacity"}
-{"text": "please forecast stock risk in the dashboard", "intent": "demand_forecast"}
-{"text": "just network latency for me", "intent": "network_issues"}
-{"text": "quickly threat events in the dashboard", "intent": "security_events"}
-{"text": "related product suggestions right now", "intent": "recommendation"}
-{"text": "just baaki reorder for me", "intent": "pending_reorders"}
-{"text": "quickly what is the status of SKU-", "intent": "product_status"}
-{"text": "just hey assistant please", "intent": "greeting"}
-{"text": "quickly related product suggestions in the dashboard", "intent": "recommendation"}
-{"text": "quickly overall backend health for me", "intent": "system_health_overview"}
-{"text": "can you what is the weather now", "intent": "out_of_scope"}
-{"text": "could you purchase order backlog please", "intent": "pending_reorders"}
-{"text": "pending reorders list", "intent": "pending_reorders"}
-{"text": "could you how is everything running in the dashboard", "intent": "system_health_overview"}
-{"text": "could you network latency right now", "intent": "network_issues"}
-{"text": "could you p95 database latency in the dashboard", "intent": "slow_database"}
-{"text": "could you reset and drop stats now", "intent": "network_issues"}
-{"text": "show reorder warnings", "intent": "low_stock_threshold"}
-{"text": "quickly what reorders are waiting for me", "intent": "pending_reorders"}
-{"text": "could you recent high severity alerts in the dashboard", "intent": "security_events"}
-{"text": "could you how does Bankers algorithm work in the dashboard", "intent": "how_does_it_work"}
-{"text": "could you tell me a joke now", "intent": "out_of_scope"}
-{"text": "quickly TCP retransmits", "intent": "network_issues"}
-{"text": "just overall backend health", "intent": "system_health_overview"}
-{"text": "could you what is sold out in the dashboard", "intent": "zero_stock"}
-{"text": "please which items are low in stock for me", "intent": "low_stock_threshold"}
-{"text": "please check stock for SKU- right now", "intent": "product_status"}
-{"text": "forecast stock risk now", "intent": "demand_forecast"}
-{"text": "quickly good morning please", "intent": "greeting"}
-{"text": "TCP retransmits now", "intent": "network_issues"}
-{"text": "please hello now", "intent": "greeting"}
-{"text": "app p95 latency for me", "intent": "api_latency"}
-{"text": "can you how is everything running please", "intent": "system_health_overview"}
-{"text": "just capacity status in the dashboard", "intent": "warehouse_capacity"}
-{"text": "please database query is slow", "intent": "slow_database"}
-{"text": "please overall backend health in the dashboard", "intent": "system_health_overview"}
-{"text": "could you check stock for SKU- in the dashboard", "intent": "product_status"}
-{"text": "just purchase order backlog", "intent": "pending_reorders"}
-{"text": "quickly CPU database network status please", "intent": "system_health_overview"}
-{"text": "please how is everything running", "intent": "system_health_overview"}
-{"text": "just explain row locking right now", "intent": "how_does_it_work"}
-{"text": "godown capacity dikhao in the dashboard", "intent": "warehouse_capacity"}
-{"text": "could you frequently bought with SKU- right now", "intent": "recommendation"}
-{"text": "could you any suspicious activity in the dashboard", "intent": "security_events"}
-{"text": "could you godown capacity dikhao", "intent": "warehouse_capacity"}
-{"text": "quickly warehouse available space in the dashboard", "intent": "warehouse_capacity"}
-{"text": "quickly random unrelated question in the dashboard", "intent": "out_of_scope"}
-{"text": "quickly priority scheduling concept now", "intent": "how_does_it_work"}
-{"text": "please show reorder warnings", "intent": "low_stock_threshold"}
-{"text": "please tell me a joke", "intent": "out_of_scope"}
-{"text": "quickly system health overview", "intent": "system_health_overview"}
-{"text": "can you hey assistant in the dashboard", "intent": "greeting"}
-{"text": "helo right now", "intent": "greeting"}
-{"text": "what is the weather", "intent": "out_of_scope"}
-{"text": "could you is PostgreSQL delayed now", "intent": "slow_database"}
-{"text": "quickly why select for update for me", "intent": "how_does_it_work"}
-{"text": "could you p95 datbase latency for me", "intent": "slow_database"}
-{"text": "could you p95 database latency right now", "intent": "slow_database"}
-{"text": "can you which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "quickly which products are out of stock for me", "intent": "zero_stock"}
-{"text": "just priority scheduling concept right now", "intent": "how_does_it_work"}
-{"text": "namaste please", "intent": "greeting"}
-{"text": "frequently bought with SKU-", "intent": "recommendation"}
-{"text": "quickly reset and drop stats for me", "intent": "network_issues"}
-{"text": "product SKU- details right now", "intent": "product_status"}
-{"text": "product SKU- details right now", "intent": "product_status"}
-{"text": "quickly related product suggestions in the dashboard", "intent": "recommendation"}
-{"text": "please write a poem please", "intent": "out_of_scope"}
-{"text": "could you tell me SKU- inventory in the dashboard", "intent": "product_status"}
-{"text": "please kam stok wala list in the dashboard", "intent": "low_stock_threshold"}
-{"text": "did anyone access secrets", "intent": "security_events"}
-{"text": "items needing reorder for me", "intent": "low_stock_threshold"}
-{"text": "related product suggestions in the dashboard", "intent": "recommendation"}
-{"text": "just random unrelated question in the dashboard", "intent": "out_of_scope"}
-{"text": "kam stock wala list for me", "intent": "low_stock_threshold"}
-{"text": "can you lock versus no lock in the dashboard", "intent": "how_does_it_work"}
-{"text": "just hello please", "intent": "greeting"}
-{"text": "quickly random unrelated question", "intent": "out_of_scope"}
-{"text": "can you overall backend health please", "intent": "system_health_overview"}
-{"text": "just kam stock wala list please", "intent": "low_stock_threshold"}
-{"text": "please tell me a joke please", "intent": "out_of_scope"}
-{"text": "could you pending reorders list for me", "intent": "pending_reorders"}
-{"text": "TCP retransmits", "intent": "network_issues"}
-{"text": "just backend speed right now", "intent": "api_latency"}
-{"text": "please items with 0 stock right now", "intent": "zero_stock"}
-{"text": "can you hello right now", "intent": "greeting"}
-{"text": "please current system status for me", "intent": "system_health_overview"}
-{"text": "could you priority scheduling concept", "intent": "how_does_it_work"}
-{"text": "just did anyone access secrets please", "intent": "security_events"}
-{"text": "just how is everything running", "intent": "system_health_overview"}
-{"text": "could you which products run out in 14 days in the dashboard", "intent": "demand_forecast"}
-{"text": "could you is SKU- in stock for me", "intent": "product_status"}
-{"text": "please warehouse available space for me", "intent": "warehouse_capacity"}
-{"text": "next 14 days demand right now", "intent": "demand_forecast"}
-{"text": "could you recent high severity alerts", "intent": "security_events"}
-{"text": "just items needing reorder", "intent": "low_stock_threshold"}
-{"text": "could you what is the weather please", "intent": "out_of_scope"}
-{"text": "please is SKU- in stock please", "intent": "product_status"}
-{"text": "just recommend products bought together right now", "intent": "recommendation"}
-{"text": "just is PostgreSQL delayed for me", "intent": "slow_database"}
-{"text": "can you what reorders are waiting for me", "intent": "pending_reorders"}
-{"text": "please recommend next item", "intent": "recommendation"}
-{"text": "tell me SKU- inventory please", "intent": "product_status"}
-{"text": "quickly list empty inventory in the dashboard", "intent": "zero_stock"}
-{"text": "quickly hey assistant now", "intent": "greeting"}
-{"text": "could you forecast stok risk for me", "intent": "demand_forecast"}
-{"text": "any suspicious activity right now", "intent": "security_events"}
-{"text": "just godown capacity dikhao", "intent": "warehouse_capacity"}
-{"text": "just check stock for SKU-", "intent": "product_status"}
-{"text": "just show zero stock items now", "intent": "zero_stock"}
-{"text": "just which items are low in stock please", "intent": "low_stock_threshold"}
-{"text": "could you kam stock wala list now", "intent": "low_stock_threshold"}
-{"text": "just did anyone access secrets right now", "intent": "security_events"}
-{"text": "can you connection failures for me", "intent": "network_issues"}
-{"text": "can you p95 database latency now", "intent": "slow_database"}
-{"text": "why is the database slow now", "intent": "slow_database"}
-{"text": "could you lock versus no lock in the dashboard", "intent": "how_does_it_work"}
-{"text": "quickly system health overview in the dashboard", "intent": "system_health_overview"}
-{"text": "please next 14 days demand right now", "intent": "demand_forecast"}
-{"text": "request response slow", "intent": "api_latency"}
-{"text": "can you kal se demand prediction for me", "intent": "demand_forecast"}
-{"text": "just show reorder warnings for me", "intent": "low_stock_threshold"}
-{"text": "could you cross sell recommendation in the dashboard", "intent": "recommendation"}
-{"text": "can you system health overview", "intent": "system_health_overview"}
-{"text": "quickly how is everything running now", "intent": "system_health_overview"}
-{"text": "quickly namaste now", "intent": "greeting"}
-{"text": "which products are out of stock for me", "intent": "zero_stock"}
-{"text": "can you connection failures now", "intent": "network_issues"}
-{"text": "quickly baaki reorder for me", "intent": "pending_reorders"}
-{"text": "could you pending reorders list for me", "intent": "pending_reorders"}
-{"text": "just which items are low in stok now", "intent": "low_stock_threshold"}
-{"text": "please check stok for SKU- for me", "intent": "product_status"}
-{"text": "quickly why is the database slow now", "intent": "slow_database"}
-{"text": "quickly threat events", "intent": "security_events"}
-{"text": "could you koi stock khatam hai now", "intent": "zero_stock"}
-{"text": "just tell me a joke for me", "intent": "out_of_scope"}
-{"text": "quickly check warehouse capacity please", "intent": "warehouse_capacity"}
-{"text": "please cross sell recommendation now", "intent": "recommendation"}
-{"text": "list empty inventory now", "intent": "zero_stock"}
-{"text": "quickly what reorders are waiting please", "intent": "pending_reorders"}
-{"text": "just which products run out in 14 days in the dashboard", "intent": "demand_forecast"}
-{"text": "just hi for me", "intent": "greeting"}
-{"text": "system health overview please", "intent": "system_health_overview"}
-{"text": "please how does Bankers algorithm work now", "intent": "how_does_it_work"}
-{"text": "quickly tell me SKU- inventory in the dashboard", "intent": "product_status"}
-{"text": "godown capacity dikhao right now", "intent": "warehouse_capacity"}
-{"text": "could you check API latency in the dashboard", "intent": "api_latency"}
-{"text": "quickly is SKU- in stock please", "intent": "product_status"}
-{"text": "can you items with 0 stock right now", "intent": "zero_stock"}
-{"text": "just good morning please", "intent": "greeting"}
-{"text": "frequently bought with SKU- right now", "intent": "recommendation"}
-{"text": "could you show pending reorder records for me", "intent": "pending_reorders"}
-{"text": "please recommend products bought together in the dashboard", "intent": "recommendation"}
-{"text": "quickly baaki reorder right now", "intent": "pending_reorders"}
-{"text": "can you database query is slow", "intent": "slow_database"}
-{"text": "just app p95 latency please", "intent": "api_latency"}
-{"text": "any network issues in the dashboard", "intent": "network_issues"}
-{"text": "can you reset and drop stats right now", "intent": "network_issues"}
-{"text": "just connection failures", "intent": "network_issues"}
-{"text": "quickly show DB latency", "intent": "slow_database"}
-{"text": "quickly check warehouse capacity please", "intent": "warehouse_capacity"}
-{"text": "please items with 0 stock", "intent": "zero_stock"}
-{"text": "just frequently bought with SKU-", "intent": "recommendation"}
-{"text": "just how much dock space is free right now", "intent": "warehouse_capacity"}
-{"text": "please write a poem in the dashboard", "intent": "out_of_scope"}
-{"text": "just helo please", "intent": "greeting"}
-{"text": "can you purchase order backlog now", "intent": "pending_reorders"}
-{"text": "please godown capacity dikhao now", "intent": "warehouse_capacity"}
-{"text": "quickly what is the status of SKU- in the dashboard", "intent": "product_status"}
-{"text": "quickly godown capacity dikhao for me", "intent": "warehouse_capacity"}
-{"text": "can you show DB latency in the dashboard", "intent": "slow_database"}
-{"text": "could you is SKU- in stock now", "intent": "product_status"}
-{"text": "show security events in the dashboard", "intent": "security_events"}
-{"text": "check API latency right now", "intent": "api_latency"}
-{"text": "can you recommend products bought together for me", "intent": "recommendation"}
-{"text": "can you frequently bought with SKU-", "intent": "recommendation"}
-{"text": "can you p95 database latency for me", "intent": "slow_database"}
-{"text": "please random unrelated question right now", "intent": "out_of_scope"}
-{"text": "could you how does Bankers algorithm work for me", "intent": "how_does_it_work"}
-{"text": "can you how much dock space is free please", "intent": "warehouse_capacity"}
-{"text": "please show zero stok items in the dashboard", "intent": "zero_stock"}
-{"text": "can you purchase order backlog", "intent": "pending_reorders"}
-{"text": "just show reorder warnings for me", "intent": "low_stock_threshold"}
-{"text": "can you backend speed please", "intent": "api_latency"}
-{"text": "database query is slow please", "intent": "slow_database"}
-{"text": "could you pending reorders list right now", "intent": "pending_reorders"}
-{"text": "could you hi for me", "intent": "greeting"}
-{"text": "quickly godown capacity dikhao right now", "intent": "warehouse_capacity"}
-{"text": "can you CPU database network status", "intent": "system_health_overview"}
-{"text": "why select for update", "intent": "how_does_it_work"}
-{"text": "could you tell me a joke please", "intent": "out_of_scope"}
-{"text": "could you check API latency for me", "intent": "api_latency"}
-{"text": "just pending reorders list now", "intent": "pending_reorders"}
-{"text": "can you any suspicious activity for me", "intent": "security_events"}
-{"text": "quickly priority scheduling concept please", "intent": "how_does_it_work"}
-{"text": "why select for update right now", "intent": "how_does_it_work"}
-{"text": "could you koi stock khatam hai for me", "intent": "zero_stock"}
-{"text": "please baaki reorder for me", "intent": "pending_reorders"}
-{"text": "please next 14 days demand now", "intent": "demand_forecast"}
-{"text": "please recommend products bought together right now", "intent": "recommendation"}
-{"text": "quickly show DB latency please", "intent": "slow_database"}
-{"text": "show DB latency now", "intent": "slow_database"}
-{"text": "quickly capacity status please", "intent": "warehouse_capacity"}
-{"text": "please good morning right now", "intent": "greeting"}
-{"text": "kal se demand prediction in the dashboard", "intent": "demand_forecast"}
-{"text": "quickly tell me SKU- inventory right now", "intent": "product_status"}
-{"text": "quickly show pending reorder records please", "intent": "pending_reorders"}
-{"text": "quickly below threshold products", "intent": "low_stock_threshold"}
-{"text": "explain row locking in the dashboard", "intent": "how_does_it_work"}
-{"text": "quickly list empty inventory right now", "intent": "zero_stock"}
-{"text": "please overall backend health please", "intent": "system_health_overview"}
-{"text": "can you any suspicious activity right now", "intent": "security_events"}
-{"text": "can you how does Bankers algorithm work", "intent": "how_does_it_work"}
-{"text": "just explain row locking please", "intent": "how_does_it_work"}
-{"text": "what reorders are waiting now", "intent": "pending_reorders"}
-{"text": "just any suspicious activity in the dashboard", "intent": "security_events"}
-{"text": "quickly below threshold products in the dashboard", "intent": "low_stock_threshold"}
-{"text": "quickly priority scheduling concept in the dashboard", "intent": "how_does_it_work"}
-{"text": "can you recent high severity alerts right now", "intent": "security_events"}
-{"text": "please why is the database slow for me", "intent": "slow_database"}
-{"text": "which items are low in stock for me", "intent": "low_stock_threshold"}
-{"text": "quickly forecast stock risk", "intent": "demand_forecast"}
-{"text": "can you what reorders are waiting now", "intent": "pending_reorders"}
-{"text": "can you cross sell recommendation", "intent": "recommendation"}
-{"text": "quickly connection failures for me", "intent": "network_issues"}
-{"text": "who won the match now", "intent": "out_of_scope"}
-{"text": "just koi stok khatam hai right now", "intent": "zero_stock"}
-{"text": "just connection failures now", "intent": "network_issues"}
-{"text": "could you request response slow in the dashboard", "intent": "api_latency"}
-{"text": "could you kal se demand prediction right now", "intent": "demand_forecast"}
-{"text": "can you show zero stock items", "intent": "zero_stock"}
-{"text": "could you app p95 latency for me", "intent": "api_latency"}
-{"text": "could you any suspicious activity for me", "intent": "security_events"}
-{"text": "quickly hello in the dashboard", "intent": "greeting"}
-{"text": "quickly next 14 days demand for me", "intent": "demand_forecast"}
-{"text": "quickly which products are out of stock right now", "intent": "zero_stock"}
-{"text": "can you threat events in the dashboard", "intent": "security_events"}
-{"text": "quickly 14 day demand forecast now", "intent": "demand_forecast"}
-{"text": "could you who won the match now", "intent": "out_of_scope"}
-{"text": "quickly did anyone access secrets", "intent": "security_events"}
-{"text": "please forecast stock risk please", "intent": "demand_forecast"}
-{"text": "helo in the dashboard", "intent": "greeting"}
-{"text": "just show reorder warnings please", "intent": "low_stock_threshold"}
-{"text": "quickly below threshold products", "intent": "low_stock_threshold"}
-{"text": "quickly 14 day demand forecast in the dashboard", "intent": "demand_forecast"}
-{"text": "just overall backend health please", "intent": "system_health_overview"}
-{"text": "please threat events for me", "intent": "security_events"}
-{"text": "quickly kal se demand prediction now", "intent": "demand_forecast"}
-{"text": "please recent high severity alerts right now", "intent": "security_events"}
-{"text": "quickly what is the weather now", "intent": "out_of_scope"}
-{"text": "could you purchase order backlog for me", "intent": "pending_reorders"}
-{"text": "can you backend speed for me", "intent": "api_latency"}
-{"text": "quickly items needing reorder for me", "intent": "low_stock_threshold"}
-{"text": "just TCP retransmits", "intent": "network_issues"}
-{"text": "quickly warehouse available space right now", "intent": "warehouse_capacity"}
-{"text": "can you database query is slow right now", "intent": "slow_database"}
-{"text": "just hello right now", "intent": "greeting"}
-{"text": "just helo now", "intent": "greeting"}
-{"text": "p95 database latency right now", "intent": "slow_database"}
-{"text": "please any network issues please", "intent": "network_issues"}
-{"text": "can you TCP retransmits in the dashboard", "intent": "network_issues"}
-{"text": "could you app p95 latency please", "intent": "api_latency"}
-{"text": "please CPU datbase network status now", "intent": "system_health_overview"}
-{"text": "please show security events for me", "intent": "security_events"}
-{"text": "just check API latency in the dashboard", "intent": "api_latency"}
-{"text": "could you which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "just below threshold products in the dashboard", "intent": "low_stock_threshold"}
-{"text": "request response slow", "intent": "api_latency"}
-{"text": "is SKU- in stok", "intent": "product_status"}
-{"text": "just items with 0 stock right now", "intent": "zero_stock"}
-{"text": "quickly how does Bankers algorithm work", "intent": "how_does_it_work"}
-{"text": "please helo right now", "intent": "greeting"}
-{"text": "baaki reorder right now", "intent": "pending_reorders"}
-{"text": "is SKU- in stock please", "intent": "product_status"}
-{"text": "can you network latency right now", "intent": "network_issues"}
-{"text": "can you kal se demand prediction right now", "intent": "demand_forecast"}
-{"text": "which items are low in stock right now", "intent": "low_stock_threshold"}
-{"text": "please why is the app slow right now now", "intent": "api_latency"}
-{"text": "recommend next item please", "intent": "recommendation"}
-{"text": "please lock versus no lock please", "intent": "how_does_it_work"}
-{"text": "system health overview right now", "intent": "system_health_overview"}
-{"text": "could you current system status please", "intent": "system_health_overview"}
-{"text": "just next 14 days demand in the dashboard", "intent": "demand_forecast"}
-{"text": "can you kam stock wala list in the dashboard", "intent": "low_stock_threshold"}
-{"text": "just kal se demand prediction now", "intent": "demand_forecast"}
-{"text": "please how much dock space is free right now", "intent": "warehouse_capacity"}
-{"text": "please items needing reorder please", "intent": "low_stock_threshold"}
-{"text": "CPU database network status for me", "intent": "system_health_overview"}
-{"text": "please kam stock wala list", "intent": "low_stock_threshold"}
-{"text": "can you recommend next item", "intent": "recommendation"}
-{"text": "CPU database network status for me", "intent": "system_health_overview"}
-{"text": "check stock for SKU-", "intent": "product_status"}
-{"text": "can you warehouse available space right now", "intent": "warehouse_capacity"}
-{"text": "quickly related product suggestions", "intent": "recommendation"}
-{"text": "just forecast stock risk for me", "intent": "demand_forecast"}
-{"text": "can you check warehouse capacity for me", "intent": "warehouse_capacity"}
-{"text": "random unrelated question right now", "intent": "out_of_scope"}
-{"text": "could you 14 day demand forecast now", "intent": "demand_forecast"}
-{"text": "quickly show DB latency please", "intent": "slow_database"}
-{"text": "quickly frequently bought with SKU- in the dashboard", "intent": "recommendation"}
-{"text": "can you how is everything running right now", "intent": "system_health_overview"}
-{"text": "could you check warehouse capacity now", "intent": "warehouse_capacity"}
-{"text": "just show pending reorder records right now", "intent": "pending_reorders"}
-{"text": "can you write a poem right now", "intent": "out_of_scope"}
-{"text": "list empty inventory in the dashboard", "intent": "zero_stock"}
-{"text": "please any network issues now", "intent": "network_issues"}
-{"text": "quickly what is the weather", "intent": "out_of_scope"}
-{"text": "could you CPU database network status please", "intent": "system_health_overview"}
-{"text": "please database query is slow right now", "intent": "slow_database"}
-{"text": "could you show DB latency right now", "intent": "slow_database"}
-{"text": "quickly overall backend health", "intent": "system_health_overview"}
-{"text": "please check stock for SKU- now", "intent": "product_status"}
-{"text": "show security events in the dashboard", "intent": "security_events"}
-{"text": "could you tell me SKU- inventory right now", "intent": "product_status"}
-{"text": "please next 14 days demand for me", "intent": "demand_forecast"}
-{"text": "could you connection failures in the dashboard", "intent": "network_issues"}
-{"text": "please which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "quickly show zero stock items", "intent": "zero_stock"}
-{"text": "just warehouse available space in the dashboard", "intent": "warehouse_capacity"}
-{"text": "recommend next item now", "intent": "recommendation"}
-{"text": "is SKU- in stock in the dashboard", "intent": "product_status"}
-{"text": "reset and drop stats please", "intent": "network_issues"}
-{"text": "could you show security events in the dashboard", "intent": "security_events"}
-{"text": "please hey assistant", "intent": "greeting"}
-{"text": "recommend next item for me", "intent": "recommendation"}
-{"text": "hello please", "intent": "greeting"}
-{"text": "just overall backend health now", "intent": "system_health_overview"}
-{"text": "can you purchase order backlog in the dashboard", "intent": "pending_reorders"}
-{"text": "please frequently bought with SKU- in the dashboard", "intent": "recommendation"}
-{"text": "quickly cross sell recommendation now", "intent": "recommendation"}
-{"text": "could you request response slow", "intent": "api_latency"}
-{"text": "just backend speed in the dashboard", "intent": "api_latency"}
-{"text": "system health overview", "intent": "system_health_overview"}
-{"text": "quickly 14 day demand forecast now", "intent": "demand_forecast"}
-{"text": "priority scheduling concept please", "intent": "how_does_it_work"}
-{"text": "could you is PostgreSQL delayed in the dashboard", "intent": "slow_database"}
-{"text": "please what is the weather please", "intent": "out_of_scope"}
-{"text": "just cross sell recommendation now", "intent": "recommendation"}
-{"text": "can you why is the database slow right now", "intent": "slow_database"}
-{"text": "can you current system status in the dashboard", "intent": "system_health_overview"}
-{"text": "show zero stock items right now", "intent": "zero_stock"}
-{"text": "could you connection failures now", "intent": "network_issues"}
-{"text": "could you what reorders are waiting please", "intent": "pending_reorders"}
-{"text": "can you how does Bankers algorithm work right now", "intent": "how_does_it_work"}
-{"text": "please show zero stock items for me", "intent": "zero_stock"}
-{"text": "quickly backend speed for me", "intent": "api_latency"}
-{"text": "just recommend next item", "intent": "recommendation"}
-{"text": "quickly why is the app slow right now right now", "intent": "api_latency"}
-{"text": "quickly product SKU- details now", "intent": "product_status"}
-{"text": "just why select for update now", "intent": "how_does_it_work"}
-{"text": "items needing reorder for me", "intent": "low_stock_threshold"}
-{"text": "quickly is PostgreSQL delayed please", "intent": "slow_database"}
-{"text": "quickly backend speed", "intent": "api_latency"}
-{"text": "quickly which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "please namaste now", "intent": "greeting"}
-{"text": "just pending reorders list", "intent": "pending_reorders"}
-{"text": "just check warehouse capacity", "intent": "warehouse_capacity"}
-{"text": "could you recent high severity alerts please", "intent": "security_events"}
-{"text": "just hi right now", "intent": "greeting"}
-{"text": "quickly TCP retransmits", "intent": "network_issues"}
-{"text": "just who won the match for me", "intent": "out_of_scope"}
-{"text": "please how does Bankers algorithm work for me", "intent": "how_does_it_work"}
-{"text": "can you recommend products bought together for me", "intent": "recommendation"}
-{"text": "please tell me a joke in the dashboard", "intent": "out_of_scope"}
-{"text": "quickly explain row locking now", "intent": "how_does_it_work"}
-{"text": "can you 14 day demand forecast now", "intent": "demand_forecast"}
-{"text": "can you CPU database network status", "intent": "system_health_overview"}
-{"text": "quickly product SKU- details now", "intent": "product_status"}
-{"text": "quickly baaki reorder please", "intent": "pending_reorders"}
-{"text": "just why is the app slow right now", "intent": "api_latency"}
-{"text": "just tell me SKU- inventory in the dashboard", "intent": "product_status"}
-{"text": "quickly recommend products bought together right now", "intent": "recommendation"}
-{"text": "can you related product suggestions right now", "intent": "recommendation"}
-{"text": "quickly show pending reorder records", "intent": "pending_reorders"}
-{"text": "quickly show DB latency in the dashboard", "intent": "slow_database"}
-{"text": "please why is the datbase slow right now", "intent": "slow_database"}
-{"text": "just how much dock space is free now", "intent": "warehouse_capacity"}
-{"text": "forecast stock risk", "intent": "demand_forecast"}
-{"text": "just recommend next item for me", "intent": "recommendation"}
-{"text": "tell me a joke right now", "intent": "out_of_scope"}
-{"text": "please check stock for SKU-", "intent": "product_status"}
-{"text": "can you is PostgreSQL delayed now", "intent": "slow_database"}
-{"text": "just which items are low in stock right now", "intent": "low_stock_threshold"}
-{"text": "just why select for update now", "intent": "how_does_it_work"}
-{"text": "quickly warehouse available space please", "intent": "warehouse_capacity"}
-{"text": "could you show reorder warnings right now", "intent": "low_stock_threshold"}
-{"text": "could you who won the match please", "intent": "out_of_scope"}
-{"text": "please capacity status right now", "intent": "warehouse_capacity"}
-{"text": "who won the match right now", "intent": "out_of_scope"}
-{"text": "please why is the app slow right now in the dashboard", "intent": "api_latency"}
-{"text": "please app p95 latency", "intent": "api_latency"}
-{"text": "can you current system status please", "intent": "system_health_overview"}
-{"text": "just hello right now", "intent": "greeting"}
-{"text": "14 day demand forecast now", "intent": "demand_forecast"}
-{"text": "quickly reset and drop stats right now", "intent": "network_issues"}
-{"text": "just namaste please", "intent": "greeting"}
-{"text": "could you show pending reorder records now", "intent": "pending_reorders"}
-{"text": "quickly request response slow right now", "intent": "api_latency"}
-{"text": "could you capacity status", "intent": "warehouse_capacity"}
-{"text": "just capacity status please", "intent": "warehouse_capacity"}
-{"text": "just write a poem now", "intent": "out_of_scope"}
-{"text": "just why is the datbase slow in the dashboard", "intent": "slow_database"}
-{"text": "please p95 database latency in the dashboard", "intent": "slow_database"}
-{"text": "just below threshold products", "intent": "low_stock_threshold"}
-{"text": "please how much dock space is free right now", "intent": "warehouse_capacity"}
-{"text": "quickly did anyone access secrets right now", "intent": "security_events"}
-{"text": "quickly what is the status of SKU- please", "intent": "product_status"}
-{"text": "quickly system health overview please", "intent": "system_health_overview"}
-{"text": "quickly hi now", "intent": "greeting"}
-{"text": "could you recommend products bought together in the dashboard", "intent": "recommendation"}
-{"text": "could you which products run out in 14 days please", "intent": "demand_forecast"}
-{"text": "please hey assistant right now", "intent": "greeting"}
-{"text": "quickly network latency", "intent": "network_issues"}
-{"text": "quickly kal se demand prediction", "intent": "demand_forecast"}
-{"text": "pending reorders list right now", "intent": "pending_reorders"}
-{"text": "please what is the weather in the dashboard", "intent": "out_of_scope"}
-{"text": "can you priority scheduling concept in the dashboard", "intent": "how_does_it_work"}
-{"text": "just explain row locking", "intent": "how_does_it_work"}
-{"text": "connection failures in the dashboard", "intent": "network_issues"}
-{"text": "quickly hey assistant in the dashboard", "intent": "greeting"}
-{"text": "can you network latency right now", "intent": "network_issues"}
-{"text": "next 14 days demand please", "intent": "demand_forecast"}
-{"text": "please show pending reorder records for me", "intent": "pending_reorders"}
-{"text": "please priority scheduling concept please", "intent": "how_does_it_work"}
-{"text": "please product SKU- details", "intent": "product_status"}
-{"text": "can you did anyone access secrets in the dashboard", "intent": "security_events"}
-{"text": "quickly what is sold out for me", "intent": "zero_stock"}
-{"text": "threat events right now", "intent": "security_events"}
-{"text": "forecast stock risk", "intent": "demand_forecast"}
-{"text": "quickly check stock for SKU- in the dashboard", "intent": "product_status"}
-{"text": "quickly any suspicious activity right now", "intent": "security_events"}
-{"text": "just how much dock space is free right now", "intent": "warehouse_capacity"}
-{"text": "items needing reorder for me", "intent": "low_stock_threshold"}
-{"text": "please baaki reorder right now", "intent": "pending_reorders"}
-{"text": "quickly why select for update right now", "intent": "how_does_it_work"}
-{"text": "just koi stock khatam hai right now", "intent": "zero_stock"}
-{"text": "can you any network issues now", "intent": "network_issues"}
-{"text": "could you baaki reorder for me", "intent": "pending_reorders"}
-{"text": "could you is PostgreSQL delayed now", "intent": "slow_database"}
-{"text": "please current system status please", "intent": "system_health_overview"}
-{"text": "list empty inventory in the dashboard", "intent": "zero_stock"}
-{"text": "just hi now", "intent": "greeting"}
-{"text": "quickly recent high severity alerts now", "intent": "security_events"}
-{"text": "can you purchase order backlog please", "intent": "pending_reorders"}
-{"text": "just p95 database latency right now", "intent": "slow_database"}
-{"text": "quickly what is sold out right now", "intent": "zero_stock"}
-{"text": "show pending reorder records please", "intent": "pending_reorders"}
-{"text": "could you items needing reorder for me", "intent": "low_stock_threshold"}
-{"text": "please check warehouse capacity for me", "intent": "warehouse_capacity"}
-{"text": "lock versus no lock please", "intent": "how_does_it_work"}
-{"text": "could you lock versus no lock", "intent": "how_does_it_work"}
-{"text": "product SKU- details in the dashboard", "intent": "product_status"}
-{"text": "just why select for update for me", "intent": "how_does_it_work"}
-{"text": "can you random unrelated question", "intent": "out_of_scope"}
-{"text": "could you capacity status now", "intent": "warehouse_capacity"}
-{"text": "could you current system status right now", "intent": "system_health_overview"}
-{"text": "could you good morning for me", "intent": "greeting"}
-{"text": "just why is the app slow right now now", "intent": "api_latency"}
-{"text": "just koi stock khatam hai for me", "intent": "zero_stock"}
-{"text": "please what is sold out now", "intent": "zero_stock"}
-{"text": "just database query is slow for me", "intent": "slow_database"}
-{"text": "please tell me SKU- inventory now", "intent": "product_status"}
-{"text": "could you show DB latency right now", "intent": "slow_database"}
-{"text": "could you recommend products bought together please", "intent": "recommendation"}
-{"text": "please TCP retransmits right now", "intent": "network_issues"}
-{"text": "could you hi please", "intent": "greeting"}
-{"text": "quickly random unrelated question right now", "intent": "out_of_scope"}
-{"text": "can you cross sell recommendation please", "intent": "recommendation"}
-{"text": "please items with 0 stok right now", "intent": "zero_stock"}
-{"text": "can you check warehouse capacity please", "intent": "warehouse_capacity"}
-{"text": "reset and drop stats in the dashboard", "intent": "network_issues"}
-{"text": "please namaste for me", "intent": "greeting"}
-{"text": "quickly check API latency now", "intent": "api_latency"}
-{"text": "can you did anyone access secrets now", "intent": "security_events"}
-{"text": "just lock versus no lock for me", "intent": "how_does_it_work"}
-{"text": "who won the match for me", "intent": "out_of_scope"}
-{"text": "quickly network latency", "intent": "network_issues"}
-{"text": "quickly which products are out of stock right now", "intent": "zero_stock"}
-{"text": "could you what reorders are waiting please", "intent": "pending_reorders"}
-{"text": "can you godown capacity dikhao right now", "intent": "warehouse_capacity"}
-{"text": "can you explain row locking now", "intent": "how_does_it_work"}
-{"text": "can you is SKU- in stock in the dashboard", "intent": "product_status"}
-{"text": "can you why is the app slow right now for me", "intent": "api_latency"}
-{"text": "please what reorders are waiting now", "intent": "pending_reorders"}
-{"text": "how does Bankers algorithm work", "intent": "how_does_it_work"}
-{"text": "just recommend next item", "intent": "recommendation"}
-{"text": "could you good morning please", "intent": "greeting"}
-{"text": "can you pending reorders list", "intent": "pending_reorders"}
-{"text": "show reorder warnings in the dashboard", "intent": "low_stock_threshold"}
-{"text": "could you request response slow", "intent": "api_latency"}
-{"text": "which products are out of stock now", "intent": "zero_stock"}
-{"text": "capacity status please", "intent": "warehouse_capacity"}
-{"text": "can you current system status in the dashboard", "intent": "system_health_overview"}
-{"text": "please product SKU- details in the dashboard", "intent": "product_status"}
-{"text": "can you why is the database slow in the dashboard", "intent": "slow_database"}
-{"text": "just threat events in the dashboard", "intent": "security_events"}
-{"text": "could you why is the app slow right now please", "intent": "api_latency"}
-{"text": "just explain row locking in the dashboard", "intent": "how_does_it_work"}
-{"text": "could you next 14 days demand", "intent": "demand_forecast"}
-{"text": "can you write a poem now", "intent": "out_of_scope"}
-{"text": "can you tell me SKU- inventory now", "intent": "product_status"}
-{"text": "related product suggestions in the dashboard", "intent": "recommendation"}
-{"text": "please what is the status of SKU- right now", "intent": "product_status"}
-{"text": "could you product SKU- details for me", "intent": "product_status"}
-{"text": "could you how is everything running please", "intent": "system_health_overview"}
-{"text": "could you how much dock space is free", "intent": "warehouse_capacity"}
-{"text": "please random unrelated question now", "intent": "out_of_scope"}
-{"text": "can you any network issues for me", "intent": "network_issues"}
-{"text": "please did anyone access secrets right now", "intent": "security_events"}
-{"text": "can you items with 0 stock for me", "intent": "zero_stock"}
-{"text": "just list empty inventory now", "intent": "zero_stock"}
-{"text": "can you cross sell recommendation", "intent": "recommendation"}
-{"text": "capacity status in the dashboard", "intent": "warehouse_capacity"}
-{"text": "system health overview for me", "intent": "system_health_overview"}
-{"text": "please recent high severity alerts", "intent": "security_events"}
-{"text": "please helo right now", "intent": "greeting"}
-{"text": "quickly kal se demand prediction for me", "intent": "demand_forecast"}
-{"text": "could you any network issues now", "intent": "network_issues"}
-{"text": "just namaste", "intent": "greeting"}
-{"text": "items needing reorder right now", "intent": "low_stock_threshold"}
-{"text": "can you why select for update right now", "intent": "how_does_it_work"}
-{"text": "please cross sell recommendation", "intent": "recommendation"}
+{"text": "Which products are completely out of stock?", "intent": "zero_stock"}
+{"text": "Show me the empty shelves in the inventory list.", "intent": "zero_stock"}
+{"text": "Do we have any zero-stock items today?", "intent": "zero_stock"}
+{"text": "List every SKU with no units available.", "intent": "zero_stock"}
+{"text": "What has sold out?", "intent": "zero_stock"}
+{"text": "Can you find products whose quantity is exactly zero?", "intent": "zero_stock"}
+{"text": "Any stockouts I should know about?", "intent": "zero_stock"}
+{"text": "Which items can the warehouse no longer fulfill?", "intent": "zero_stock"}
+{"text": "Show products with an empty inventory balance.", "intent": "zero_stock"}
+{"text": "Tell me what is unavailable because stock ran out.", "intent": "zero_stock"}
+{"text": "Are any products showing zero on hand?", "intent": "zero_stock"}
+{"text": "Find the completely depleted SKUs.", "intent": "zero_stock"}
+{"text": "Which products have nothing left to sell?", "intent": "zero_stock"}
+{"text": "Could you list the items that have run out?", "intent": "zero_stock"}
+{"text": "What's at zero inventory right now?", "intent": "zero_stock"}
+{"text": "Show me the products that are out of stock across all locations.", "intent": "zero_stock"}
+{"text": "Are there any empty-stock records in the catalog?", "intent": "zero_stock"}
+{"text": "Find items with no remaining units in storage.", "intent": "zero_stock"}
+{"text": "Which SKUs have a stock count of 0?", "intent": "zero_stock"}
+{"text": "I need the list of products we cannot ship for lack of stock.", "intent": "zero_stock"}
+{"text": "Anything fully depleted?", "intent": "zero_stock"}
+{"text": "Show the sold-out products, not low-stock ones.", "intent": "zero_stock"}
+{"text": "Which inventory lines have reached zero?", "intent": "zero_stock"}
+{"text": "Are we out of any supplies?", "intent": "zero_stock"}
+{"text": "Give me the current stockout list.", "intent": "zero_stock"}
+{"text": "Can I see all products with no available quantity?", "intent": "zero_stock"}
+{"text": "What items have been exhausted from the warehouse?", "intent": "zero_stock"}
+{"text": "List the zero balance products for me.", "intent": "zero_stock"}
+{"text": "Which products have no on-hand inventory?", "intent": "zero_stock"}
+{"text": "Has anything gone completely out of stock?", "intent": "zero_stock"}
+{"text": "I want to check which goods are unavailable today.", "intent": "zero_stock"}
+{"text": "Show every product with an on-hand count of zero.", "intent": "zero_stock"}
+{"text": "What stock has been used up entirely?", "intent": "zero_stock"}
+{"text": "Are any catalog items sold out at the moment?", "intent": "zero_stock"}
+{"text": "Which products are missing from the shelves because none remain?", "intent": "zero_stock"}
+{"text": "Can you identify the zero quantity SKUs?", "intent": "zero_stock"}
+{"text": "Show me the out-of-stock report.", "intent": "zero_stock"}
+{"text": "Do any products have no inventory left?", "intent": "zero_stock"}
+{"text": "Find the items with zero units on hand, please.", "intent": "zero_stock"}
+{"text": "What can't we fulfill because the shelf is empty?", "intent": "zero_stock"}
+{"text": "List products that are fully sold through.", "intent": "zero_stock"}
+{"text": "Is anything showing as unavailable due to zero stock?", "intent": "zero_stock"}
+{"text": "Which items have been depleted to nothing?", "intent": "zero_stock"}
+{"text": "Please show the current stockout products.", "intent": "zero_stock"}
+{"text": "Are there zero-stock products in the demo inventory?", "intent": "zero_stock"}
+{"text": "Show me any SKU with an empty quantity field set to zero.", "intent": "zero_stock"}
+{"text": "Which goods have completely run dry?", "intent": "zero_stock"}
+{"text": "I need to know what is out of stock before taking orders.", "intent": "zero_stock"}
+{"text": "Find products with no sellable units remaining.", "intent": "zero_stock"}
+{"text": "Anything sold out in our current inventory?", "intent": "zero_stock"}
+{"text": "Can you check for items at zero stock?", "intent": "zero_stock"}
+{"text": "Which SKUs are unavailable because inventory is empty?", "intent": "zero_stock"}
+{"text": "Show me anything with nothing in the warehouse.", "intent": "zero_stock"}
+{"text": "List the products whose inventory has been exhausted.", "intent": "zero_stock"}
+{"text": "Is there a product with an on-hand quantity of zero?", "intent": "zero_stock"}
+{"text": "What has no units in stock today?", "intent": "zero_stock"}
+{"text": "Which line items are completely depleted right now?", "intent": "zero_stock"}
+{"text": "Show all stockout alerts from the inventory data.", "intent": "zero_stock"}
+{"text": "Can you tell me which products have run out entirely?", "intent": "zero_stock"}
+{"text": "Do we have any products with an empty shelf balance?", "intent": "zero_stock"}
+{"text": "zero stock?", "intent": "zero_stock"}
+{"text": "Which products are below their reorder threshold?", "intent": "low_stock_threshold"}
+{"text": "Show me the items that need replenishment soon.", "intent": "low_stock_threshold"}
+{"text": "Which SKUs are running low but still have units left?", "intent": "low_stock_threshold"}
+{"text": "List products at or under their minimum stock level.", "intent": "low_stock_threshold"}
+{"text": "Low stock?", "intent": "low_stock_threshold"}
+{"text": "What should I restock before we run out?", "intent": "low_stock_threshold"}
+{"text": "Find inventory quantities below the reorder point.", "intent": "low_stock_threshold"}
+{"text": "Any low-stock warnings on the dashboard?", "intent": "low_stock_threshold"}
+{"text": "Which products have crossed their minimum quantity?", "intent": "low_stock_threshold"}
+{"text": "Show me the restock alerts for items still on hand.", "intent": "low_stock_threshold"}
+{"text": "What merchandise is close to running out?", "intent": "low_stock_threshold"}
+{"text": "Tell me which items are under the safety-stock level.", "intent": "low_stock_threshold"}
+{"text": "Do we have anything below its stocking threshold?", "intent": "low_stock_threshold"}
+{"text": "Give me a list of products that need a reorder soon.", "intent": "low_stock_threshold"}
+{"text": "Which items have fallen to their reorder level?", "intent": "low_stock_threshold"}
+{"text": "Can you flag the products with low quantities?", "intent": "low_stock_threshold"}
+{"text": "I want to see the current replenishment warnings.", "intent": "low_stock_threshold"}
+{"text": "Show all items with stock at or below the threshold.", "intent": "low_stock_threshold"}
+{"text": "Which goods are running short in the warehouse?", "intent": "low_stock_threshold"}
+{"text": "Are any products approaching a stockout?", "intent": "low_stock_threshold"}
+{"text": "What's below minimum inventory right now?", "intent": "low_stock_threshold"}
+{"text": "Find the products we should top up this week.", "intent": "low_stock_threshold"}
+{"text": "Show stock warnings, excluding products already at zero.", "intent": "low_stock_threshold"}
+{"text": "Which products have less stock than their reorder threshold?", "intent": "low_stock_threshold"}
+{"text": "Restock list, please.", "intent": "low_stock_threshold"}
+{"text": "Tell me what is low before it becomes unavailable.", "intent": "low_stock_threshold"}
+{"text": "Are there any items under the desired stock level?", "intent": "low_stock_threshold"}
+{"text": "Can I get the below-threshold inventory report?", "intent": "low_stock_threshold"}
+{"text": "Which supplies need replenishing based on current counts?", "intent": "low_stock_threshold"}
+{"text": "Show me the SKUs with less than their minimum quantity.", "intent": "low_stock_threshold"}
+{"text": "Is anything running low in the product catalog?", "intent": "low_stock_threshold"}
+{"text": "List products that are low but not sold out.", "intent": "low_stock_threshold"}
+{"text": "What should the purchasing team reorder based on stock levels?", "intent": "low_stock_threshold"}
+{"text": "Find the items at risk of running out soon.", "intent": "low_stock_threshold"}
+{"text": "Which products need a top-up today?", "intent": "low_stock_threshold"}
+{"text": "Show inventory alerts for quantities below minimum.", "intent": "low_stock_threshold"}
+{"text": "Any SKUs below their restock trigger?", "intent": "low_stock_threshold"}
+{"text": "Can you check what is understocked?", "intent": "low_stock_threshold"}
+{"text": "I need the low quantity list, not the open purchase orders.", "intent": "low_stock_threshold"}
+{"text": "Which stock counts have dipped under the reorder line?", "intent": "low_stock_threshold"}
+{"text": "Show products with only a few units remaining.", "intent": "low_stock_threshold"}
+{"text": "What needs a restock alert right now?", "intent": "low_stock_threshold"}
+{"text": "Tell me which SKUs are at their minimum stock level.", "intent": "low_stock_threshold"}
+{"text": "Are any products below the amount we normally keep on hand?", "intent": "low_stock_threshold"}
+{"text": "Could you review the items that have low inventory?", "intent": "low_stock_threshold"}
+{"text": "What is under the reorder threshold today?", "intent": "low_stock_threshold"}
+{"text": "Show me products that may stock out if sales continue.", "intent": "low_stock_threshold"}
+{"text": "Which lines need replenishment while they still have stock?", "intent": "low_stock_threshold"}
+{"text": "Find the items with a low stock count.", "intent": "low_stock_threshold"}
+{"text": "Any replenishment flags?", "intent": "low_stock_threshold"}
+{"text": "Which products are short of their target inventory?", "intent": "low_stock_threshold"}
+{"text": "List the low-stock SKUs for today's review.", "intent": "low_stock_threshold"}
+{"text": "Show me what has dipped below its restock point.", "intent": "low_stock_threshold"}
+{"text": "The shelf is getting thin; what should we replenish?", "intent": "low_stock_threshold"}
+{"text": "Which items need attention because their quantity is low?", "intent": "low_stock_threshold"}
+{"text": "Do any stock levels call for a reorder?", "intent": "low_stock_threshold"}
+{"text": "How many products are under their minimum level?", "intent": "low_stock_threshold"}
+{"text": "What stock should I top up before the next shift?", "intent": "low_stock_threshold"}
+{"text": "Show me the under-threshold items, please.", "intent": "low_stock_threshold"}
+{"text": "Which products are below the quantity we aim to maintain?", "intent": "low_stock_threshold"}
+{"text": "Low stk list?", "intent": "low_stock_threshold"}
+{"text": "Which SKUs have crossed the configured minimum but still have stock?", "intent": "low_stock_threshold"}
+{"text": "Flag products whose on-hand quantity is under the safety floor.", "intent": "low_stock_threshold"}
+{"text": "Show items below their target shelf quantity, excluding empty products.", "intent": "low_stock_threshold"}
+{"text": "What inventory is under its warning level today?", "intent": "low_stock_threshold"}
+{"text": "Tell me which remaining stock counts are beneath the set minimum.", "intent": "low_stock_threshold"}
+{"text": "Show the reorder requests that are still pending.", "intent": "pending_reorders"}
+{"text": "Which purchase orders are waiting for action?", "intent": "pending_reorders"}
+{"text": "Do we have any open replenishment requests?", "intent": "pending_reorders"}
+{"text": "List restock orders that have not been completed yet.", "intent": "pending_reorders"}
+{"text": "Pending reorders?", "intent": "pending_reorders"}
+{"text": "What purchase requests are awaiting approval?", "intent": "pending_reorders"}
+{"text": "Show me the reorder backlog by status.", "intent": "pending_reorders"}
+{"text": "Which replenishment jobs are still open?", "intent": "pending_reorders"}
+{"text": "Are there any unprocessed supplier orders?", "intent": "pending_reorders"}
+{"text": "Tell me how many reorder records remain pending.", "intent": "pending_reorders"}
+{"text": "What orders are waiting in the restock queue?", "intent": "pending_reorders"}
+{"text": "Can I see open purchase orders that need review?", "intent": "pending_reorders"}
+{"text": "Find all pending reorder logs.", "intent": "pending_reorders"}
+{"text": "Which restock requests have not been fulfilled?", "intent": "pending_reorders"}
+{"text": "Show incomplete purchase orders for inventory.", "intent": "pending_reorders"}
+{"text": "Is anything waiting in the purchasing queue?", "intent": "pending_reorders"}
+{"text": "List reorder records that still need processing.", "intent": "pending_reorders"}
+{"text": "How many open replenishment orders are there?", "intent": "pending_reorders"}
+{"text": "I need to review the pending stock orders.", "intent": "pending_reorders"}
+{"text": "Are any supplier reorders awaiting action?", "intent": "pending_reorders"}
+{"text": "Show the outstanding restock requests.", "intent": "pending_reorders"}
+{"text": "Which purchase orders have not moved forward?", "intent": "pending_reorders"}
+{"text": "Can you list the unapproved reorder requests?", "intent": "pending_reorders"}
+{"text": "What inventory orders are still outstanding?", "intent": "pending_reorders"}
+{"text": "Find requests in the pending state, please.", "intent": "pending_reorders"}
+{"text": "Give me the backlog of products already ordered for restock.", "intent": "pending_reorders"}
+{"text": "Are there old reorder requests we have not closed?", "intent": "pending_reorders"}
+{"text": "Which replenishment orders are awaiting a supplier update?", "intent": "pending_reorders"}
+{"text": "Show me orders that were created but remain unfinished.", "intent": "pending_reorders"}
+{"text": "What reorders still need a buyer's attention?", "intent": "pending_reorders"}
+{"text": "How many restock jobs are waiting to be completed?", "intent": "pending_reorders"}
+{"text": "Display all pending purchase requests for stock.", "intent": "pending_reorders"}
+{"text": "Any outstanding reorder slips?", "intent": "pending_reorders"}
+{"text": "Check the status of our open restock orders.", "intent": "pending_reorders"}
+{"text": "Which order records are still marked pending?", "intent": "pending_reorders"}
+{"text": "I want the pending orders list, not low stock warnings.", "intent": "pending_reorders"}
+{"text": "Are any replenishment requests waiting to be sent?", "intent": "pending_reorders"}
+{"text": "Show inventory orders not yet completed.", "intent": "pending_reorders"}
+{"text": "Tell me what the purchasing team still has to process.", "intent": "pending_reorders"}
+{"text": "Find the restock orders with no completion yet.", "intent": "pending_reorders"}
+{"text": "Can you check if we have pending supplier reorders?", "intent": "pending_reorders"}
+{"text": "Which open requests will add stock to the warehouse?", "intent": "pending_reorders"}
+{"text": "Show outstanding purchase order records.", "intent": "pending_reorders"}
+{"text": "What remains in the reorder queue?", "intent": "pending_reorders"}
+{"text": "List the inventory replenishments awaiting approval.", "intent": "pending_reorders"}
+{"text": "Are there any stock orders waiting for confirmation?", "intent": "pending_reorders"}
+{"text": "Review the pending reorder status for me.", "intent": "pending_reorders"}
+{"text": "Show requests that were raised but not closed.", "intent": "pending_reorders"}
+{"text": "Do we have unfulfilled purchase orders on file?", "intent": "pending_reorders"}
+{"text": "I need the number of open restock requests.", "intent": "pending_reorders"}
+{"text": "Which replenishment entries are still marked pending?", "intent": "pending_reorders"}
+{"text": "Can you pull the current purchase order backlog?", "intent": "pending_reorders"}
+{"text": "What is waiting for the procurement team?", "intent": "pending_reorders"}
+{"text": "Show me the incomplete reorder requests from the database.", "intent": "pending_reorders"}
+{"text": "Any restock orders with an unfinished status?", "intent": "pending_reorders"}
+{"text": "Which orders are queued but not fulfilled yet?", "intent": "pending_reorders"}
+{"text": "Pending PO list?", "intent": "pending_reorders"}
+{"text": "How many orders are awaiting restock fulfillment?", "intent": "pending_reorders"}
+{"text": "Show requests for replenishment that remain unresolved.", "intent": "pending_reorders"}
+{"text": "Do any purchase orders still need to be received?", "intent": "pending_reorders"}
+{"text": "Check the current quantity for ELEC-001.", "intent": "product_status"}
+{"text": "How many cordless drills are in stock?", "intent": "product_status"}
+{"text": "Is PACK-003 available to ship today?", "intent": "product_status"}
+{"text": "Look up the stock status of SAFE-004.", "intent": "product_status"}
+{"text": "What is the inventory count for OFF-006?", "intent": "product_status"}
+{"text": "Does HARD-002 have enough units on hand?", "intent": "product_status"}
+{"text": "Show me the status of ELEC-005, including its reorder point.", "intent": "product_status"}
+{"text": "How much bubble wrap do we have?", "intent": "product_status"}
+{"text": "Is the demo scanner SKU DEMO-ZERO-001 sold out?", "intent": "product_status"}
+{"text": "Find the details for DEMO-LOW-002.", "intent": "product_status"}
+{"text": "Can we fulfill an order for HARD-006?", "intent": "product_status"}
+{"text": "Tell me whether OFF-001 is in stock.", "intent": "product_status"}
+{"text": "What's the quantity on ELEC-002?", "intent": "product_status"}
+{"text": "Check inventory for the safety glasses, SAFE-002.", "intent": "product_status"}
+{"text": "I need the stock count for PACK-006.", "intent": "product_status"}
+{"text": "Is SKU ELEC-004 running low?", "intent": "product_status"}
+{"text": "What is the current status of the utility knife, HARD-004?", "intent": "product_status"}
+{"text": "Look up OFF-003 in the product catalog.", "intent": "product_status"}
+{"text": "How many first aid kits are available under SAFE-004?", "intent": "product_status"}
+{"text": "Show the on-hand balance for PACK-001.", "intent": "product_status"}
+{"text": "Does ELEC-006 have any units left?", "intent": "product_status"}
+{"text": "Give me the product details for HARD-003.", "intent": "product_status"}
+{"text": "What is the reorder threshold for SAFE-005?", "intent": "product_status"}
+{"text": "Check if DEMO-LOW-003 has dropped below its minimum.", "intent": "product_status"}
+{"text": "Tell me if PACK-004 can cover a small order.", "intent": "product_status"}
+{"text": "How many markers are there in OFF-002?", "intent": "product_status"}
+{"text": "Can you find ELEC-003 and report its stock?", "intent": "product_status"}
+{"text": "Is the demo low-stock dock, DEMO-LOW-001, available?", "intent": "product_status"}
+{"text": "What's the current balance for SAFE-006?", "intent": "product_status"}
+{"text": "Show inventory details for HARD-001.", "intent": "product_status"}
+{"text": "Look up product PACK-005 for me.", "intent": "product_status"}
+{"text": "Does OFF-004 have stock right now?", "intent": "product_status"}
+{"text": "I want to know whether ELEC-001 is below its reorder level.", "intent": "product_status"}
+{"text": "Check the number of units in SAFE-003.", "intent": "product_status"}
+{"text": "Where does HARD-005 stand on inventory?", "intent": "product_status"}
+{"text": "What is the stock status of DEMO-ZERO-002?", "intent": "product_status"}
+{"text": "How many boxes are on hand for PACK-002?", "intent": "product_status"}
+{"text": "Show the catalog entry and quantity for OFF-005.", "intent": "product_status"}
+{"text": "Is HARD-002 above its reorder threshold?", "intent": "product_status"}
+{"text": "Find out if SAFE-001 is available in the warehouse.", "intent": "product_status"}
+{"text": "What does the database show for ELEC-005 stock?", "intent": "product_status"}
+{"text": "Can I get the current inventory for SKU PACK-003?", "intent": "product_status"}
+{"text": "Check product HARD-006 and tell me its on-hand units.", "intent": "product_status"}
+{"text": "Is OFF-006 close to being depleted?", "intent": "product_status"}
+{"text": "Give me the count and threshold for SAFE-004.", "intent": "product_status"}
+{"text": "Find ELEC-002 and tell me if it is low.", "intent": "product_status"}
+{"text": "How much stock remains for DEMO-LOW-002?", "intent": "product_status"}
+{"text": "Does PACK-006 have enough mailers for today's orders?", "intent": "product_status"}
+{"text": "I need a quick status check on OFF-001.", "intent": "product_status"}
+{"text": "What is the stock quantity of the barcode scanner, ELEC-001?", "intent": "product_status"}
+{"text": "Can you verify availability for HARD-004?", "intent": "product_status"}
+{"text": "Show me the reorder point and count for ELEC-006.", "intent": "product_status"}
+{"text": "Is SAFE-002 out, low, or comfortably stocked?", "intent": "product_status"}
+{"text": "Find the product record for DEMO-ZERO-001.", "intent": "product_status"}
+{"text": "Tell me how much copy paper SKU OFF-001 is left.", "intent": "product_status"}
+{"text": "Check stock for the cordless drill with code HARD-001.", "intent": "product_status"}
+{"text": "What does our inventory say about SAFE-005?", "intent": "product_status"}
+{"text": "Is there any stretch film left under PACK-004?", "intent": "product_status"}
+{"text": "How is the thermal label printer, ELEC-003, stocked?", "intent": "product_status"}
+{"text": "Check SKU ELEC-004, please.", "intent": "product_status"}
+{"text": "For SKU HARD-003, report its quantity and current availability.", "intent": "product_status"}
+{"text": "Look up PACK-004 by its code and show the product record.", "intent": "product_status"}
+{"text": "I have a question about SKU OFF-002; what is its current count?", "intent": "product_status"}
+{"text": "Can you check whether SAFE-006 is available in our catalog stock?", "intent": "product_status"}
+{"text": "Show the inventory record for the item coded ELEC-006.", "intent": "product_status"}
+{"text": "How much free capacity does Central Depot have?", "intent": "warehouse_capacity"}
+{"text": "Show available storage space at each warehouse.", "intent": "warehouse_capacity"}
+{"text": "Is East Hub close to its capacity limit?", "intent": "warehouse_capacity"}
+{"text": "Compare current capacity across our three locations.", "intent": "warehouse_capacity"}
+{"text": "Warehouse space?", "intent": "warehouse_capacity"}
+{"text": "How many units of storage remain at West Hub?", "intent": "warehouse_capacity"}
+{"text": "Tell me the total and available capacity for Central Depot.", "intent": "warehouse_capacity"}
+{"text": "Do we have room for another pallet at East Hub?", "intent": "warehouse_capacity"}
+{"text": "What is the current warehouse utilization?", "intent": "warehouse_capacity"}
+{"text": "List each depot's remaining storage capacity.", "intent": "warehouse_capacity"}
+{"text": "How full is the West warehouse right now?", "intent": "warehouse_capacity"}
+{"text": "Can the Central Depot take more incoming goods?", "intent": "warehouse_capacity"}
+{"text": "Show me free space by warehouse location.", "intent": "warehouse_capacity"}
+{"text": "What's the capacity status at East Industrial Park?", "intent": "warehouse_capacity"}
+{"text": "I need to know which site has the most room.", "intent": "warehouse_capacity"}
+{"text": "How much storage is still unused at West Hub?", "intent": "warehouse_capacity"}
+{"text": "Are any warehouses nearly full?", "intent": "warehouse_capacity"}
+{"text": "Give me the remaining dock and warehouse room for each site.", "intent": "warehouse_capacity"}
+{"text": "Could Central Depot fit a large delivery today?", "intent": "warehouse_capacity"}
+{"text": "What portion of our storage capacity is available?", "intent": "warehouse_capacity"}
+{"text": "Check the warehouse space figures for all hubs.", "intent": "warehouse_capacity"}
+{"text": "Is East Hub able to receive more inventory?", "intent": "warehouse_capacity"}
+{"text": "Show total capacity versus available capacity at each site.", "intent": "warehouse_capacity"}
+{"text": "Which warehouse has the largest amount of free space?", "intent": "warehouse_capacity"}
+{"text": "Do we have enough room at the depot for tomorrow's shipment?", "intent": "warehouse_capacity"}
+{"text": "I want a snapshot of storage utilization.", "intent": "warehouse_capacity"}
+{"text": "How much warehouse capacity is left overall?", "intent": "warehouse_capacity"}
+{"text": "Check space remaining at Central Depot.", "intent": "warehouse_capacity"}
+{"text": "Are the hubs running out of room for inventory?", "intent": "warehouse_capacity"}
+{"text": "Can you show open capacity by location?", "intent": "warehouse_capacity"}
+{"text": "What is the warehouse fill level at each site?", "intent": "warehouse_capacity"}
+{"text": "Which site should receive the next inbound shipment based on space?", "intent": "warehouse_capacity"}
+{"text": "Is there room in the West Logistics Zone warehouse?", "intent": "warehouse_capacity"}
+{"text": "Tell me how much capacity remains at East Hub.", "intent": "warehouse_capacity"}
+{"text": "Show available space at Central, East, and West.", "intent": "warehouse_capacity"}
+{"text": "How much of the warehouse is still empty?", "intent": "warehouse_capacity"}
+{"text": "Can West Hub accept another batch of cartons?", "intent": "warehouse_capacity"}
+{"text": "Display current storage availability for each depot.", "intent": "warehouse_capacity"}
+{"text": "What is the free capacity at our East location?", "intent": "warehouse_capacity"}
+{"text": "Which warehouse is closest to full?", "intent": "warehouse_capacity"}
+{"text": "Are we using most of the storage at Central Depot?", "intent": "warehouse_capacity"}
+{"text": "How much room is left for new stock?", "intent": "warehouse_capacity"}
+{"text": "Give me a capacity breakdown by hub.", "intent": "warehouse_capacity"}
+{"text": "Check if West Hub has enough space for a restock shipment.", "intent": "warehouse_capacity"}
+{"text": "What storage capacity remains in the network?", "intent": "warehouse_capacity"}
+{"text": "Show the available warehouse space, not the product stock count.", "intent": "warehouse_capacity"}
+{"text": "Could you check each site's capacity before we route a delivery?", "intent": "warehouse_capacity"}
+{"text": "Is any depot over its planned capacity?", "intent": "warehouse_capacity"}
+{"text": "What's the unused space at the Central warehouse?", "intent": "warehouse_capacity"}
+{"text": "How loaded are the warehouses today?", "intent": "warehouse_capacity"}
+{"text": "Check available capacity for incoming inventory.", "intent": "warehouse_capacity"}
+{"text": "Can we fit more goods at East Hub?", "intent": "warehouse_capacity"}
+{"text": "Show the capacity totals for all warehouses.", "intent": "warehouse_capacity"}
+{"text": "Do we have spare storage at West Hub?", "intent": "warehouse_capacity"}
+{"text": "How many more items can the depot accommodate?", "intent": "warehouse_capacity"}
+{"text": "Capacity check for East Hub?", "intent": "warehouse_capacity"}
+{"text": "What does the 14-day demand forecast say for our stock?", "intent": "demand_forecast"}
+{"text": "Which products are likely to run out in the next two weeks?", "intent": "demand_forecast"}
+{"text": "Forecast demand for the coming fortnight.", "intent": "demand_forecast"}
+{"text": "Do the projections show any upcoming stock risks?", "intent": "demand_forecast"}
+{"text": "Demand outlook?", "intent": "demand_forecast"}
+{"text": "Which items should we replenish based on expected sales?", "intent": "demand_forecast"}
+{"text": "Can you estimate what we'll need over the next 14 days?", "intent": "demand_forecast"}
+{"text": "Show the forecasted stockout risk by product.", "intent": "demand_forecast"}
+{"text": "What inventory may run short before the end of the month?", "intent": "demand_forecast"}
+{"text": "Give me the two-week demand projection.", "intent": "demand_forecast"}
+{"text": "Will any product fall below its reorder level soon?", "intent": "demand_forecast"}
+{"text": "Use recent transactions to forecast upcoming demand.", "intent": "demand_forecast"}
+{"text": "Which SKUs have a high chance of running out soon?", "intent": "demand_forecast"}
+{"text": "What does the sales trend imply for our restocking needs?", "intent": "demand_forecast"}
+{"text": "Show products at risk over the forecast horizon.", "intent": "demand_forecast"}
+{"text": "Are we likely to run short of packaging supplies next week?", "intent": "demand_forecast"}
+{"text": "Estimate inventory demand for the next 14 days.", "intent": "demand_forecast"}
+{"text": "Which items need attention according to the demand model?", "intent": "demand_forecast"}
+{"text": "Can I see the stock risk forecast for the next fortnight?", "intent": "demand_forecast"}
+{"text": "Tell me what sales volume may look like in two weeks.", "intent": "demand_forecast"}
+{"text": "How many products are predicted to need a reorder?", "intent": "demand_forecast"}
+{"text": "What's the expected demand for our hardware items?", "intent": "demand_forecast"}
+{"text": "Show a forward-looking inventory risk summary.", "intent": "demand_forecast"}
+{"text": "Will current inventory cover projected orders?", "intent": "demand_forecast"}
+{"text": "Which products could stock out if demand follows its recent pattern?", "intent": "demand_forecast"}
+{"text": "Run the demand projection for the next two weeks.", "intent": "demand_forecast"}
+{"text": "I need a forecast of restock requirements.", "intent": "demand_forecast"}
+{"text": "Are the labels and boxes expected to sell faster soon?", "intent": "demand_forecast"}
+{"text": "Check the upcoming demand risk for all products.", "intent": "demand_forecast"}
+{"text": "How does the forecast look for inventory depletion?", "intent": "demand_forecast"}
+{"text": "What stock is predicted to be insufficient in 14 days?", "intent": "demand_forecast"}
+{"text": "Can we see which items may need ordering before the next cycle?", "intent": "demand_forecast"}
+{"text": "Forecast replenishment needs from the recent sales history.", "intent": "demand_forecast"}
+{"text": "Which products have the strongest expected demand this fortnight?", "intent": "demand_forecast"}
+{"text": "Show me the predicted stock levels for the next two weeks.", "intent": "demand_forecast"}
+{"text": "Could sales leave any SKUs below minimum by next week?", "intent": "demand_forecast"}
+{"text": "What does the model project for demand through the next 14 days?", "intent": "demand_forecast"}
+{"text": "Are restock orders needed based on the demand forecast?", "intent": "demand_forecast"}
+{"text": "Give me an outlook on potential shortages.", "intent": "demand_forecast"}
+{"text": "Check which items could become unavailable soon.", "intent": "demand_forecast"}
+{"text": "What is the forecasted demand for office supplies?", "intent": "demand_forecast"}
+{"text": "How many days of stock might each product have left?", "intent": "demand_forecast"}
+{"text": "Show me projected demand and reorder risk for the fortnight.", "intent": "demand_forecast"}
+{"text": "Does the forecast suggest we should buy more safety gear?", "intent": "demand_forecast"}
+{"text": "Which inventory lines are most likely to need a top-up?", "intent": "demand_forecast"}
+{"text": "Can you predict potential shortages from recent sales?", "intent": "demand_forecast"}
+{"text": "Look ahead at expected stock consumption.", "intent": "demand_forecast"}
+{"text": "What products may run out by the end of the forecast period?", "intent": "demand_forecast"}
+{"text": "Two week demand forecast?", "intent": "demand_forecast"}
+{"text": "How might sales affect our stock position next month?", "intent": "demand_forecast"}
+{"text": "Which products have the highest projected depletion risk?", "intent": "demand_forecast"}
+{"text": "Can the forecast identify items to purchase this week?", "intent": "demand_forecast"}
+{"text": "Show estimated demand for the upcoming 14 days by SKU.", "intent": "demand_forecast"}
+{"text": "What shortages should the warehouse prepare for?", "intent": "demand_forecast"}
+{"text": "Do recent sales point to a future stockout?", "intent": "demand_forecast"}
+{"text": "Is any stock projected to fall faster than expected?", "intent": "demand_forecast"}
+{"text": "Give me the predicted inventory risks from current sales patterns.", "intent": "demand_forecast"}
+{"text": "Will demand likely exceed available stock for any item?", "intent": "demand_forecast"}
+{"text": "Check the forecast before I prepare the next buying plan.", "intent": "demand_forecast"}
+{"text": "What should we plan to replenish over the next fortnight?", "intent": "demand_forecast"}
+{"text": "Can Central Depot receive more cartons this afternoon?", "intent": "warehouse_capacity"}
+{"text": "Which hub has the most unused storage today?", "intent": "warehouse_capacity"}
+{"text": "Show me the space available for inbound pallets.", "intent": "warehouse_capacity"}
+{"text": "Is there spare capacity across the depots?", "intent": "warehouse_capacity"}
+{"text": "Which products are commonly bought in the same order?", "intent": "recommendation"}
+{"text": "Suggest a product bundle for customers buying a barcode scanner.", "intent": "recommendation"}
+{"text": "What items pair well with a cordless drill?", "intent": "recommendation"}
+{"text": "Show cross-sell ideas based on our transaction history.", "intent": "recommendation"}
+{"text": "Product recommendations?", "intent": "recommendation"}
+{"text": "Which supplies do customers tend to purchase together?", "intent": "recommendation"}
+{"text": "Can you suggest related products for SKU ELEC-001?", "intent": "recommendation"}
+{"text": "What else is often in the basket with packaging tape?", "intent": "recommendation"}
+{"text": "Find products that have strong co-purchase patterns.", "intent": "recommendation"}
+{"text": "Give me a bundle suggestion for safety glasses.", "intent": "recommendation"}
+{"text": "Which items are frequently ordered alongside copy paper?", "intent": "recommendation"}
+{"text": "Recommend complementary inventory for the handheld scanner.", "intent": "recommendation"}
+{"text": "What products should we offer together at checkout?", "intent": "recommendation"}
+{"text": "Show the most common pairings in past sales.", "intent": "recommendation"}
+{"text": "Do customers who buy boxes also buy tape?", "intent": "recommendation"}
+{"text": "What would you bundle with the first aid kit?", "intent": "recommendation"}
+{"text": "List products often purchased with HARD-001.", "intent": "recommendation"}
+{"text": "Can sales history suggest a companion item for this SKU?", "intent": "recommendation"}
+{"text": "Which product combinations show up most often?", "intent": "recommendation"}
+{"text": "What add-on products are popular with label printers?", "intent": "recommendation"}
+{"text": "Suggest related goods for the safety vest.", "intent": "recommendation"}
+{"text": "What else should I offer with a shipping document pouch?", "intent": "recommendation"}
+{"text": "Find commonly co-ordered products in the database.", "intent": "recommendation"}
+{"text": "Are there products that are usually bought as a set?", "intent": "recommendation"}
+{"text": "Recommend an inventory bundle for customers ordering work gloves.", "intent": "recommendation"}
+{"text": "Show me cross-sell options tied to past purchases.", "intent": "recommendation"}
+{"text": "Which items complement the thermal labels?", "intent": "recommendation"}
+{"text": "What tends to sell together with a socket set?", "intent": "recommendation"}
+{"text": "Suggest a related product based on SKU PACK-002 purchases.", "intent": "recommendation"}
+{"text": "Which products have the strongest purchase association?", "intent": "recommendation"}
+{"text": "Can we see popular combinations for office supplies?", "intent": "recommendation"}
+{"text": "What other stock should be displayed beside the utility knife?", "intent": "recommendation"}
+{"text": "Find a sensible add-on for customers buying a calculator.", "intent": "recommendation"}
+{"text": "Which products are good candidates for a joint promotion?", "intent": "recommendation"}
+{"text": "What do buyers usually add when ordering bubble wrap?", "intent": "recommendation"}
+{"text": "Give me a related-item suggestion for the drill.", "intent": "recommendation"}
+{"text": "Do we have any useful cross-sell pairs in recent orders?", "intent": "recommendation"}
+{"text": "Which products are frequently ordered in combination?", "intent": "recommendation"}
+{"text": "Recommend another item for a customer buying ear protection.", "intent": "recommendation"}
+{"text": "What else could go in a box-and-tape bundle?", "intent": "recommendation"}
+{"text": "Can you find products associated with SAFE-001?", "intent": "recommendation"}
+{"text": "Show related products from prior transactions.", "intent": "recommendation"}
+{"text": "Which goods make a useful bundle with a tablet?", "intent": "recommendation"}
+{"text": "I need recommendations based on what customers buy together.", "intent": "recommendation"}
+{"text": "What companion product would fit an order for worklights?", "intent": "recommendation"}
+{"text": "What is usually purchased along with a tape measure?", "intent": "recommendation"}
+{"text": "Suggest products to pair with a padded mailer.", "intent": "recommendation"}
+{"text": "Which items share the same customer baskets?", "intent": "recommendation"}
+{"text": "Can the sales records show popular product pairings?", "intent": "recommendation"}
+{"text": "Find bundle ideas for a packing station.", "intent": "recommendation"}
+{"text": "What related products should we recommend for HARD-002?", "intent": "recommendation"}
+{"text": "Are markers often bought with clipboards?", "intent": "recommendation"}
+{"text": "Show me items that commonly accompany the inventory tablet.", "intent": "recommendation"}
+{"text": "Which safety products are commonly ordered together?", "intent": "recommendation"}
+{"text": "Recommend an extra purchase for customers ordering corrugated boxes.", "intent": "recommendation"}
+{"text": "What pairings could increase the average order size?", "intent": "recommendation"}
+{"text": "List frequently bought-together product pairs.", "intent": "recommendation"}
+{"text": "Find a product match for the Wi-Fi access point.", "intent": "recommendation"}
+{"text": "What related item should accompany a first aid kit order?", "intent": "recommendation"}
+{"text": "Suggest a bundle using our actual product catalog.", "intent": "recommendation"}
+{"text": "How does Banker's algorithm decide a request is safe?", "intent": "how_does_it_work"}
+{"text": "Explain the safe sequence idea in Banker's algorithm.", "intent": "how_does_it_work"}
+{"text": "Why does the inventory sale use a row lock?", "intent": "how_does_it_work"}
+{"text": "What does SELECT FOR UPDATE do in PostgreSQL?", "intent": "how_does_it_work"}
+{"text": "How does priority scheduling choose the next job?", "intent": "how_does_it_work"}
+{"text": "Explain deadlock avoidance in simple terms.", "intent": "how_does_it_work"}
+{"text": "What is Banker's algorithm used for in this lab?", "intent": "how_does_it_work"}
+{"text": "Why do concurrent sales lock the product row?", "intent": "how_does_it_work"}
+{"text": "What is the difference between a safe and unsafe resource state?", "intent": "how_does_it_work"}
+{"text": "Can you explain the FOR UPDATE clause to a student?", "intent": "how_does_it_work"}
+{"text": "How does the scheduler handle an emergency stockout task?", "intent": "how_does_it_work"}
+{"text": "What causes a database deadlock?", "intent": "how_does_it_work"}
+{"text": "Why is a safe resource sequence important?", "intent": "how_does_it_work"}
+{"text": "How does row-level locking prevent a lost update?", "intent": "how_does_it_work"}
+{"text": "What happens when two sales update the same product together?", "intent": "how_does_it_work"}
+{"text": "Explain non-preemptive priority scheduling.", "intent": "how_does_it_work"}
+{"text": "When would Banker's algorithm deny a resource request?", "intent": "how_does_it_work"}
+{"text": "How does the demo avoid deadlock before granting resources?", "intent": "how_does_it_work"}
+{"text": "Why is SELECT FOR UPDATE used before changing stock?", "intent": "how_does_it_work"}
+{"text": "What is the point of locking a row inside a transaction?", "intent": "how_does_it_work"}
+{"text": "How does an unsafe sale race lose an inventory update?", "intent": "how_does_it_work"}
+{"text": "Could you describe the Banker's safety check?", "intent": "how_does_it_work"}
+{"text": "What does the available vector mean in the Banker's lab?", "intent": "how_does_it_work"}
+{"text": "How are maximum and allocated resources used to find a safe state?", "intent": "how_does_it_work"}
+{"text": "Why can a deadlock-free system still be unsafe?", "intent": "how_does_it_work"}
+{"text": "Tell me how row locks serialize competing stock updates.", "intent": "how_does_it_work"}
+{"text": "What is the purpose of a database transaction around a sale?", "intent": "how_does_it_work"}
+{"text": "How does priority affect jobs waiting in the queue?", "intent": "how_does_it_work"}
+{"text": "Why does an emergency stockout task jump ahead of normal work?", "intent": "how_does_it_work"}
+{"text": "Explain the difference between deadlock prevention and avoidance.", "intent": "how_does_it_work"}
+{"text": "How does the lab show safe resource allocation?", "intent": "how_does_it_work"}
+{"text": "What protects the product count when multiple users sell at once?", "intent": "how_does_it_work"}
+{"text": "Why do we check a safe sequence before allocating resources?", "intent": "how_does_it_work"}
+{"text": "What would happen if a sale skipped SELECT FOR UPDATE?", "intent": "how_does_it_work"}
+{"text": "How can two database transactions overwrite each other's changes?", "intent": "how_does_it_work"}
+{"text": "What is the role of the need matrix in Banker's algorithm?", "intent": "how_does_it_work"}
+{"text": "How does the demo decide which scheduled task runs first?", "intent": "how_does_it_work"}
+{"text": "Explain why locking only one product row helps concurrency.", "intent": "how_does_it_work"}
+{"text": "When does the scheduler preempt a regular inventory task?", "intent": "how_does_it_work"}
+{"text": "What is a safe state in operating systems?", "intent": "how_does_it_work"}
+{"text": "How does Banker's algorithm avoid circular waiting?", "intent": "how_does_it_work"}
+{"text": "Can you explain the row lock in the safe sale endpoint?", "intent": "how_does_it_work"}
+{"text": "Why might a transaction wait for another sale to finish?", "intent": "how_does_it_work"}
+{"text": "What does FOR UPDATE lock while a transaction is running?", "intent": "how_does_it_work"}
+{"text": "How does the priority queue order jobs with different urgency?", "intent": "how_does_it_work"}
+{"text": "What makes a resource request unsafe under Banker's algorithm?", "intent": "how_does_it_work"}
+{"text": "How are deadlocks demonstrated in the concurrency lab?", "intent": "how_does_it_work"}
+{"text": "Why does PostgreSQL need row locks for concurrent stock sales?", "intent": "how_does_it_work"}
+{"text": "What is the difference between row locking and no locking?", "intent": "how_does_it_work"}
+{"text": "Can a safe sequence prove that all processes can finish?", "intent": "how_does_it_work"}
+{"text": "How should I interpret the resource allocation graph?", "intent": "how_does_it_work"}
+{"text": "What is the Banker's algorithm checking before it grants resources?", "intent": "how_does_it_work"}
+{"text": "Explain priority scheduling with the stockout example.", "intent": "how_does_it_work"}
+{"text": "Why do database updates need atomic transactions?", "intent": "how_does_it_work"}
+{"text": "How do locks stop overselling the last unit?", "intent": "how_does_it_work"}
+{"text": "What's the difference between a deadlock and a race condition?", "intent": "how_does_it_work"}
+{"text": "How does a process release resources in the safety algorithm?", "intent": "how_does_it_work"}
+{"text": "FOR UPDATE meaning?", "intent": "how_does_it_work"}
+{"text": "How does a database establish that a sequence of processes is safe?", "intent": "how_does_it_work"}
+{"text": "Why does the scheduler keep normal jobs non-preemptive?", "intent": "how_does_it_work"}
+{"text": "Why are PostgreSQL queries taking so long?", "intent": "slow_database"}
+{"text": "Show recent database latency measurements.", "intent": "slow_database"}
+{"text": "What is the DB p95 right now?", "intent": "slow_database"}
+{"text": "Is the database causing the application lag?", "intent": "slow_database"}
+{"text": "The queries feel slow today; can you check the timings?", "intent": "slow_database"}
+{"text": "Report p50, p95, and p99 database response times.", "intent": "slow_database"}
+{"text": "Has PostgreSQL latency increased?", "intent": "slow_database"}
+{"text": "How many slow database operations were recorded?", "intent": "slow_database"}
+{"text": "Check whether DB calls are exceeding the latency threshold.", "intent": "slow_database"}
+{"text": "Is our database lagging behind the API?", "intent": "slow_database"}
+{"text": "What do the latest query timing samples show?", "intent": "slow_database"}
+{"text": "Give me the current database performance summary.", "intent": "slow_database"}
+{"text": "Are database transactions slower than normal?", "intent": "slow_database"}
+{"text": "Show the database's 95th percentile latency.", "intent": "slow_database"}
+{"text": "Why does the DB feel sluggish?", "intent": "slow_database"}
+{"text": "How many samples are available for database timing?", "intent": "slow_database"}
+{"text": "Can you check the latest PostgreSQL response time?", "intent": "slow_database"}
+{"text": "What is the p99 query duration?", "intent": "slow_database"}
+{"text": "Are any DB operations over the slow-query limit?", "intent": "slow_database"}
+{"text": "Tell me if database calls are delayed.", "intent": "slow_database"}
+{"text": "Database latency?", "intent": "slow_database"}
+{"text": "Compare typical and worst-case database timings.", "intent": "slow_database"}
+{"text": "Is the DB the bottleneck based on measured query latency?", "intent": "slow_database"}
+{"text": "Show slow query counts and timing percentiles.", "intent": "slow_database"}
+{"text": "Did database performance get worse after the last load test?", "intent": "slow_database"}
+{"text": "How long are database requests taking on average?", "intent": "slow_database"}
+{"text": "What is the current p95 DB time in milliseconds?", "intent": "slow_database"}
+{"text": "Check for elevated database round-trip times.", "intent": "slow_database"}
+{"text": "Is PostgreSQL responding slowly right now?", "intent": "slow_database"}
+{"text": "I need the recent DB timing histogram.", "intent": "slow_database"}
+{"text": "Show me whether query latency crossed its warning threshold.", "intent": "slow_database"}
+{"text": "What is the spread between p50 and p99 DB latency?", "intent": "slow_database"}
+{"text": "Are SQL operations taking longer than expected?", "intent": "slow_database"}
+{"text": "Check the database metrics after the concurrency run.", "intent": "slow_database"}
+{"text": "How many calls exceeded the database timing threshold?", "intent": "slow_database"}
+{"text": "Is the database slower than the app request path?", "intent": "slow_database"}
+{"text": "Give me an update on DB response times.", "intent": "slow_database"}
+{"text": "What do our recorded database delays look like?", "intent": "slow_database"}
+{"text": "Are queries piling up in PostgreSQL?", "intent": "slow_database"}
+{"text": "Can we see query performance percentiles?", "intent": "slow_database"}
+{"text": "Has the p95 database time gone above normal?", "intent": "slow_database"}
+{"text": "Review latency samples from the database instrumentation.", "intent": "slow_database"}
+{"text": "Show the slowest recent database timing values.", "intent": "slow_database"}
+{"text": "How does DB latency compare with the previous sample window?", "intent": "slow_database"}
+{"text": "I am seeing database lag; what do the metrics say?", "intent": "slow_database"}
+{"text": "Can you summarize PostgreSQL call duration?", "intent": "slow_database"}
+{"text": "What percentage of database calls are considered slow?", "intent": "slow_database"}
+{"text": "Are there enough DB samples to judge latency?", "intent": "slow_database"}
+{"text": "Check p95 and p99 for database operations.", "intent": "slow_database"}
+{"text": "Why are data reads from Postgres delayed?", "intent": "slow_database"}
+{"text": "Show the database latency trend from current telemetry.", "intent": "slow_database"}
+{"text": "Is query response lagging under the current load?", "intent": "slow_database"}
+{"text": "How many milliseconds is the DB p50?", "intent": "slow_database"}
+{"text": "Report the count of slow database calls.", "intent": "slow_database"}
+{"text": "Do we have any measurements for SQL latency yet?", "intent": "slow_database"}
+{"text": "Does the DB timing data show a bottleneck?", "intent": "slow_database"}
+{"text": "What is the latest database p95 sample?", "intent": "slow_database"}
+{"text": "Are backend database requests taking too long?", "intent": "slow_database"}
+{"text": "Check if Postgres response times are elevated.", "intent": "slow_database"}
+{"text": "DB lag?", "intent": "slow_database"}
+{"text": "How fast is the API responding to requests?", "intent": "api_latency"}
+{"text": "Show the latest app request latency percentiles.", "intent": "api_latency"}
+{"text": "The dashboard feels slow; check the API timings.", "intent": "api_latency"}
+{"text": "What is the backend p95 response time?", "intent": "api_latency"}
+{"text": "API lag?", "intent": "api_latency"}
+{"text": "How long do requests spend in the application?", "intent": "api_latency"}
+{"text": "Report p50 and p95 HTTP request latency.", "intent": "api_latency"}
+{"text": "Are API responses slower than usual?", "intent": "api_latency"}
+{"text": "Check the app-level request timing samples.", "intent": "api_latency"}
+{"text": "Why is the inventory app responding slowly?", "intent": "api_latency"}
+{"text": "Give me the current service response-time summary.", "intent": "api_latency"}
+{"text": "What is the p95 latency for backend routes?", "intent": "api_latency"}
+{"text": "Has request lag increased during the demo?", "intent": "api_latency"}
+{"text": "Show average and tail latency for API calls.", "intent": "api_latency"}
+{"text": "Do we have enough request samples to calculate latency?", "intent": "api_latency"}
+{"text": "How many HTTP requests are included in the timing window?", "intent": "api_latency"}
+{"text": "Check whether the application is slow under load.", "intent": "api_latency"}
+{"text": "What is the latest API response time in milliseconds?", "intent": "api_latency"}
+{"text": "Tell me if the backend has high request latency.", "intent": "api_latency"}
+{"text": "Can I see app latency percentiles?", "intent": "api_latency"}
+{"text": "The API is laggy right now; what do its metrics show?", "intent": "api_latency"}
+{"text": "Compare median and worst-case service response times.", "intent": "api_latency"}
+{"text": "Show the app request p50, p95, and sample count.", "intent": "api_latency"}
+{"text": "Are endpoint responses taking longer this afternoon?", "intent": "api_latency"}
+{"text": "How quickly is the backend handling requests?", "intent": "api_latency"}
+{"text": "What do the application timing counters report?", "intent": "api_latency"}
+{"text": "Check the API latency after running the sales demo.", "intent": "api_latency"}
+{"text": "Is the service response lag coming from the app path?", "intent": "api_latency"}
+{"text": "How many milliseconds is the app p95?", "intent": "api_latency"}
+{"text": "Give me a snapshot of route response times.", "intent": "api_latency"}
+{"text": "Does the current load affect API response speed?", "intent": "api_latency"}
+{"text": "Show recent backend request durations.", "intent": "api_latency"}
+{"text": "Is the service latency within its usual range?", "intent": "api_latency"}
+{"text": "What is the application-level p99 response time?", "intent": "api_latency"}
+{"text": "Review the request latency measurements for this session.", "intent": "api_latency"}
+{"text": "Has the p95 API time crossed our alert level?", "intent": "api_latency"}
+{"text": "Are route calls slower than the database calls?", "intent": "api_latency"}
+{"text": "Check the web service timing summary.", "intent": "api_latency"}
+{"text": "How long does a typical request take?", "intent": "api_latency"}
+{"text": "Can you find the slowest application response percentile?", "intent": "api_latency"}
+{"text": "Is app performance dropping as traffic rises?", "intent": "api_latency"}
+{"text": "What is the response-time distribution for the API?", "intent": "api_latency"}
+{"text": "Show HTTP latency stats from the middleware.", "intent": "api_latency"}
+{"text": "Why are requests to the backend taking extra time?", "intent": "api_latency"}
+{"text": "How many requests were observed by the latency collector?", "intent": "api_latency"}
+{"text": "Is there a recent spike in request duration?", "intent": "api_latency"}
+{"text": "Tell me the current app response lag.", "intent": "api_latency"}
+{"text": "Could you check our service's tail latency?", "intent": "api_latency"}
+{"text": "What's the app p95 right now?", "intent": "api_latency"}
+{"text": "What does the API timing panel report at the moment?", "intent": "api_latency"}
+{"text": "Check recent response delays across the backend endpoints.", "intent": "api_latency"}
+{"text": "Is the app returning responses more slowly than before?", "intent": "api_latency"}
+{"text": "Show the request timing summary after the demo traffic.", "intent": "api_latency"}
+{"text": "How much time are API calls spending in the service?", "intent": "api_latency"}
+{"text": "Can you report the application latency percentiles?", "intent": "api_latency"}
+{"text": "Are requests spending too long in the backend?", "intent": "api_latency"}
+{"text": "What is the latest response delay for a typical route?", "intent": "api_latency"}
+{"text": "Check if our HTTP handlers have a latency spike.", "intent": "api_latency"}
+{"text": "Do current measurements show a slow app response?", "intent": "api_latency"}
+{"text": "App response time check?", "intent": "api_latency"}
+{"text": "Are TCP packets being retransmitted?", "intent": "network_issues"}
+{"text": "Check for recent network failures and resets.", "intent": "network_issues"}
+{"text": "Any packet loss on the service connection?", "intent": "network_issues"}
+{"text": "Show TCP retransmit counts from telemetry.", "intent": "network_issues"}
+{"text": "Network trouble?", "intent": "network_issues"}
+{"text": "Have we recorded connection resets lately?", "intent": "network_issues"}
+{"text": "What do the current TCP counters say?", "intent": "network_issues"}
+{"text": "Is the application seeing network errors?", "intent": "network_issues"}
+{"text": "Report retransmissions and connection failures.", "intent": "network_issues"}
+{"text": "Are connections being dropped under load?", "intent": "network_issues"}
+{"text": "Check the latest packet retransmission count.", "intent": "network_issues"}
+{"text": "Why are clients having trouble connecting?", "intent": "network_issues"}
+{"text": "Show network telemetry for this host.", "intent": "network_issues"}
+{"text": "How many TCP resets were observed?", "intent": "network_issues"}
+{"text": "Do we have any failed connection attempts?", "intent": "network_issues"}
+{"text": "Can you look for packet loss or retransmits?", "intent": "network_issues"}
+{"text": "Is the network path flaky right now?", "intent": "network_issues"}
+{"text": "What is the retransmit rate from the collector?", "intent": "network_issues"}
+{"text": "Are there TCP drops in the latest sample?", "intent": "network_issues"}
+{"text": "Tell me whether connections are resetting.", "intent": "network_issues"}
+{"text": "Show connection failure totals for the API host.", "intent": "network_issues"}
+{"text": "Has network reliability changed during the load test?", "intent": "network_issues"}
+{"text": "Check for retransmitted packets on the interface.", "intent": "network_issues"}
+{"text": "What networking errors have been captured?", "intent": "network_issues"}
+{"text": "Are clients disconnecting before requests finish?", "intent": "network_issues"}
+{"text": "Give me the current TCP health counters.", "intent": "network_issues"}
+{"text": "Any evidence of a connection drop?", "intent": "network_issues"}
+{"text": "How many retransmits occurred recently?", "intent": "network_issues"}
+{"text": "Show me the network issue summary.", "intent": "network_issues"}
+{"text": "Is there unusual TCP activity on the backend?", "intent": "network_issues"}
+{"text": "Can packet retransmission explain these disconnects?", "intent": "network_issues"}
+{"text": "Check whether the collector saw TCP resets.", "intent": "network_issues"}
+{"text": "Are socket connections failing?", "intent": "network_issues"}
+{"text": "What is the count of network connection errors?", "intent": "network_issues"}
+{"text": "Any network latency or packet loss right now?", "intent": "network_issues"}
+{"text": "Review transport-layer errors from the host.", "intent": "network_issues"}
+{"text": "Did the load test cause more TCP retransmits?", "intent": "network_issues"}
+{"text": "How many dropped connections did we see this period?", "intent": "network_issues"}
+{"text": "Are packets getting resent between the app and its clients?", "intent": "network_issues"}
+{"text": "Show me any connection resets recorded by eBPF.", "intent": "network_issues"}
+{"text": "Has the host reported network trouble?", "intent": "network_issues"}
+{"text": "What's the status of the TCP connection counters?", "intent": "network_issues"}
+{"text": "Could network instability be affecting the dashboard?", "intent": "network_issues"}
+{"text": "Tell me if there are failed TCP connections.", "intent": "network_issues"}
+{"text": "Any retransmits or resets?", "intent": "network_issues"}
+{"text": "Is packet delivery reliable during this run?", "intent": "network_issues"}
+{"text": "Check network errors after the concurrency scenario.", "intent": "network_issues"}
+{"text": "Do current metrics show TCP retransmission?", "intent": "network_issues"}
+{"text": "How often are connections being reset?", "intent": "network_issues"}
+{"text": "Look for evidence of packet loss on the service.", "intent": "network_issues"}
+{"text": "Are network connections timing out?", "intent": "network_issues"}
+{"text": "Show the latest connection health data.", "intent": "network_issues"}
+{"text": "Check TCP retransmit and reset stats, pls.", "intent": "network_issues"}
+{"text": "Has the network dropped any packets recently?", "intent": "network_issues"}
+{"text": "Are TCP connections resetting during requests?", "intent": "network_issues"}
+{"text": "Show any network failure counters from the collector.", "intent": "network_issues"}
+{"text": "Did we see retransmitted traffic during the test?", "intent": "network_issues"}
+{"text": "Can you check the host's connection reliability?", "intent": "network_issues"}
+{"text": "What network drops were counted in this interval?", "intent": "network_issues"}
+{"text": "Do the metrics show socket errors?", "intent": "network_issues"}
+{"text": "Show the latest security events.", "intent": "security_events"}
+{"text": "Were any high-severity alerts raised?", "intent": "security_events"}
+{"text": "Did someone open the env file?", "intent": "security_events"}
+{"text": "Has the collector detected an intrusion attempt?", "intent": "security_events"}
+{"text": "Any suspicious process activity on the backend?", "intent": "security_events"}
+{"text": "List recent security alerts by severity.", "intent": "security_events"}
+{"text": "Who touched the env file according to the audit events?", "intent": "security_events"}
+{"text": "Were there attempts to read protected files?", "intent": "security_events"}
+{"text": "Check for unusual process launches.", "intent": "security_events"}
+{"text": "Do we have any threat detections today?", "intent": "security_events"}
+{"text": "Show me recent file access warnings.", "intent": "security_events"}
+{"text": "Have any critical security events been recorded?", "intent": "security_events"}
+{"text": "Did a process try to access a sensitive path?", "intent": "security_events"}
+{"text": "I need the current security event counts.", "intent": "security_events"}
+{"text": "Has anything triggered the security monitor?", "intent": "security_events"}
+{"text": "Review the most recent intrusion alerts.", "intent": "security_events"}
+{"text": "Any suspicious executable activity?", "intent": "security_events"}
+{"text": "Which security events were marked high or critical?", "intent": "security_events"}
+{"text": "Show the latest audit detections from the collector.", "intent": "security_events"}
+{"text": "Did anyone attempt an unauthorized file read?", "intent": "security_events"}
+{"text": "What security warnings came in during the last run?", "intent": "security_events"}
+{"text": "List the detected security incidents without exposing file contents.", "intent": "security_events"}
+{"text": "Are there any alerts about unexpected process execution?", "intent": "security_events"}
+{"text": "Check whether the security feed contains new events.", "intent": "security_events"}
+{"text": "Has the monitor seen access to a restricted file?", "intent": "security_events"}
+{"text": "What threats were detected on this machine?", "intent": "security_events"}
+{"text": "Show me the critical alert total.", "intent": "security_events"}
+{"text": "Were there any suspicious file opens?", "intent": "security_events"}
+{"text": "Tell me about recent policy violations.", "intent": "security_events"}
+{"text": "Did the backend process open an unexpected file?", "intent": "security_events"}
+{"text": "Are any security events waiting for review?", "intent": "security_events"}
+{"text": "Look for intrusion indicators in the event stream.", "intent": "security_events"}
+{"text": "Has the audit monitor flagged unusual access?", "intent": "security_events"}
+{"text": "Which processes caused security alerts?", "intent": "security_events"}
+{"text": "How many high severity events were seen?", "intent": "security_events"}
+{"text": "Check for suspicious activity around the app process.", "intent": "security_events"}
+{"text": "Did the collector report access to secrets?", "intent": "security_events"}
+{"text": "Show security detections from the most recent interval.", "intent": "security_events"}
+{"text": "Any unusual openat events from the backend?", "intent": "security_events"}
+{"text": "Can you summarize the security incidents by level?", "intent": "security_events"}
+{"text": "Have there been failed attempts to inspect protected files?", "intent": "security_events"}
+{"text": "List alerts related to unexpected command execution.", "intent": "security_events"}
+{"text": "Was an environment file access event captured?", "intent": "security_events"}
+{"text": "Do the logs show an unrecognized process?", "intent": "security_events"}
+{"text": "I want to inspect suspicious host events.", "intent": "security_events"}
+{"text": "Has anything touched a protected path recently?", "intent": "security_events"}
+{"text": "Were security events generated during the load test?", "intent": "security_events"}
+{"text": "Show the severity breakdown for security alerts.", "intent": "security_events"}
+{"text": "Did any process attempt to read credentials?", "intent": "security_events"}
+{"text": "Check for signs of unauthorized access.", "intent": "security_events"}
+{"text": "Which new events look security-related?", "intent": "security_events"}
+{"text": "Are there any warnings about file access?", "intent": "security_events"}
+{"text": "Can I see event summaries without secret values?", "intent": "security_events"}
+{"text": "What did the host monitor flag as suspicious?", "intent": "security_events"}
+{"text": "Did we record an unexpected binary launch?", "intent": "security_events"}
+{"text": "Show me today's intrusion and access alerts.", "intent": "security_events"}
+{"text": "Is the security event stream empty or active?", "intent": "security_events"}
+{"text": "What kind of suspicious operations were detected?", "intent": "security_events"}
+{"text": "Were there alerts about reading the backend env file?", "intent": "security_events"}
+{"text": "Any new host security events?", "intent": "security_events"}
+{"text": "How healthy is the application right now?", "intent": "system_health_overview"}
+{"text": "Give me an overview of app, database, and network health.", "intent": "system_health_overview"}
+{"text": "Is the system operating normally?", "intent": "system_health_overview"}
+{"text": "Summarize the current service health metrics.", "intent": "system_health_overview"}
+{"text": "Overall health?", "intent": "system_health_overview"}
+{"text": "What is the likely bottleneck in the application?", "intent": "system_health_overview"}
+{"text": "Show a high-level status for the backend services.", "intent": "system_health_overview"}
+{"text": "Are CPU, database, and network measurements available?", "intent": "system_health_overview"}
+{"text": "How is the whole system doing under the current load?", "intent": "system_health_overview"}
+{"text": "Tell me whether the app looks healthy or degraded.", "intent": "system_health_overview"}
+{"text": "Is anything unhealthy in the current system snapshot?", "intent": "system_health_overview"}
+{"text": "Provide a quick operational health check.", "intent": "system_health_overview"}
+{"text": "What's the overall status of IntelliStock?", "intent": "system_health_overview"}
+{"text": "Can you summarize service performance and telemetry?", "intent": "system_health_overview"}
+{"text": "Do current metrics show a system problem?", "intent": "system_health_overview"}
+{"text": "How are the application and database performing together?", "intent": "system_health_overview"}
+{"text": "Check the latest health indicators for the backend.", "intent": "system_health_overview"}
+{"text": "Is the system stable after the concurrency demo?", "intent": "system_health_overview"}
+{"text": "Which component appears to be slowing the service?", "intent": "system_health_overview"}
+{"text": "Give me a broad health summary, not a single metric.", "intent": "system_health_overview"}
+{"text": "What does the telemetry say about overall system condition?", "intent": "system_health_overview"}
+{"text": "Are the API, DB, and host all responding?", "intent": "system_health_overview"}
+{"text": "Show me current CPU and latency health at a glance.", "intent": "system_health_overview"}
+{"text": "Does the backend have enough live measurements for a health check?", "intent": "system_health_overview"}
+{"text": "How is the service holding up right now?", "intent": "system_health_overview"}
+{"text": "Check for an overall performance regression.", "intent": "system_health_overview"}
+{"text": "What part of the stack looks least healthy?", "intent": "system_health_overview"}
+{"text": "Is the app healthy after the latest requests?", "intent": "system_health_overview"}
+{"text": "Review the system health overview panel values.", "intent": "system_health_overview"}
+{"text": "Tell me whether the API or database is the current bottleneck.", "intent": "system_health_overview"}
+{"text": "Are there live system metrics to review?", "intent": "system_health_overview"}
+{"text": "Show an operational snapshot across the stack.", "intent": "system_health_overview"}
+{"text": "How are the key services doing as a whole?", "intent": "system_health_overview"}
+{"text": "Check whether the app is healthy, slow, or unavailable.", "intent": "system_health_overview"}
+{"text": "I need the current system-wide status.", "intent": "system_health_overview"}
+{"text": "Do we have any health data from the active collector?", "intent": "system_health_overview"}
+{"text": "Summarize recent CPU, DB, API, and network behavior.", "intent": "system_health_overview"}
+{"text": "Is the backend running well overall?", "intent": "system_health_overview"}
+{"text": "What's the system health after running eight sales?", "intent": "system_health_overview"}
+{"text": "Look at the system metrics and identify any concern.", "intent": "system_health_overview"}
+{"text": "Can I get a top-level health report for the demo?", "intent": "system_health_overview"}
+{"text": "How are service dependencies behaving?", "intent": "system_health_overview"}
+{"text": "Is the system showing signs of stress?", "intent": "system_health_overview"}
+{"text": "Give me the overall health picture for the warehouse app.", "intent": "system_health_overview"}
+{"text": "What is the current backend status across all metrics?", "intent": "system_health_overview"}
+{"text": "Are all monitored components reporting?", "intent": "system_health_overview"}
+{"text": "Tell me if any part of the application needs attention.", "intent": "system_health_overview"}
+{"text": "How healthy is the full stack at this moment?", "intent": "system_health_overview"}
+{"text": "Show a concise status for CPU, API timing, and DB timing.", "intent": "system_health_overview"}
+{"text": "Is there a current issue affecting system stability?", "intent": "system_health_overview"}
+{"text": "What does the latest app health snapshot show?", "intent": "system_health_overview"}
+{"text": "Can you check overall service health for me?", "intent": "system_health_overview"}
+{"text": "Are we seeing any broad performance issues?", "intent": "system_health_overview"}
+{"text": "Give me the app's general condition right now.", "intent": "system_health_overview"}
+{"text": "Is the application running smoothly from end to end?", "intent": "system_health_overview"}
+{"text": "What do the current observability metrics say about health?", "intent": "system_health_overview"}
+{"text": "Show me the overall backend condition after the latest traffic.", "intent": "system_health_overview"}
+{"text": "Are there any system-wide warnings at the moment?", "intent": "system_health_overview"}
+{"text": "How are our main services performing right now?", "intent": "system_health_overview"}
+{"text": "Hello.", "intent": "greeting"}
+{"text": "Hi!", "intent": "greeting"}
+{"text": "Hey there.", "intent": "greeting"}
+{"text": "Good afternoon!", "intent": "greeting"}
+{"text": "Good evening.", "intent": "greeting"}
+{"text": "Howdy.", "intent": "greeting"}
+{"text": "Hi assistant.", "intent": "greeting"}
+{"text": "Hey, can you hear me?", "intent": "greeting"}
+{"text": "Morning!", "intent": "greeting"}
+{"text": "Evening, assistant.", "intent": "greeting"}
+{"text": "Hi there, how are you?", "intent": "greeting"}
+{"text": "Hello chatbot.", "intent": "greeting"}
+{"text": "Hey IntelliStock.", "intent": "greeting"}
+{"text": "What's up?", "intent": "greeting"}
+{"text": "How's it going?", "intent": "greeting"}
+{"text": "Nice to meet you.", "intent": "greeting"}
+{"text": "Greetings.", "intent": "greeting"}
+{"text": "Yo.", "intent": "greeting"}
+{"text": "Hi, I'm back.", "intent": "greeting"}
+{"text": "Hello again.", "intent": "greeting"}
+{"text": "Hey bot.", "intent": "greeting"}
+{"text": "Good day.", "intent": "greeting"}
+{"text": "How are you doing today?", "intent": "greeting"}
+{"text": "Hi! Ready to help?", "intent": "greeting"}
+{"text": "Hey, assistant.", "intent": "greeting"}
+{"text": "Hello there!", "intent": "greeting"}
+{"text": "Morning, how are things?", "intent": "greeting"}
+{"text": "Good afternoon, chatbot.", "intent": "greeting"}
+{"text": "Heya!", "intent": "greeting"}
+{"text": "What's happening?", "intent": "greeting"}
+{"text": "How have you been?", "intent": "greeting"}
+{"text": "I wanted to say hello.", "intent": "greeting"}
+{"text": "Just checking in, hi.", "intent": "greeting"}
+{"text": "Hello, let's get started.", "intent": "greeting"}
+{"text": "Hey there, assistant.", "intent": "greeting"}
+{"text": "Hi and good morning.", "intent": "greeting"}
+{"text": "Good to see you.", "intent": "greeting"}
+{"text": "Hello! Are you online?", "intent": "greeting"}
+{"text": "Hey, what's new?", "intent": "greeting"}
+{"text": "Hi, hope you're well.", "intent": "greeting"}
+{"text": "A quick hello.", "intent": "greeting"}
+{"text": "Greetings, how are you?", "intent": "greeting"}
+{"text": "Hey, I'm here.", "intent": "greeting"}
+{"text": "Hello there, how's your day?", "intent": "greeting"}
+{"text": "Hi assistant, ready when you are.", "intent": "greeting"}
+{"text": "Good evening, how are things?", "intent": "greeting"}
+{"text": "Hey, nice to see you again.", "intent": "greeting"}
+{"text": "Hi! Let's begin.", "intent": "greeting"}
+{"text": "Hello from the warehouse.", "intent": "greeting"}
+{"text": "Hey, how are you today?", "intent": "greeting"}
+{"text": "Morning, bot.", "intent": "greeting"}
+{"text": "Hello, I'm ready.", "intent": "greeting"}
+{"text": "Helo, are you around?", "intent": "greeting"}
+{"text": "hiya bot", "intent": "greeting"}
+{"text": "Yo, is anyone online?", "intent": "greeting"}
+{"text": "Hiya, ready for a question?", "intent": "greeting"}
+{"text": "Salutations from the morning shift.", "intent": "greeting"}
+{"text": "I have arrived for today's walkthrough.", "intent": "greeting"}
+{"text": "Popping in to start a chat.", "intent": "greeting"}
+{"text": "Nice to connect with you this evening.", "intent": "greeting"}
+{"text": "It's the warehouse team's turn to say hello.", "intent": "greeting"}
+{"text": "Back for another inventory session.", "intent": "greeting"}
+{"text": "Just dropping by to check in.", "intent": "greeting"}
+{"text": "A cheerful hello from the loading dock.", "intent": "greeting"}
+{"text": "I'm here again whenever you're ready.", "intent": "greeting"}
+{"text": "Let's kick off today's shift together.", "intent": "greeting"}
+{"text": "Give me a broad status of platform stability and live telemetry coverage.", "intent": "system_health_overview"}
+{"text": "Is any major component reporting degradation at present?", "intent": "system_health_overview"}
+{"text": "What does the whole monitoring picture look like after today's traffic?", "intent": "system_health_overview"}
+{"text": "Are the connected services healthy enough for the next demo?", "intent": "system_health_overview"}
+{"text": "Point out the weakest part of the stack from current measurements.", "intent": "system_health_overview"}
+{"text": "Is our platform broadly stable or are there warning signs?", "intent": "system_health_overview"}
+{"text": "Hey, good to see you.", "intent": "greeting"}
+{"text": "Good morning, assistant.", "intent": "greeting"}
+{"text": "Hello again, are you ready?", "intent": "greeting"}
+{"text": "Hi, let's chat.", "intent": "greeting"}
+{"text": "What's the capital of Peru?", "intent": "out_of_scope"}
+{"text": "Who wrote Pride and Prejudice?", "intent": "out_of_scope"}
+{"text": "Explain how photosynthesis works.", "intent": "out_of_scope"}
+{"text": "What is the boiling point of water?", "intent": "out_of_scope"}
+{"text": "Tell me a short joke about a penguin.", "intent": "out_of_scope"}
+{"text": "Can you write a poem about autumn?", "intent": "out_of_scope"}
+{"text": "What will the weather be like in Delhi tomorrow?", "intent": "out_of_scope"}
+{"text": "Is it raining in London right now?", "intent": "out_of_scope"}
+{"text": "What is 147 times 23?", "intent": "out_of_scope"}
+{"text": "Solve this: 2x plus 8 equals 20.", "intent": "out_of_scope"}
+{"text": "How do I sort a list in Python?", "intent": "out_of_scope"}
+{"text": "Help me debug this JavaScript promise.", "intent": "out_of_scope"}
+{"text": "Write a SQL query to find duplicate names.", "intent": "out_of_scope"}
+{"text": "What does a CSS flex container do?", "intent": "out_of_scope"}
+{"text": "Recommend a good restaurant in Pune.", "intent": "out_of_scope"}
+{"text": "Recommend a science-fiction movie for tonight.", "intent": "out_of_scope"}
+{"text": "Which film should I watch this weekend?", "intent": "out_of_scope"}
+{"text": "Greet my grandmother in French.", "intent": "out_of_scope"}
+{"text": "Translate 'good morning' into Japanese.", "intent": "out_of_scope"}
+{"text": "Reorder my playlist so jazz comes first.", "intent": "out_of_scope"}
+{"text": "Can you recommend a playlist for a road trip?", "intent": "out_of_scope"}
+{"text": "What is the capacity of Wembley Stadium?", "intent": "out_of_scope"}
+{"text": "How many people fit inside a concert hall?", "intent": "out_of_scope"}
+{"text": "Explain the rules of chess.", "intent": "out_of_scope"}
+{"text": "Who won the last World Cup?", "intent": "out_of_scope"}
+{"text": "Give me a recipe for vegetable soup.", "intent": "out_of_scope"}
+{"text": "How long should I bake sourdough bread?", "intent": "out_of_scope"}
+{"text": "What is the distance from Earth to the Moon?", "intent": "out_of_scope"}
+{"text": "Why is the sky blue?", "intent": "out_of_scope"}
+{"text": "Tell me a fun fact about dolphins.", "intent": "out_of_scope"}
+{"text": "Can you help me plan a weekend trip?", "intent": "out_of_scope"}
+{"text": "What should I pack for a beach holiday?", "intent": "out_of_scope"}
+{"text": "Find a birthday gift for my sister.", "intent": "out_of_scope"}
+{"text": "Write a polite email declining an invitation.", "intent": "out_of_scope"}
+{"text": "Can you summarize this paragraph for school?", "intent": "out_of_scope"}
+{"text": "Explain the difference between a noun and a verb.", "intent": "out_of_scope"}
+{"text": "What does the word ephemeral mean?", "intent": "out_of_scope"}
+{"text": "Tell me a bedtime story about a fox.", "intent": "out_of_scope"}
+{"text": "Make up a name for a fantasy kingdom.", "intent": "out_of_scope"}
+{"text": "What time is it in New York?", "intent": "out_of_scope"}
+{"text": "Convert 35 Celsius to Fahrenheit.", "intent": "out_of_scope"}
+{"text": "How many days are there in a leap year?", "intent": "out_of_scope"}
+{"text": "What is the square root of 625?", "intent": "out_of_scope"}
+{"text": "Can you explain the Pythagorean theorem?", "intent": "out_of_scope"}
+{"text": "Give me a beginner workout for home.", "intent": "out_of_scope"}
+{"text": "What are some good stretches after running?", "intent": "out_of_scope"}
+{"text": "Suggest a name for my coffee shop.", "intent": "out_of_scope"}
+{"text": "Recommend a laptop for photo editing.", "intent": "out_of_scope"}
+{"text": "How do I change a bicycle tire?", "intent": "out_of_scope"}
+{"text": "Why do leaves change color in fall?", "intent": "out_of_scope"}
+{"text": "Write a limerick about a sleepy cat.", "intent": "out_of_scope"}
+{"text": "Tell me something interesting about Saturn.", "intent": "out_of_scope"}
+{"text": "What's a good restaurant for dinner near me?", "intent": "out_of_scope"}
+{"text": "Suggest a movie with a clever ending.", "intent": "out_of_scope"}
+{"text": "I need a recommendation for a mystery novel.", "intent": "out_of_scope"}
+{"text": "Can you reorder these paragraphs by date?", "intent": "out_of_scope"}
+{"text": "Please reorder my music playlist alphabetically.", "intent": "out_of_scope"}
+{"text": "Greet my new neighbor in Spanish.", "intent": "out_of_scope"}
+{"text": "Help me say hello to my professor in German.", "intent": "out_of_scope"}
+{"text": "What is the capacity of the Sydney Opera House?", "intent": "out_of_scope"}
+{"text": "How much water can a standard swimming pool hold?", "intent": "out_of_scope"}
+{"text": "What is the best way to learn guitar?", "intent": "out_of_scope"}
+{"text": "Who invented the telephone?", "intent": "out_of_scope"}
+{"text": "Explain how an eclipse happens.", "intent": "out_of_scope"}
+{"text": "Give me three ideas for a school science project.", "intent": "out_of_scope"}
+{"text": "Can you write a thank-you note to my teacher?", "intent": "out_of_scope"}
+{"text": "What are the ingredients in a mango lassi?", "intent": "out_of_scope"}
+{"text": "Tell me a joke that is safe for work.", "intent": "out_of_scope"}
+{"text": "What is the weather usually like in Iceland in June?", "intent": "out_of_scope"}
+{"text": "Find a fun board game for four people.", "intent": "out_of_scope"}
+{"text": "Which restaurant has the best noodles in town?", "intent": "out_of_scope"}
+{"text": "Recommend a podcast about history.", "intent": "out_of_scope"}
+{"text": "Can you make a playlist for studying?", "intent": "out_of_scope"}
+{"text": "Reorder the steps in this cake recipe.", "intent": "out_of_scope"}
+{"text": "Say hello to my aunt in Italian.", "intent": "out_of_scope"}
+{"text": "What is the seating capacity of a football stadium?", "intent": "out_of_scope"}
+{"text": "How many seats does the local theater have?", "intent": "out_of_scope"}
+{"text": "Explain compound interest with a simple example.", "intent": "out_of_scope"}
+{"text": "What is the current exchange rate for euros?", "intent": "out_of_scope"}
+{"text": "Help me write a birthday card for a coworker.", "intent": "out_of_scope"}
+{"text": "Can you suggest a name for a pet rabbit?", "intent": "out_of_scope"}
+{"text": "What are the planets in order from the Sun?", "intent": "out_of_scope"}
+{"text": "Why do airplanes leave white trails?", "intent": "out_of_scope"}
+{"text": "Tell me how to make a paper airplane.", "intent": "out_of_scope"}
+{"text": "What's a good way to organize my photo library?", "intent": "out_of_scope"}
+{"text": "Recommend a restaurant for a vegetarian date.", "intent": "out_of_scope"}
+{"text": "Can you recommend a comedy show?", "intent": "out_of_scope"}
+{"text": "I need a suggestion for a gift card amount.", "intent": "out_of_scope"}
+{"text": "Could you reorder my desktop icons by name?", "intent": "out_of_scope"}
+{"text": "Greet the audience in Portuguese.", "intent": "out_of_scope"}
+{"text": "What is the capacity of a Boeing 747?", "intent": "out_of_scope"}
+{"text": "How much can a large auditorium hold?", "intent": "out_of_scope"}
+{"text": "Tell me a knock-knock joke.", "intent": "out_of_scope"}
+{"text": "What does 'break the ice' mean?", "intent": "out_of_scope"}
+{"text": "Can you explain a basic chess opening?", "intent": "out_of_scope"}
+{"text": "What is the weather forecast for Toronto this weekend?", "intent": "out_of_scope"}
+{"text": "How do I center a div in CSS?", "intent": "out_of_scope"}
+{"text": "Write a Python function that reverses a string.", "intent": "out_of_scope"}
+{"text": "Why does my laptop battery drain quickly?", "intent": "out_of_scope"}
+{"text": "Suggest a name for a neighborhood book club.", "intent": "out_of_scope"}
+{"text": "Can you recommend a good travel destination in winter?", "intent": "out_of_scope"}
+{"text": "Reorder my reading list by publication date.", "intent": "out_of_scope"}
+{"text": "Please greet my grandmother in French for me.", "intent": "out_of_scope"}
+{"text": "What's the maximum capacity of a sports arena?", "intent": "out_of_scope"}
+{"text": "Why is the ocean salty?", "intent": "out_of_scope"}
+{"text": "asdf qwerty", "intent": "out_of_scope"}
+{"text": "qzxv blergh 992??", "intent": "out_of_scope"}
+{"text": "asdfghjkl", "intent": "out_of_scope"}
+{"text": "blah blah flurble", "intent": "out_of_scope"}
+{"text": "12345 banana cloud", "intent": "out_of_scope"}
+{"text": "zzzz what even is this", "intent": "out_of_scope"}
+{"text": "lkj qwe poi", "intent": "out_of_scope"}
+{"text": "random words: fish seven purple", "intent": "out_of_scope"}

@@ -23,6 +23,7 @@ from app.api.auth import login
 from app.core.security import get_password_hash
 from app.db.base_class import Base
 from app.main import app
+from app.services import chatbot as chatbot_service
 from app.models import (
     Product,
     Supplier,
@@ -129,6 +130,21 @@ class AssistantApiTests(unittest.TestCase):
         self.assertEqual(response["kind"], "product_status")
         self.assertEqual(response["items"][0]["sku"], self.product.sku)
         self.assertEqual(response["items"][0]["status"], "low_stock")
+        self.assertEqual(response["items"][0]["stock_quantity"], 3)
+
+    def test_sku_status_question_is_not_misanswered_as_generic_stockout(self) -> None:
+        original = chatbot_service._classify_intent
+        chatbot_service._classify_intent = lambda _question: ("zero_stock", 0.99)
+        try:
+            response = chatbot_service.answer_stock_query(
+                self.db,
+                f"Is {self.product.sku} still in stock, or has it sold out?",
+            )
+        finally:
+            chatbot_service._classify_intent = original
+
+        self.assertEqual(response["kind"], "product_status")
+        self.assertEqual(response["items"][0]["sku"], self.product.sku)
         self.assertEqual(response["items"][0]["stock_quantity"], 3)
 
     def test_chatbot_lists_threshold_warnings(self) -> None:

@@ -1,0 +1,180 @@
+{"text":"Why are PostgreSQL queries taking so long?","intent":"slow_database"}
+{"text":"Show recent database latency measurements.","intent":"slow_database"}
+{"text":"What is the DB p95 right now?","intent":"slow_database"}
+{"text":"Is the database causing the application lag?","intent":"slow_database"}
+{"text":"The queries feel slow today; can you check the timings?","intent":"slow_database"}
+{"text":"Report p50, p95, and p99 database response times.","intent":"slow_database"}
+{"text":"Has PostgreSQL latency increased?","intent":"slow_database"}
+{"text":"How many slow database operations were recorded?","intent":"slow_database"}
+{"text":"Check whether DB calls are exceeding the latency threshold.","intent":"slow_database"}
+{"text":"Is our database lagging behind the API?","intent":"slow_database"}
+{"text":"What do the latest query timing samples show?","intent":"slow_database"}
+{"text":"Give me the current database performance summary.","intent":"slow_database"}
+{"text":"Are database transactions slower than normal?","intent":"slow_database"}
+{"text":"Show the database's 95th percentile latency.","intent":"slow_database"}
+{"text":"Why does the DB feel sluggish?","intent":"slow_database"}
+{"text":"How many samples are available for database timing?","intent":"slow_database"}
+{"text":"Can you check the latest PostgreSQL response time?","intent":"slow_database"}
+{"text":"What is the p99 query duration?","intent":"slow_database"}
+{"text":"Are any DB operations over the slow-query limit?","intent":"slow_database"}
+{"text":"Tell me if database calls are delayed.","intent":"slow_database"}
+{"text":"Database latency?","intent":"slow_database"}
+{"text":"Compare typical and worst-case database timings.","intent":"slow_database"}
+{"text":"Is the DB the bottleneck based on measured query latency?","intent":"slow_database"}
+{"text":"Show slow query counts and timing percentiles.","intent":"slow_database"}
+{"text":"Did database performance get worse after the last load test?","intent":"slow_database"}
+{"text":"How long are database requests taking on average?","intent":"slow_database"}
+{"text":"What is the current p95 DB time in milliseconds?","intent":"slow_database"}
+{"text":"Check for elevated database round-trip times.","intent":"slow_database"}
+{"text":"Is PostgreSQL responding slowly right now?","intent":"slow_database"}
+{"text":"I need the recent DB timing histogram.","intent":"slow_database"}
+{"text":"Show me whether query latency crossed its warning threshold.","intent":"slow_database"}
+{"text":"What is the spread between p50 and p99 DB latency?","intent":"slow_database"}
+{"text":"Are SQL operations taking longer than expected?","intent":"slow_database"}
+{"text":"Check the database metrics after the concurrency run.","intent":"slow_database"}
+{"text":"How many calls exceeded the database timing threshold?","intent":"slow_database"}
+{"text":"Is the database slower than the app request path?","intent":"slow_database"}
+{"text":"Give me an update on DB response times.","intent":"slow_database"}
+{"text":"What do our recorded database delays look like?","intent":"slow_database"}
+{"text":"Are queries piling up in PostgreSQL?","intent":"slow_database"}
+{"text":"Can we see query performance percentiles?","intent":"slow_database"}
+{"text":"Has the p95 database time gone above normal?","intent":"slow_database"}
+{"text":"Review latency samples from the database instrumentation.","intent":"slow_database"}
+{"text":"Show the slowest recent database timing values.","intent":"slow_database"}
+{"text":"How does DB latency compare with the previous sample window?","intent":"slow_database"}
+{"text":"I am seeing database lag; what do the metrics say?","intent":"slow_database"}
+{"text":"Can you summarize PostgreSQL call duration?","intent":"slow_database"}
+{"text":"What percentage of database calls are considered slow?","intent":"slow_database"}
+{"text":"Are there enough DB samples to judge latency?","intent":"slow_database"}
+{"text":"Check p95 and p99 for database operations.","intent":"slow_database"}
+{"text":"Why are data reads from Postgres delayed?","intent":"slow_database"}
+{"text":"Show the database latency trend from current telemetry.","intent":"slow_database"}
+{"text":"Is query response lagging under the current load?","intent":"slow_database"}
+{"text":"How many milliseconds is the DB p50?","intent":"slow_database"}
+{"text":"Report the count of slow database calls.","intent":"slow_database"}
+{"text":"Do we have any measurements for SQL latency yet?","intent":"slow_database"}
+{"text":"Does the DB timing data show a bottleneck?","intent":"slow_database"}
+{"text":"What is the latest database p95 sample?","intent":"slow_database"}
+{"text":"Are backend database requests taking too long?","intent":"slow_database"}
+{"text":"Check if Postgres response times are elevated.","intent":"slow_database"}
+{"text":"DB lag?","intent":"slow_database"}
+{"text":"How fast is the API responding to requests?","intent":"api_latency"}
+{"text":"Show the latest app request latency percentiles.","intent":"api_latency"}
+{"text":"The dashboard feels slow; check the API timings.","intent":"api_latency"}
+{"text":"What is the backend p95 response time?","intent":"api_latency"}
+{"text":"API lag?","intent":"api_latency"}
+{"text":"How long do requests spend in the application?","intent":"api_latency"}
+{"text":"Report p50 and p95 HTTP request latency.","intent":"api_latency"}
+{"text":"Are API responses slower than usual?","intent":"api_latency"}
+{"text":"Check the app-level request timing samples.","intent":"api_latency"}
+{"text":"Why is the inventory app responding slowly?","intent":"api_latency"}
+{"text":"Give me the current service response-time summary.","intent":"api_latency"}
+{"text":"What is the p95 latency for backend routes?","intent":"api_latency"}
+{"text":"Has request lag increased during the demo?","intent":"api_latency"}
+{"text":"Show average and tail latency for API calls.","intent":"api_latency"}
+{"text":"Do we have enough request samples to calculate latency?","intent":"api_latency"}
+{"text":"How many HTTP requests are included in the timing window?","intent":"api_latency"}
+{"text":"Check whether the application is slow under load.","intent":"api_latency"}
+{"text":"What is the latest API response time in milliseconds?","intent":"api_latency"}
+{"text":"Tell me if the backend has high request latency.","intent":"api_latency"}
+{"text":"Can I see app latency percentiles?","intent":"api_latency"}
+{"text":"The API is laggy right now; what do its metrics show?","intent":"api_latency"}
+{"text":"Compare median and worst-case service response times.","intent":"api_latency"}
+{"text":"Show the app request p50, p95, and sample count.","intent":"api_latency"}
+{"text":"Are endpoint responses taking longer this afternoon?","intent":"api_latency"}
+{"text":"How quickly is the backend handling requests?","intent":"api_latency"}
+{"text":"What do the application timing counters report?","intent":"api_latency"}
+{"text":"Check the API latency after running the sales demo.","intent":"api_latency"}
+{"text":"Is the service response lag coming from the app path?","intent":"api_latency"}
+{"text":"How many milliseconds is the app p95?","intent":"api_latency"}
+{"text":"Give me a snapshot of route response times.","intent":"api_latency"}
+{"text":"Does the current load affect API response speed?","intent":"api_latency"}
+{"text":"Show recent backend request durations.","intent":"api_latency"}
+{"text":"Is the service latency within its usual range?","intent":"api_latency"}
+{"text":"What is the application-level p99 response time?","intent":"api_latency"}
+{"text":"Review the request latency measurements for this session.","intent":"api_latency"}
+{"text":"Has the p95 API time crossed our alert level?","intent":"api_latency"}
+{"text":"Are route calls slower than the database calls?","intent":"api_latency"}
+{"text":"Check the web service timing summary.","intent":"api_latency"}
+{"text":"How long does a typical request take?","intent":"api_latency"}
+{"text":"Can you find the slowest application response percentile?","intent":"api_latency"}
+{"text":"Is app performance dropping as traffic rises?","intent":"api_latency"}
+{"text":"What is the response-time distribution for the API?","intent":"api_latency"}
+{"text":"Show HTTP latency stats from the middleware.","intent":"api_latency"}
+{"text":"Why are requests to the backend taking extra time?","intent":"api_latency"}
+{"text":"How many requests were observed by the latency collector?","intent":"api_latency"}
+{"text":"Is there a recent spike in request duration?","intent":"api_latency"}
+{"text":"Tell me the current app response lag.","intent":"api_latency"}
+{"text":"Could you check our service's tail latency?","intent":"api_latency"}
+{"text":"What's the app p95 right now?","intent":"api_latency"}
+{"text":"What does the API timing panel report at the moment?","intent":"api_latency"}
+{"text":"Check recent response delays across the backend endpoints.","intent":"api_latency"}
+{"text":"Is the app returning responses more slowly than before?","intent":"api_latency"}
+{"text":"Show the request timing summary after the demo traffic.","intent":"api_latency"}
+{"text":"How much time are API calls spending in the service?","intent":"api_latency"}
+{"text":"Can you report the application latency percentiles?","intent":"api_latency"}
+{"text":"Are requests spending too long in the backend?","intent":"api_latency"}
+{"text":"What is the latest response delay for a typical route?","intent":"api_latency"}
+{"text":"Check if our HTTP handlers have a latency spike.","intent":"api_latency"}
+{"text":"Do current measurements show a slow app response?","intent":"api_latency"}
+{"text":"App response time check?","intent":"api_latency"}
+{"text":"Are TCP packets being retransmitted?","intent":"network_issues"}
+{"text":"Check for recent network failures and resets.","intent":"network_issues"}
+{"text":"Any packet loss on the service connection?","intent":"network_issues"}
+{"text":"Show TCP retransmit counts from telemetry.","intent":"network_issues"}
+{"text":"Network trouble?","intent":"network_issues"}
+{"text":"Have we recorded connection resets lately?","intent":"network_issues"}
+{"text":"What do the current TCP counters say?","intent":"network_issues"}
+{"text":"Is the application seeing network errors?","intent":"network_issues"}
+{"text":"Report retransmissions and connection failures.","intent":"network_issues"}
+{"text":"Are connections being dropped under load?","intent":"network_issues"}
+{"text":"Check the latest packet retransmission count.","intent":"network_issues"}
+{"text":"Why are clients having trouble connecting?","intent":"network_issues"}
+{"text":"Show network telemetry for this host.","intent":"network_issues"}
+{"text":"How many TCP resets were observed?","intent":"network_issues"}
+{"text":"Do we have any failed connection attempts?","intent":"network_issues"}
+{"text":"Can you look for packet loss or retransmits?","intent":"network_issues"}
+{"text":"Is the network path flaky right now?","intent":"network_issues"}
+{"text":"What is the retransmit rate from the collector?","intent":"network_issues"}
+{"text":"Are there TCP drops in the latest sample?","intent":"network_issues"}
+{"text":"Tell me whether connections are resetting.","intent":"network_issues"}
+{"text":"Show connection failure totals for the API host.","intent":"network_issues"}
+{"text":"Has network reliability changed during the load test?","intent":"network_issues"}
+{"text":"Check for retransmitted packets on the interface.","intent":"network_issues"}
+{"text":"What networking errors have been captured?","intent":"network_issues"}
+{"text":"Are clients disconnecting before requests finish?","intent":"network_issues"}
+{"text":"Give me the current TCP health counters.","intent":"network_issues"}
+{"text":"Any evidence of a connection drop?","intent":"network_issues"}
+{"text":"How many retransmits occurred recently?","intent":"network_issues"}
+{"text":"Show me the network issue summary.","intent":"network_issues"}
+{"text":"Is there unusual TCP activity on the backend?","intent":"network_issues"}
+{"text":"Can packet retransmission explain these disconnects?","intent":"network_issues"}
+{"text":"Check whether the collector saw TCP resets.","intent":"network_issues"}
+{"text":"Are socket connections failing?","intent":"network_issues"}
+{"text":"What is the count of network connection errors?","intent":"network_issues"}
+{"text":"Any network latency or packet loss right now?","intent":"network_issues"}
+{"text":"Review transport-layer errors from the host.","intent":"network_issues"}
+{"text":"Did the load test cause more TCP retransmits?","intent":"network_issues"}
+{"text":"How many dropped connections did we see this period?","intent":"network_issues"}
+{"text":"Are packets getting resent between the app and its clients?","intent":"network_issues"}
+{"text":"Show me any connection resets recorded by eBPF.","intent":"network_issues"}
+{"text":"Has the host reported network trouble?","intent":"network_issues"}
+{"text":"What's the status of the TCP connection counters?","intent":"network_issues"}
+{"text":"Could network instability be affecting the dashboard?","intent":"network_issues"}
+{"text":"Tell me if there are failed TCP connections.","intent":"network_issues"}
+{"text":"Any retransmits or resets?","intent":"network_issues"}
+{"text":"Is packet delivery reliable during this run?","intent":"network_issues"}
+{"text":"Check network errors after the concurrency scenario.","intent":"network_issues"}
+{"text":"Do current metrics show TCP retransmission?","intent":"network_issues"}
+{"text":"How often are connections being reset?","intent":"network_issues"}
+{"text":"Look for evidence of packet loss on the service.","intent":"network_issues"}
+{"text":"Are network connections timing out?","intent":"network_issues"}
+{"text":"Show the latest connection health data.","intent":"network_issues"}
+{"text":"Check TCP retransmit and reset stats, pls.","intent":"network_issues"}
+{"text":"Has the network dropped any packets recently?","intent":"network_issues"}
+{"text":"Are TCP connections resetting during requests?","intent":"network_issues"}
+{"text":"Show any network failure counters from the collector.","intent":"network_issues"}
+{"text":"Did we see retransmitted traffic during the test?","intent":"network_issues"}
+{"text":"Can you check the host's connection reliability?","intent":"network_issues"}
+{"text":"What network drops were counted in this interval?","intent":"network_issues"}
+{"text":"Do the metrics show socket errors?","intent":"network_issues"}

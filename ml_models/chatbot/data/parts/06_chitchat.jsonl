@@ -1,0 +1,196 @@
+{"text":"Hello.","intent":"greeting"}
+{"text":"Hi!","intent":"greeting"}
+{"text":"Hey there.","intent":"greeting"}
+{"text":"Good morning.","intent":"greeting"}
+{"text":"Good afternoon!","intent":"greeting"}
+{"text":"Good evening.","intent":"greeting"}
+{"text":"Howdy.","intent":"greeting"}
+{"text":"Hi assistant.","intent":"greeting"}
+{"text":"Hello, anyone there?","intent":"greeting"}
+{"text":"Hey, can you hear me?","intent":"greeting"}
+{"text":"Morning!","intent":"greeting"}
+{"text":"Evening, assistant.","intent":"greeting"}
+{"text":"Hi there, how are you?","intent":"greeting"}
+{"text":"Hello chatbot.","intent":"greeting"}
+{"text":"Hey IntelliStock.","intent":"greeting"}
+{"text":"What's up?","intent":"greeting"}
+{"text":"How's it going?","intent":"greeting"}
+{"text":"Nice to meet you.","intent":"greeting"}
+{"text":"Greetings.","intent":"greeting"}
+{"text":"Yo.","intent":"greeting"}
+{"text":"Hi, I'm back.","intent":"greeting"}
+{"text":"Hello again.","intent":"greeting"}
+{"text":"Hey bot.","intent":"greeting"}
+{"text":"Good day.","intent":"greeting"}
+{"text":"How are you doing today?","intent":"greeting"}
+{"text":"Hi! Ready to help?","intent":"greeting"}
+{"text":"Hey, assistant.","intent":"greeting"}
+{"text":"Hello there!","intent":"greeting"}
+{"text":"Morning, how are things?","intent":"greeting"}
+{"text":"Good afternoon, chatbot.","intent":"greeting"}
+{"text":"Hiya.","intent":"greeting"}
+{"text":"Heya!","intent":"greeting"}
+{"text":"What's happening?","intent":"greeting"}
+{"text":"How have you been?","intent":"greeting"}
+{"text":"I wanted to say hello.","intent":"greeting"}
+{"text":"Just checking in, hi.","intent":"greeting"}
+{"text":"Hello, let's get started.","intent":"greeting"}
+{"text":"Hey there, assistant.","intent":"greeting"}
+{"text":"Hi and good morning.","intent":"greeting"}
+{"text":"Good to see you.","intent":"greeting"}
+{"text":"Hello! Are you online?","intent":"greeting"}
+{"text":"Hey, what's new?","intent":"greeting"}
+{"text":"Hi, hope you're well.","intent":"greeting"}
+{"text":"A quick hello.","intent":"greeting"}
+{"text":"Greetings, how are you?","intent":"greeting"}
+{"text":"Hey, I'm here.","intent":"greeting"}
+{"text":"Hello there, how's your day?","intent":"greeting"}
+{"text":"Hi assistant, ready when you are.","intent":"greeting"}
+{"text":"Good evening, how are things?","intent":"greeting"}
+{"text":"Hey, nice to see you again.","intent":"greeting"}
+{"text":"Hi! Let's begin.","intent":"greeting"}
+{"text":"Hello from the warehouse.","intent":"greeting"}
+{"text":"Hey, how are you today?","intent":"greeting"}
+{"text":"Morning, bot.","intent":"greeting"}
+{"text":"Hello, I'm ready.","intent":"greeting"}
+{"text":"Hi there!","intent":"greeting"}
+{"text":"Helo, are you around?","intent":"greeting"}
+{"text":"Heyy there!","intent":"greeting"}
+{"text":"hiya bot","intent":"greeting"}
+{"text":"Yo, is anyone online?","intent":"greeting"}
+{"text":"Hiya, ready for a question?","intent":"greeting"}
+{"text":"Salutations from the morning shift.","intent":"greeting"}
+{"text":"I have arrived for today's walkthrough.","intent":"greeting"}
+{"text":"Popping in to start a chat.","intent":"greeting"}
+{"text":"Nice to connect with you this evening.","intent":"greeting"}
+{"text":"It's the warehouse team's turn to say hello.","intent":"greeting"}
+{"text":"Back for another inventory session.","intent":"greeting"}
+{"text":"Just dropping by to check in.","intent":"greeting"}
+{"text":"A cheerful hello from the loading dock.","intent":"greeting"}
+{"text":"I'm here again whenever you're ready.","intent":"greeting"}
+{"text":"Let's kick off today's shift together.","intent":"greeting"}
+{"text":"Give me a broad status of platform stability and live telemetry coverage.","intent":"system_health_overview"}
+{"text":"Is any major component reporting degradation at present?","intent":"system_health_overview"}
+{"text":"What does the whole monitoring picture look like after today's traffic?","intent":"system_health_overview"}
+{"text":"Are the connected services healthy enough for the next demo?","intent":"system_health_overview"}
+{"text":"Point out the weakest part of the stack from current measurements.","intent":"system_health_overview"}
+{"text":"Is our platform broadly stable or are there warning signs?","intent":"system_health_overview"}
+{"text":"Hey, good to see you.","intent":"greeting"}
+{"text":"Good morning, assistant.","intent":"greeting"}
+{"text":"Hello again, are you ready?","intent":"greeting"}
+{"text":"Hi, let's chat.","intent":"greeting"}
+{"text":"What's the capital of Peru?","intent":"out_of_scope"}
+{"text":"Who wrote Pride and Prejudice?","intent":"out_of_scope"}
+{"text":"Explain how photosynthesis works.","intent":"out_of_scope"}
+{"text":"What is the boiling point of water?","intent":"out_of_scope"}
+{"text":"Tell me a short joke about a penguin.","intent":"out_of_scope"}
+{"text":"Can you write a poem about autumn?","intent":"out_of_scope"}
+{"text":"What will the weather be like in Delhi tomorrow?","intent":"out_of_scope"}
+{"text":"Is it raining in London right now?","intent":"out_of_scope"}
+{"text":"What is 147 times 23?","intent":"out_of_scope"}
+{"text":"Solve this: 2x plus 8 equals 20.","intent":"out_of_scope"}
+{"text":"How do I sort a list in Python?","intent":"out_of_scope"}
+{"text":"Help me debug this JavaScript promise.","intent":"out_of_scope"}
+{"text":"Write a SQL query to find duplicate names.","intent":"out_of_scope"}
+{"text":"What does a CSS flex container do?","intent":"out_of_scope"}
+{"text":"Recommend a good restaurant in Pune.","intent":"out_of_scope"}
+{"text":"Recommend a science-fiction movie for tonight.","intent":"out_of_scope"}
+{"text":"Which film should I watch this weekend?","intent":"out_of_scope"}
+{"text":"Greet my grandmother in French.","intent":"out_of_scope"}
+{"text":"Translate 'good morning' into Japanese.","intent":"out_of_scope"}
+{"text":"Reorder my playlist so jazz comes first.","intent":"out_of_scope"}
+{"text":"Can you recommend a playlist for a road trip?","intent":"out_of_scope"}
+{"text":"What is the capacity of Wembley Stadium?","intent":"out_of_scope"}
+{"text":"How many people fit inside a concert hall?","intent":"out_of_scope"}
+{"text":"Explain the rules of chess.","intent":"out_of_scope"}
+{"text":"Who won the last World Cup?","intent":"out_of_scope"}
+{"text":"Give me a recipe for vegetable soup.","intent":"out_of_scope"}
+{"text":"How long should I bake sourdough bread?","intent":"out_of_scope"}
+{"text":"What is the distance from Earth to the Moon?","intent":"out_of_scope"}
+{"text":"Why is the sky blue?","intent":"out_of_scope"}
+{"text":"Tell me a fun fact about dolphins.","intent":"out_of_scope"}
+{"text":"Can you help me plan a weekend trip?","intent":"out_of_scope"}
+{"text":"What should I pack for a beach holiday?","intent":"out_of_scope"}
+{"text":"Find a birthday gift for my sister.","intent":"out_of_scope"}
+{"text":"Write a polite email declining an invitation.","intent":"out_of_scope"}
+{"text":"Can you summarize this paragraph for school?","intent":"out_of_scope"}
+{"text":"Explain the difference between a noun and a verb.","intent":"out_of_scope"}
+{"text":"What does the word ephemeral mean?","intent":"out_of_scope"}
+{"text":"Tell me a bedtime story about a fox.","intent":"out_of_scope"}
+{"text":"Make up a name for a fantasy kingdom.","intent":"out_of_scope"}
+{"text":"What time is it in New York?","intent":"out_of_scope"}
+{"text":"Convert 35 Celsius to Fahrenheit.","intent":"out_of_scope"}
+{"text":"How many days are there in a leap year?","intent":"out_of_scope"}
+{"text":"What is the square root of 625?","intent":"out_of_scope"}
+{"text":"Can you explain the Pythagorean theorem?","intent":"out_of_scope"}
+{"text":"Give me a beginner workout for home.","intent":"out_of_scope"}
+{"text":"What are some good stretches after running?","intent":"out_of_scope"}
+{"text":"Suggest a name for my coffee shop.","intent":"out_of_scope"}
+{"text":"Recommend a laptop for photo editing.","intent":"out_of_scope"}
+{"text":"How do I change a bicycle tire?","intent":"out_of_scope"}
+{"text":"Why do leaves change color in fall?","intent":"out_of_scope"}
+{"text":"Write a limerick about a sleepy cat.","intent":"out_of_scope"}
+{"text":"Tell me something interesting about Saturn.","intent":"out_of_scope"}
+{"text":"What's a good restaurant for dinner near me?","intent":"out_of_scope"}
+{"text":"Suggest a movie with a clever ending.","intent":"out_of_scope"}
+{"text":"I need a recommendation for a mystery novel.","intent":"out_of_scope"}
+{"text":"Can you reorder these paragraphs by date?","intent":"out_of_scope"}
+{"text":"Please reorder my music playlist alphabetically.","intent":"out_of_scope"}
+{"text":"Greet my new neighbor in Spanish.","intent":"out_of_scope"}
+{"text":"Help me say hello to my professor in German.","intent":"out_of_scope"}
+{"text":"What is the capacity of the Sydney Opera House?","intent":"out_of_scope"}
+{"text":"How much water can a standard swimming pool hold?","intent":"out_of_scope"}
+{"text":"What is the best way to learn guitar?","intent":"out_of_scope"}
+{"text":"Who invented the telephone?","intent":"out_of_scope"}
+{"text":"Explain how an eclipse happens.","intent":"out_of_scope"}
+{"text":"Give me three ideas for a school science project.","intent":"out_of_scope"}
+{"text":"Can you write a thank-you note to my teacher?","intent":"out_of_scope"}
+{"text":"What are the ingredients in a mango lassi?","intent":"out_of_scope"}
+{"text":"Tell me a joke that is safe for work.","intent":"out_of_scope"}
+{"text":"What is the weather usually like in Iceland in June?","intent":"out_of_scope"}
+{"text":"Find a fun board game for four people.","intent":"out_of_scope"}
+{"text":"Which restaurant has the best noodles in town?","intent":"out_of_scope"}
+{"text":"Recommend a podcast about history.","intent":"out_of_scope"}
+{"text":"Can you make a playlist for studying?","intent":"out_of_scope"}
+{"text":"Reorder the steps in this cake recipe.","intent":"out_of_scope"}
+{"text":"Say hello to my aunt in Italian.","intent":"out_of_scope"}
+{"text":"What is the seating capacity of a football stadium?","intent":"out_of_scope"}
+{"text":"How many seats does the local theater have?","intent":"out_of_scope"}
+{"text":"Explain compound interest with a simple example.","intent":"out_of_scope"}
+{"text":"What is the current exchange rate for euros?","intent":"out_of_scope"}
+{"text":"Help me write a birthday card for a coworker.","intent":"out_of_scope"}
+{"text":"Can you suggest a name for a pet rabbit?","intent":"out_of_scope"}
+{"text":"What are the planets in order from the Sun?","intent":"out_of_scope"}
+{"text":"Why do airplanes leave white trails?","intent":"out_of_scope"}
+{"text":"Tell me how to make a paper airplane.","intent":"out_of_scope"}
+{"text":"What's a good way to organize my photo library?","intent":"out_of_scope"}
+{"text":"Recommend a restaurant for a vegetarian date.","intent":"out_of_scope"}
+{"text":"Can you recommend a comedy show?","intent":"out_of_scope"}
+{"text":"I need a suggestion for a gift card amount.","intent":"out_of_scope"}
+{"text":"Could you reorder my desktop icons by name?","intent":"out_of_scope"}
+{"text":"Greet the audience in Portuguese.","intent":"out_of_scope"}
+{"text":"What is the capacity of a Boeing 747?","intent":"out_of_scope"}
+{"text":"How much can a large auditorium hold?","intent":"out_of_scope"}
+{"text":"Tell me a knock-knock joke.","intent":"out_of_scope"}
+{"text":"What does 'break the ice' mean?","intent":"out_of_scope"}
+{"text":"Can you explain a basic chess opening?","intent":"out_of_scope"}
+{"text":"What is the weather forecast for Toronto this weekend?","intent":"out_of_scope"}
+{"text":"How do I center a div in CSS?","intent":"out_of_scope"}
+{"text":"Write a Python function that reverses a string.","intent":"out_of_scope"}
+{"text":"Why does my laptop battery drain quickly?","intent":"out_of_scope"}
+{"text":"Suggest a name for a neighborhood book club.","intent":"out_of_scope"}
+{"text":"Can you recommend a good travel destination in winter?","intent":"out_of_scope"}
+{"text":"Reorder my reading list by publication date.","intent":"out_of_scope"}
+{"text":"Please greet my grandmother in French for me.","intent":"out_of_scope"}
+{"text":"What's the maximum capacity of a sports arena?","intent":"out_of_scope"}
+{"text":"Why is the ocean salty?","intent":"out_of_scope"}
+{"text":"asdf qwerty","intent":"out_of_scope"}
+{"text":"qzxv blergh 992??","intent":"out_of_scope"}
+{"text":"...","intent":"out_of_scope"}
+{"text":"???","intent":"out_of_scope"}
+{"text":"asdfghjkl","intent":"out_of_scope"}
+{"text":"blah blah flurble","intent":"out_of_scope"}
+{"text":"12345 banana cloud","intent":"out_of_scope"}
+{"text":"zzzz what even is this","intent":"out_of_scope"}
+{"text":"lkj qwe poi","intent":"out_of_scope"}
+{"text":"random words: fish seven purple","intent":"out_of_scope"}

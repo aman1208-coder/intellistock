@@ -1,0 +1,185 @@
+{"text":"Check the current quantity for ELEC-001.","intent":"product_status"}
+{"text":"How many cordless drills are in stock?","intent":"product_status"}
+{"text":"Is PACK-003 available to ship today?","intent":"product_status"}
+{"text":"Look up the stock status of SAFE-004.","intent":"product_status"}
+{"text":"What is the inventory count for OFF-006?","intent":"product_status"}
+{"text":"Does HARD-002 have enough units on hand?","intent":"product_status"}
+{"text":"Show me the status of ELEC-005, including its reorder point.","intent":"product_status"}
+{"text":"How much bubble wrap do we have?","intent":"product_status"}
+{"text":"Is the demo scanner SKU DEMO-ZERO-001 sold out?","intent":"product_status"}
+{"text":"Find the details for DEMO-LOW-002.","intent":"product_status"}
+{"text":"Can we fulfill an order for HARD-006?","intent":"product_status"}
+{"text":"Tell me whether OFF-001 is in stock.","intent":"product_status"}
+{"text":"What's the quantity on ELEC-002?","intent":"product_status"}
+{"text":"Check inventory for the safety glasses, SAFE-002.","intent":"product_status"}
+{"text":"I need the stock count for PACK-006.","intent":"product_status"}
+{"text":"Is SKU ELEC-004 running low?","intent":"product_status"}
+{"text":"What is the current status of the utility knife, HARD-004?","intent":"product_status"}
+{"text":"Look up OFF-003 in the product catalog.","intent":"product_status"}
+{"text":"How many first aid kits are available under SAFE-004?","intent":"product_status"}
+{"text":"Show the on-hand balance for PACK-001.","intent":"product_status"}
+{"text":"Does ELEC-006 have any units left?","intent":"product_status"}
+{"text":"Give me the product details for HARD-003.","intent":"product_status"}
+{"text":"What is the reorder threshold for SAFE-005?","intent":"product_status"}
+{"text":"Check if DEMO-LOW-003 has dropped below its minimum.","intent":"product_status"}
+{"text":"Tell me if PACK-004 can cover a small order.","intent":"product_status"}
+{"text":"How many markers are there in OFF-002?","intent":"product_status"}
+{"text":"Can you find ELEC-003 and report its stock?","intent":"product_status"}
+{"text":"Is the demo low-stock dock, DEMO-LOW-001, available?","intent":"product_status"}
+{"text":"What's the current balance for SAFE-006?","intent":"product_status"}
+{"text":"Show inventory details for HARD-001.","intent":"product_status"}
+{"text":"Look up product PACK-005 for me.","intent":"product_status"}
+{"text":"Does OFF-004 have stock right now?","intent":"product_status"}
+{"text":"I want to know whether ELEC-001 is below its reorder level.","intent":"product_status"}
+{"text":"Check the number of units in SAFE-003.","intent":"product_status"}
+{"text":"Where does HARD-005 stand on inventory?","intent":"product_status"}
+{"text":"What is the stock status of DEMO-ZERO-002?","intent":"product_status"}
+{"text":"How many boxes are on hand for PACK-002?","intent":"product_status"}
+{"text":"Show the catalog entry and quantity for OFF-005.","intent":"product_status"}
+{"text":"Is HARD-002 above its reorder threshold?","intent":"product_status"}
+{"text":"Find out if SAFE-001 is available in the warehouse.","intent":"product_status"}
+{"text":"What does the database show for ELEC-005 stock?","intent":"product_status"}
+{"text":"Can I get the current inventory for SKU PACK-003?","intent":"product_status"}
+{"text":"Check product HARD-006 and tell me its on-hand units.","intent":"product_status"}
+{"text":"Is OFF-006 close to being depleted?","intent":"product_status"}
+{"text":"Give me the count and threshold for SAFE-004.","intent":"product_status"}
+{"text":"Find ELEC-002 and tell me if it is low.","intent":"product_status"}
+{"text":"How much stock remains for DEMO-LOW-002?","intent":"product_status"}
+{"text":"Does PACK-006 have enough mailers for today's orders?","intent":"product_status"}
+{"text":"I need a quick status check on OFF-001.","intent":"product_status"}
+{"text":"What is the stock quantity of the barcode scanner, ELEC-001?","intent":"product_status"}
+{"text":"Can you verify availability for HARD-004?","intent":"product_status"}
+{"text":"Show me the reorder point and count for ELEC-006.","intent":"product_status"}
+{"text":"Is SAFE-002 out, low, or comfortably stocked?","intent":"product_status"}
+{"text":"Find the product record for DEMO-ZERO-001.","intent":"product_status"}
+{"text":"Tell me how much copy paper SKU OFF-001 is left.","intent":"product_status"}
+{"text":"Check stock for the cordless drill with code HARD-001.","intent":"product_status"}
+{"text":"What does our inventory say about SAFE-005?","intent":"product_status"}
+{"text":"Is there any stretch film left under PACK-004?","intent":"product_status"}
+{"text":"How is the thermal label printer, ELEC-003, stocked?","intent":"product_status"}
+{"text":"Check SKU ELEC-004, please.","intent":"product_status"}
+{"text":"For SKU HARD-003, report its quantity and current availability.","intent":"product_status"}
+{"text":"Look up PACK-004 by its code and show the product record.","intent":"product_status"}
+{"text":"I have a question about SKU OFF-002; what is its current count?","intent":"product_status"}
+{"text":"Can you check whether SAFE-006 is available in our catalog stock?","intent":"product_status"}
+{"text":"Show the inventory record for the item coded ELEC-006.","intent":"product_status"}
+{"text":"How much free capacity does Central Depot have?","intent":"warehouse_capacity"}
+{"text":"Show available storage space at each warehouse.","intent":"warehouse_capacity"}
+{"text":"Is East Hub close to its capacity limit?","intent":"warehouse_capacity"}
+{"text":"Compare current capacity across our three locations.","intent":"warehouse_capacity"}
+{"text":"Warehouse space?","intent":"warehouse_capacity"}
+{"text":"How many units of storage remain at West Hub?","intent":"warehouse_capacity"}
+{"text":"Tell me the total and available capacity for Central Depot.","intent":"warehouse_capacity"}
+{"text":"Do we have room for another pallet at East Hub?","intent":"warehouse_capacity"}
+{"text":"What is the current warehouse utilization?","intent":"warehouse_capacity"}
+{"text":"List each depot's remaining storage capacity.","intent":"warehouse_capacity"}
+{"text":"How full is the West warehouse right now?","intent":"warehouse_capacity"}
+{"text":"Can the Central Depot take more incoming goods?","intent":"warehouse_capacity"}
+{"text":"Show me free space by warehouse location.","intent":"warehouse_capacity"}
+{"text":"What's the capacity status at East Industrial Park?","intent":"warehouse_capacity"}
+{"text":"I need to know which site has the most room.","intent":"warehouse_capacity"}
+{"text":"How much storage is still unused at West Hub?","intent":"warehouse_capacity"}
+{"text":"Are any warehouses nearly full?","intent":"warehouse_capacity"}
+{"text":"Give me the remaining dock and warehouse room for each site.","intent":"warehouse_capacity"}
+{"text":"Could Central Depot fit a large delivery today?","intent":"warehouse_capacity"}
+{"text":"What portion of our storage capacity is available?","intent":"warehouse_capacity"}
+{"text":"Check the warehouse space figures for all hubs.","intent":"warehouse_capacity"}
+{"text":"Is East Hub able to receive more inventory?","intent":"warehouse_capacity"}
+{"text":"Show total capacity versus available capacity at each site.","intent":"warehouse_capacity"}
+{"text":"Which warehouse has the largest amount of free space?","intent":"warehouse_capacity"}
+{"text":"Do we have enough room at the depot for tomorrow's shipment?","intent":"warehouse_capacity"}
+{"text":"I want a snapshot of storage utilization.","intent":"warehouse_capacity"}
+{"text":"How much warehouse capacity is left overall?","intent":"warehouse_capacity"}
+{"text":"Check space remaining at Central Depot.","intent":"warehouse_capacity"}
+{"text":"Are the hubs running out of room for inventory?","intent":"warehouse_capacity"}
+{"text":"Can you show open capacity by location?","intent":"warehouse_capacity"}
+{"text":"What is the warehouse fill level at each site?","intent":"warehouse_capacity"}
+{"text":"Which site should receive the next inbound shipment based on space?","intent":"warehouse_capacity"}
+{"text":"Is there room in the West Logistics Zone warehouse?","intent":"warehouse_capacity"}
+{"text":"Tell me how much capacity remains at East Hub.","intent":"warehouse_capacity"}
+{"text":"Show available space at Central, East, and West.","intent":"warehouse_capacity"}
+{"text":"How much of the warehouse is still empty?","intent":"warehouse_capacity"}
+{"text":"Can West Hub accept another batch of cartons?","intent":"warehouse_capacity"}
+{"text":"Display current storage availability for each depot.","intent":"warehouse_capacity"}
+{"text":"What is the free capacity at our East location?","intent":"warehouse_capacity"}
+{"text":"Which warehouse is closest to full?","intent":"warehouse_capacity"}
+{"text":"Are we using most of the storage at Central Depot?","intent":"warehouse_capacity"}
+{"text":"How much room is left for new stock?","intent":"warehouse_capacity"}
+{"text":"Give me a capacity breakdown by hub.","intent":"warehouse_capacity"}
+{"text":"Check if West Hub has enough space for a restock shipment.","intent":"warehouse_capacity"}
+{"text":"What storage capacity remains in the network?","intent":"warehouse_capacity"}
+{"text":"Show the available warehouse space, not the product stock count.","intent":"warehouse_capacity"}
+{"text":"Could you check each site's capacity before we route a delivery?","intent":"warehouse_capacity"}
+{"text":"Is any depot over its planned capacity?","intent":"warehouse_capacity"}
+{"text":"What's the unused space at the Central warehouse?","intent":"warehouse_capacity"}
+{"text":"How loaded are the warehouses today?","intent":"warehouse_capacity"}
+{"text":"Check available capacity for incoming inventory.","intent":"warehouse_capacity"}
+{"text":"Can we fit more goods at East Hub?","intent":"warehouse_capacity"}
+{"text":"Show the capacity totals for all warehouses.","intent":"warehouse_capacity"}
+{"text":"Do we have spare storage at West Hub?","intent":"warehouse_capacity"}
+{"text":"How many more items can the depot accommodate?","intent":"warehouse_capacity"}
+{"text":"Capacity check for East Hub?","intent":"warehouse_capacity"}
+{"text":"What does the 14-day demand forecast say for our stock?","intent":"demand_forecast"}
+{"text":"Which products are likely to run out in the next two weeks?","intent":"demand_forecast"}
+{"text":"Forecast demand for the coming fortnight.","intent":"demand_forecast"}
+{"text":"Do the projections show any upcoming stock risks?","intent":"demand_forecast"}
+{"text":"Demand outlook?","intent":"demand_forecast"}
+{"text":"Which items should we replenish based on expected sales?","intent":"demand_forecast"}
+{"text":"Can you estimate what we'll need over the next 14 days?","intent":"demand_forecast"}
+{"text":"Show the forecasted stockout risk by product.","intent":"demand_forecast"}
+{"text":"What inventory may run short before the end of the month?","intent":"demand_forecast"}
+{"text":"Give me the two-week demand projection.","intent":"demand_forecast"}
+{"text":"Will any product fall below its reorder level soon?","intent":"demand_forecast"}
+{"text":"Use recent transactions to forecast upcoming demand.","intent":"demand_forecast"}
+{"text":"Which SKUs have a high chance of running out soon?","intent":"demand_forecast"}
+{"text":"What does the sales trend imply for our restocking needs?","intent":"demand_forecast"}
+{"text":"Show products at risk over the forecast horizon.","intent":"demand_forecast"}
+{"text":"Are we likely to run short of packaging supplies next week?","intent":"demand_forecast"}
+{"text":"Estimate inventory demand for the next 14 days.","intent":"demand_forecast"}
+{"text":"Which items need attention according to the demand model?","intent":"demand_forecast"}
+{"text":"Can I see the stock risk forecast for the next fortnight?","intent":"demand_forecast"}
+{"text":"Tell me what sales volume may look like in two weeks.","intent":"demand_forecast"}
+{"text":"How many products are predicted to need a reorder?","intent":"demand_forecast"}
+{"text":"What's the expected demand for our hardware items?","intent":"demand_forecast"}
+{"text":"Show a forward-looking inventory risk summary.","intent":"demand_forecast"}
+{"text":"Will current inventory cover projected orders?","intent":"demand_forecast"}
+{"text":"Which products could stock out if demand follows its recent pattern?","intent":"demand_forecast"}
+{"text":"Run the demand projection for the next two weeks.","intent":"demand_forecast"}
+{"text":"I need a forecast of restock requirements.","intent":"demand_forecast"}
+{"text":"Are the labels and boxes expected to sell faster soon?","intent":"demand_forecast"}
+{"text":"Check the upcoming demand risk for all products.","intent":"demand_forecast"}
+{"text":"How does the forecast look for inventory depletion?","intent":"demand_forecast"}
+{"text":"What stock is predicted to be insufficient in 14 days?","intent":"demand_forecast"}
+{"text":"Can we see which items may need ordering before the next cycle?","intent":"demand_forecast"}
+{"text":"Forecast replenishment needs from the recent sales history.","intent":"demand_forecast"}
+{"text":"Which products have the strongest expected demand this fortnight?","intent":"demand_forecast"}
+{"text":"Show me the predicted stock levels for the next two weeks.","intent":"demand_forecast"}
+{"text":"Could sales leave any SKUs below minimum by next week?","intent":"demand_forecast"}
+{"text":"What does the model project for demand through the next 14 days?","intent":"demand_forecast"}
+{"text":"Are restock orders needed based on the demand forecast?","intent":"demand_forecast"}
+{"text":"Give me an outlook on potential shortages.","intent":"demand_forecast"}
+{"text":"Check which items could become unavailable soon.","intent":"demand_forecast"}
+{"text":"What is the forecasted demand for office supplies?","intent":"demand_forecast"}
+{"text":"How many days of stock might each product have left?","intent":"demand_forecast"}
+{"text":"Show me projected demand and reorder risk for the fortnight.","intent":"demand_forecast"}
+{"text":"Does the forecast suggest we should buy more safety gear?","intent":"demand_forecast"}
+{"text":"Which inventory lines are most likely to need a top-up?","intent":"demand_forecast"}
+{"text":"Can you predict potential shortages from recent sales?","intent":"demand_forecast"}
+{"text":"Look ahead at expected stock consumption.","intent":"demand_forecast"}
+{"text":"What products may run out by the end of the forecast period?","intent":"demand_forecast"}
+{"text":"Two week demand forecast?","intent":"demand_forecast"}
+{"text":"How might sales affect our stock position next month?","intent":"demand_forecast"}
+{"text":"Which products have the highest projected depletion risk?","intent":"demand_forecast"}
+{"text":"Can the forecast identify items to purchase this week?","intent":"demand_forecast"}
+{"text":"Show estimated demand for the upcoming 14 days by SKU.","intent":"demand_forecast"}
+{"text":"What shortages should the warehouse prepare for?","intent":"demand_forecast"}
+{"text":"Do recent sales point to a future stockout?","intent":"demand_forecast"}
+{"text":"Is any stock projected to fall faster than expected?","intent":"demand_forecast"}
+{"text":"Give me the predicted inventory risks from current sales patterns.","intent":"demand_forecast"}
+{"text":"Will demand likely exceed available stock for any item?","intent":"demand_forecast"}
+{"text":"Check the forecast before I prepare the next buying plan.","intent":"demand_forecast"}
+{"text":"What should we plan to replenish over the next fortnight?","intent":"demand_forecast"}
+{"text":"Can Central Depot receive more cartons this afternoon?","intent":"warehouse_capacity"}
+{"text":"Which hub has the most unused storage today?","intent":"warehouse_capacity"}
+{"text":"Show me the space available for inbound pallets.","intent":"warehouse_capacity"}
+{"text":"Is there spare capacity across the depots?","intent":"warehouse_capacity"}

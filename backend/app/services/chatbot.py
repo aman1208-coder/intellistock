@@ -165,11 +165,8 @@ def _classify_intent(question: str) -> tuple[str | None, float]:
             return None, confidence
         return str(pipeline.classes_[best]), confidence
     except Exception:
-        try:
-            pipeline = classifier.get("pipeline") if isinstance(classifier, dict) else classifier
-            return str(pipeline.predict([question])[0]), 1.0
-        except Exception:
-            return None, 0.0
+        # A classifier error is not evidence of confidence; allow keyword/help fallback.
+        return None, 0.0
 
 
 def _keyword_intent(normalized: str) -> str | None:
@@ -283,6 +280,29 @@ def answer_stock_query(db: Session, question: str) -> dict[str, Any]:
     if not question or not question.strip():
         return {"answer": "Ask about live stock, forecasts, DB latency, network issues, or security events.", "kind": "help", "items": [], "sources": []}
     normalized = _normalize_question(question)
+
+    # A status question naming a SKU must never be answered with a generic stockout
+    # list just because the classifier overweights words such as "sold out".
+    sku_reference = re.search(
+        r"\b(?:sku\s*[-:]?\s*[a-z0-9]+|[a-z]{2,6}-[a-z0-9]+)\b", normalized, re.I
+    )
+    status_language = re.search(
+        r"\b(stock|stocked|inventory|quantity|count|available|availability|status|units|sold out|in stock)\b",
+        normalized,
+        re.I,
+    )
+    if sku_reference and status_language:
+        status = _product_status_summary(db, normalized)
+        if status is not None:
+            status["sources"] = ["db:products"]
+            return status
+        return {
+            "answer": "I could not identify that product in the live database.",
+            "kind": "product_status",
+            "items": [],
+            "sources": ["db:products"],
+        }
+
     intent, _confidence = _classify_intent(normalized)
     if intent is None:
         intent = _keyword_intent(normalized)

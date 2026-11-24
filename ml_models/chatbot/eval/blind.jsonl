@@ -1,0 +1,40 @@
+{"text":"Which catalog entries have run completely dry?","intent":"zero_stock"}
+{"text":"Find stock lines with nothing available for fulfillment.","intent":"zero_stock"}
+{"text":"What is under the safety-stock floor but not depleted?","intent":"low_stock_threshold"}
+{"text":"Flag inventory below its configured replenishment trigger.","intent":"low_stock_threshold"}
+{"text":"How much unused room is there at the East warehouse?","intent":"warehouse_capacity"}
+{"text":"Which depot can accept the largest inbound load?","intent":"warehouse_capacity"}
+{"text":"Are any replenishment tickets waiting to be closed?","intent":"pending_reorders"}
+{"text":"List supplier orders that remain in an open state.","intent":"pending_reorders"}
+{"text":"Look up stock for SAFE-003.","intent":"product_status"}
+{"text":"What is the on-hand count for PACK-005?","intent":"product_status"}
+{"text":"Estimate which products could be short two weeks from now.","intent":"demand_forecast"}
+{"text":"Use recent sales to predict what needs buying next.","intent":"demand_forecast"}
+{"text":"What items make good add-ons to the barcode reader?","intent":"recommendation"}
+{"text":"Find catalog pairs that frequently share an order.","intent":"recommendation"}
+{"text":"Are PostgreSQL timings showing a long tail today?","intent":"slow_database"}
+{"text":"Check the database query duration percentiles.","intent":"slow_database"}
+{"text":"How long does a typical route take to respond?","intent":"api_latency"}
+{"text":"Has the service's p95 request time climbed?","intent":"api_latency"}
+{"text":"Any socket resets or resent packets from the host?","intent":"network_issues"}
+{"text":"Check whether TCP connections dropped during the run.","intent":"network_issues"}
+{"text":"Did the monitor detect a process opening a credential file?","intent":"security_events"}
+{"text":"Summarize the newest host intrusion warnings.","intent":"security_events"}
+{"text":"Give me the platform's overall condition, including its telemetry.","intent":"system_health_overview"}
+{"text":"Is any service component looking degraded as a whole?","intent":"system_health_overview"}
+{"text":"What makes a resource allocation sequence safe?","intent":"how_does_it_work"}
+{"text":"Why does the sale transaction lock a product row first?","intent":"how_does_it_work"}
+{"text":"Salutations, assistant.","intent":"greeting"}
+{"text":"Checking in from the afternoon shift.","intent":"greeting"}
+{"text":"Who painted the ceiling of the Sistine Chapel?","intent":"out_of_scope"}
+{"text":"Tell me a silly joke about a bicycle.","intent":"out_of_scope"}
+{"text":"Find a ramen place for dinner in Osaka.","intent":"out_of_scope"}
+{"text":"Can you recommend a documentary about oceans?","intent":"out_of_scope"}
+{"text":"Reorder the chapters in my reading notes by date.","intent":"out_of_scope"}
+{"text":"Greet my aunt in Italian and ask how she is.","intent":"out_of_scope"}
+{"text":"What is the seating capacity of Madison Square Garden?","intent":"out_of_scope"}
+{"text":"What's 19 squared?","intent":"out_of_scope"}
+{"text":"Write a JavaScript function that checks if a number is prime.","intent":"out_of_scope"}
+{"text":"Will it snow in Oslo this weekend?","intent":"out_of_scope"}
+{"text":"asdf zzz flerm","intent":"out_of_scope"}
+{"text":"qweoiu 77 !!!","intent":"out_of_scope"}
