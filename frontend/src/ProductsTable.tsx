@@ -217,7 +217,7 @@ export default function ProductsTable({
               <th>Warehouse</th>
               <th>Stock</th>
               <th>Threshold</th>
-              {canManage ? <th>Actions</th> : null}
+              <th>{canManage ? 'Actions' : 'Insights'}</th>
             </tr>
           </thead>
           <tbody>
@@ -228,12 +228,12 @@ export default function ProductsTable({
               return (
                 <Fragment key={product.id}>
                   <tr>
-                    {canManage ? <td>
+                    <td>
                       <div className="product-cell">
                         <strong>{product.name}</strong>
                         <small>{product.sku ?? 'SKU pending'}</small>
                       </div>
-                    </td> : null}
+                    </td>
                     <td>{warehouse ? warehouse.name : `Warehouse ${product.warehouse_id}`}</td>
                     <td>
                       <div className="stock-wrap">
@@ -249,19 +249,23 @@ export default function ProductsTable({
                         <button type="button" className="secondary-action" onClick={() => void viewInsights(product.id)}>
                           {expandedId === product.id ? 'Hide insights' : 'View Insights'}
                         </button>
-                        <button
-                          type="button"
-                          className="secondary-action"
-                          onClick={() => {
-                            setSelectedProduct(product);
-                            setShowAdjustModal(true);
-                          }}
-                        >
-                          ⚡ Adjust Stock
-                        </button>
-                        <button type="button" className="danger-action" onClick={() => void handleDeleteProduct(product)}>
-                          🗑️
-                        </button>
+                        {canManage ? (
+                          <>
+                            <button
+                              type="button"
+                              className="secondary-action"
+                              onClick={() => {
+                                setSelectedProduct(product);
+                                setShowAdjustModal(true);
+                              }}
+                            >
+                              ⚡ Adjust Stock
+                            </button>
+                            <button type="button" className="danger-action" onClick={() => void handleDeleteProduct(product)}>
+                              🗑️
+                            </button>
+                          </>
+                        ) : null}
                       </div>
                     </td>
                   </tr>
@@ -274,7 +278,7 @@ export default function ProductsTable({
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <td colSpan={canManage ? 5 : 4}>
+                        <td colSpan={5}>
                           <div className="insights-card">
                             {loadingId === product.id ? (
                               <span>Loading related items...</span>

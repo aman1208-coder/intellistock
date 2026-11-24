@@ -17,6 +17,7 @@ vite.config.d.ts
 .vscode/
 .idea/
 .devtunnels/
+backend/demo_credentials.local.txt
 *.sqlite
 *.sqlite3
 *.db-journal

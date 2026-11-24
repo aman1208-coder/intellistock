@@ -18,7 +18,7 @@ import BarChart from './charts/BarChart';
 import DonutChart from './charts/DonutChart';
 import LineChart, { type LineSeries } from './charts/LineChart';
 
-export default function Observability({ products }: { products: Product[] }) {
+export default function Observability({ products, canManage }: { products: Product[]; canManage: boolean }) {
   const reduceMotion = useReducedMotion();
   const [status, setStatus] = useState<ObservabilityStatus | null>(null);
   const [metrics, setMetrics] = useState<ObservabilityMetrics | null>(null);
@@ -178,9 +178,13 @@ export default function Observability({ products }: { products: Product[] }) {
       </div>
 
       <div className="observability-actions">
-        <button type="button" className="primary" onClick={() => void runLoad()} disabled={loading || !products.length}>
-          {loading ? 'Running load...' : 'Run load + watch metrics'}
-        </button>
+        {canManage ? (
+          <button type="button" className="primary" onClick={() => void runLoad()} disabled={loading || !products.length}>
+            {loading ? 'Running load...' : 'Run load + watch metrics'}
+          </button>
+        ) : (
+          <p role="note">Load generation is available to admins and warehouse managers only.</p>
+        )}
       </div>
 
       <div className="security-events">

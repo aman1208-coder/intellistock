@@ -787,10 +787,10 @@ export default function Dashboard({ onLogout, username, role }: { onLogout: () =
       </motion.section> : null}
 
       <Insights products={products} warehouses={warehouses} activeWorkflows={priorityQueueCount} />
-      <Observability products={products} />
+      <Observability products={products} canManage={canManage} />
       <ForecastPanel products={products} canManage={canManage} />
       <TransactionsPanel products={products} refreshKey={transactionRefreshKey} />
-      {canManage ? <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onWarehousesReload={refreshWarehouses} onToast={pushToast} /> : null}
+      {role === 'ADMIN' ? <BankerLab warehouses={warehouses} autoUnsafeKey={bankerAutoKey} onWarehousesReload={refreshWarehouses} onToast={pushToast} /> : null}
       {canManage ? <ConcurrencyLab products={products} initialMode={demoMode} flashKey={flashKey} onModeChange={setDemoMode} onSaleComplete={refreshAfterInventoryChange} onToast={pushToast} /> : null}
       <PrioritySchedulerPanel
         products={products}
