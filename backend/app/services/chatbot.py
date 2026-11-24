@@ -145,6 +145,7 @@ def _load_classifier() -> Any | None:
         return None
     try:
         import joblib
+        # joblib uses pickle; only load the fixed, repository-built artifact here.
         _classifier = joblib.load(MODEL_PATH)
     except Exception:
         _classifier = None
@@ -254,16 +255,22 @@ def _grounded_intent(db: Session, question: str, intent: str) -> dict[str, Any]:
     cpu = snapshot["cpu"] or {}
     events = observability_store.security_events.snapshot(limit=100)
     if intent == "slow_database":
+        if not db_latency.get("available", db_latency.get("samples", 0) > 0):
+            return {"answer": "Database latency is unavailable because no live DB timing samples have been recorded yet.", "kind": intent, "items": db_latency, "sources": ["fallback:db_latency"]}
         answer = f"Database latency is p50 {db_latency['p50_ms']:.1f} ms, p95 {db_latency['p95_ms']:.1f} ms, and p99 {db_latency['p99_ms']:.1f} ms; {db_latency['slow_query_count']} queries exceeded {db_latency['threshold_ms']} ms."
         return {"answer": answer, "kind": intent, "items": db_latency, "sources": ["ebpf:db_latency", "fallback:db_latency"]}
     if intent == "api_latency":
         return {"answer": f"App-level request latency is p50 {app_latency['p50_ms']:.1f} ms and p95 {app_latency['p95_ms']:.1f} ms across {app_latency['samples']} samples.", "kind": intent, "items": app_latency, "sources": ["app-middleware"]}
     if intent == "network_issues":
+        if not network:
+            return {"answer": "Network telemetry is unavailable in the active collector; no live TCP measurements have been received.", "kind": intent, "items": {}, "sources": []}
         return {"answer": f"TCP telemetry reports {network.get('retransmits', 0)} retransmits, {network.get('resets', 0)} resets, and {network.get('connection_failures', 0)} connection failures.", "kind": intent, "items": network, "sources": ["ebpf:network", "fallback:network"]}
     if intent == "security_events":
         counts = {severity: sum(1 for event in events if event.get("severity") == severity) for severity in ("critical", "high", "medium", "low")}
         return {"answer": f"Recent security events: {counts['critical']} critical, {counts['high']} high, {counts['medium']} medium, and {counts['low']} low.", "kind": intent, "items": counts, "sources": ["ebpf:security_events"]}
     if intent == "system_health_overview":
+        if not db_latency.get("available", db_latency.get("samples", 0) > 0) and not app_latency.get("samples") and not cpu and not network:
+            return {"answer": "System telemetry is not available yet. The fallback collector is active, but it has not recorded enough live request, database, CPU, or network samples.", "kind": intent, "items": snapshot, "sources": []}
         cpu_value = cpu.get("process_percent", "unavailable")
         likely = "database" if db_latency["p95_ms"] >= app_latency["p95_ms"] else "application/network"
         answer = f"The app p95 is {app_latency['p95_ms']:.1f} ms; DB p95 is {db_latency['p95_ms']:.1f} ms; CPU is {cpu_value}; TCP has {network.get('retransmits', 0)} retransmits. Based on these live values, the likely bottleneck is {likely}."

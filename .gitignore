@@ -14,3 +14,9 @@ dist/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+.vscode/
+.idea/
+.devtunnels/
+*.sqlite
+*.sqlite3
+*.db-journal

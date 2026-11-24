@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import platform
+import os
 import statistics
 import threading
 import time
 from collections import deque
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from app.core.config import settings
@@ -44,21 +45,24 @@ class FallbackCollector:
     def probe_load_attempt(self) -> list[str]:
         return ["app-middleware", "psutil", "pg-stat-activity"]
 
+    def sample(self) -> dict[str, Any]:
+        """Return best-effort host process metrics without making psutil mandatory."""
+        try:
+            import psutil
+
+            process = psutil.Process(os.getpid())
+            return {"cpu": {"process_percent": process.cpu_percent(), "rss_bytes": process.memory_info().rss}}
+        except (ImportError, OSError, RuntimeError):
+            return {"cpu": {}}
+
 
 class EbpfCollector:
     name = "ebpf"
 
     def __init__(self) -> None:
+        # Probe loading happens in ebpf/collector.py, never in the API process.
+        # Ingest switches the store to ebpf only after the sidecar reports success.
         self.available = False
-        if not settings.ebpf_collector_enabled or platform.system().lower() != "linux":
-            return
-        try:
-            import bcc  # type: ignore[import-not-found]
-
-            if hasattr(bcc, "BPF"):
-                self.available = True
-        except (ImportError, OSError):
-            self.available = False
 
     def probe_load_attempt(self) -> list[str]:
         return ["sched-switch", "raw-syscalls", "tcp-network", "openat-security"]
@@ -91,12 +95,16 @@ class ObservabilityStore:
         self.collector = "ebpf" if self.ebpf.available else "fallback"
         if self.collector == "fallback":
             self.probes_loaded = self.fallback.probe_load_attempt()
+        import logging
+        logging.getLogger(__name__).info("Observability collector active: %s", self.collector)
 
     def record_request(self, route: str, latency_ms: float) -> None:
         with self._lock:
             self.app_latencies_ms.append(max(0.0, latency_ms))
             route_key = route or "unknown"
             route_metrics = self.metrics.setdefault("routes", {})
+            if route_key not in route_metrics and len(route_metrics) >= 99:
+                route_key = "__other__"
             bucket = route_metrics.setdefault(route_key, deque(maxlen=100))
             bucket.append(max(0.0, latency_ms))
 
@@ -112,14 +120,32 @@ class ObservabilityStore:
             self.collector = "ebpf" if requested_collector == "ebpf" else "fallback"
             for key in ("cpu", "syscalls", "db_latency", "network"):
                 if key in payload:
+                    if key == "db_latency" and not payload[key].get("samples"):
+                        continue
                     self.metrics[key] = payload[key]
             self.probes_loaded = list(payload.get("probes_loaded") or self.probes_loaded)
             for event in payload.get("security_events", []):
                 self.security_events.append(event)
             self.last_update = utc_now()
 
+    def _refresh_collector_state(self) -> None:
+        if self.collector != "ebpf" or not self.last_update:
+            return
+        try:
+            updated = datetime.fromisoformat(self.last_update)
+        except ValueError:
+            updated = datetime.min.replace(tzinfo=timezone.utc)
+        if datetime.now(timezone.utc) - updated > timedelta(seconds=10):
+            self.collector = "fallback"
+            for key in ("cpu", "syscalls", "db_latency", "network"):
+                self.metrics.pop(key, None)
+            self.probes_loaded = self.fallback.probe_load_attempt()
+
     def snapshot(self) -> dict[str, Any]:
         with self._lock:
+            self._refresh_collector_state()
+            if self.collector == "fallback" and "cpu" not in self.metrics:
+                self.metrics.update(self.fallback.sample())
             ingested_db = dict(self.metrics.get("db_latency", {}))
             latencies = list(self.db_latencies_ms)
             db_latency = {
@@ -129,6 +155,7 @@ class ObservabilityStore:
                 "slow_query_count": ingested_db.get("slow_query_count", int(self.metrics.get("slow_query_count", 0))),
                 "threshold_ms": settings.slow_query_ms,
                 "samples": ingested_db.get("samples", len(latencies)),
+                "available": bool(ingested_db.get("samples", len(latencies))),
             }
             app_latencies = list(self.app_latencies_ms)
             return {
@@ -156,6 +183,7 @@ class ObservabilityStore:
 
     def status(self) -> dict[str, Any]:
         with self._lock:
+            self._refresh_collector_state()
             return {
                 "collector": self.collector,
                 "kernel_version": platform.release(),

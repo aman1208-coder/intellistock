@@ -11,3 +11,9 @@
 *.db
 **/*.db
 **/tsconfig.tsbuildinfo
+.vscode/
+.idea/
+.devtunnels/
+*.sqlite
+*.sqlite3
+*.db-journal

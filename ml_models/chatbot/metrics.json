@@ -3,7 +3,7 @@
   "macro_f1": 1.0,
   "confusion_matrix": [
     [
-      10,
+      6,
       0,
       0,
       0,
@@ -21,7 +21,7 @@
     ],
     [
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -39,7 +39,7 @@
     [
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -57,7 +57,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -75,7 +75,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -93,7 +93,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -111,7 +111,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -129,7 +129,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -147,7 +147,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -165,7 +165,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -183,7 +183,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0,
@@ -201,7 +201,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0,
       0
@@ -219,7 +219,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0,
       0
     ],
@@ -237,7 +237,7 @@
       0,
       0,
       0,
-      10,
+      6,
       0
     ],
     [
@@ -255,7 +255,7 @@
       0,
       0,
       0,
-      10
+      6
     ]
   ],
   "labels": [
@@ -280,106 +280,110 @@
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "demand_forecast": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "greeting": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "how_does_it_work": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "low_stock_threshold": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "network_issues": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "out_of_scope": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "pending_reorders": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "product_status": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "recommendation": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "security_events": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "slow_database": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "system_health_overview": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "warehouse_capacity": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "zero_stock": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 10.0
+      "support": 6.0
     },
     "accuracy": 1.0,
     "macro avg": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 150.0
+      "support": 90.0
     },
     "weighted avg": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
-      "support": 150.0
+      "support": 90.0
     }
   },
   "seed": 2026,
-  "test_size": 0.25
+  "validation_accuracy": 1.0,
+  "validation_macro_f1": 1.0,
+  "train_size": 420,
+  "validation_size": 90,
+  "test_size": 90
 }

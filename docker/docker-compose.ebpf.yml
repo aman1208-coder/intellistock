@@ -1,0 +1,19 @@
+services:
+  ebpf-collector:
+    image: ubuntu:22.04
+    profiles: ["ebpf"]
+    privileged: true
+    pid: host
+    environment:
+      BACKEND_PID: ${BACKEND_PID:?Set host backend PID}
+      OBSERVABILITY_INGEST_URL: ${OBSERVABILITY_INGEST_URL:-http://backend:8000/api/observability/ingest}
+      OBSERVABILITY_INGEST_SECRET: ${OBSERVABILITY_INGEST_SECRET:?Set ingest secret}
+      SENSITIVE_PATHS: ${SENSITIVE_PATHS:-/.env,/etc/passwd,/etc/shadow,/root/.ssh,/.ssh,backend/intellistock.db}
+    volumes:
+      - ../ebpf:/ebpf:ro
+      - /sys/kernel/debug:/sys/kernel/debug:rw
+      - /sys/fs/bpf:/sys/fs/bpf:rw
+      - /lib/modules:/lib/modules:ro
+      - /usr/src:/usr/src:ro
+    command: ["sh", "-c", "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y bpfcc-tools python3-bpfcc python3 && /usr/bin/python3 /ebpf/collector.py"]
+    networks: [intellistock]

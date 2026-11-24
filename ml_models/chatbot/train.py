@@ -72,8 +72,11 @@ def main() -> None:
     rows = ensure_dataset()
     texts = [row["text"] for row in rows]
     labels = [row["intent"] for row in rows]
-    train_texts, test_texts, train_labels, test_labels = train_test_split(
-        texts, labels, test_size=0.25, random_state=2026, stratify=labels
+    train_texts, held_texts, train_labels, held_labels = train_test_split(
+        texts, labels, test_size=0.30, random_state=2026, stratify=labels
+    )
+    validation_texts, test_texts, validation_labels, test_labels = train_test_split(
+        held_texts, held_labels, test_size=0.50, random_state=2027, stratify=held_labels
     )
     features = FeatureUnion([
         ("word", TfidfVectorizer(analyzer="word", ngram_range=(1, 2), sublinear_tf=True)),
@@ -84,6 +87,7 @@ def main() -> None:
         ("classifier", LogisticRegression(max_iter=1000, random_state=2026, C=4)),
     ])
     pipeline.fit(train_texts, train_labels)
+    validation_predictions = pipeline.predict(validation_texts)
     predictions = pipeline.predict(test_texts)
     accuracy = accuracy_score(test_labels, predictions)
     macro_f1 = f1_score(test_labels, predictions, average="macro")
@@ -95,7 +99,11 @@ def main() -> None:
         "labels": pipeline.classes_.tolist(),
         "classification_report": report,
         "seed": 2026,
-        "test_size": 0.25,
+        "validation_accuracy": accuracy_score(validation_labels, validation_predictions),
+        "validation_macro_f1": f1_score(validation_labels, validation_predictions, average="macro"),
+        "train_size": len(train_texts),
+        "validation_size": len(validation_texts),
+        "test_size": len(test_texts),
     }
     joblib.dump({"pipeline": pipeline, "metrics": metrics}, MODEL_PATH)
     METRICS_PATH.write_text(json.dumps(metrics, indent=2), encoding="utf-8")

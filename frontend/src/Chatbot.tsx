@@ -8,12 +8,16 @@ type ChatMessage = {
   id: string;
   role: ChatRole;
   text: string;
+  kind?: string;
+  sources?: string[];
 };
 
 const previewSuggestions = [
   'Which items are low in stock?',
   'Show me zero-stock items',
   'Check warehouse capacity',
+  'Why is the app slow right now?',
+  'Any suspicious activity?',
 ];
 
 export default function Chatbot({ products }: { products?: Product[] }) {
@@ -41,7 +45,7 @@ export default function Chatbot({ products }: { products?: Product[] }) {
     try {
       const response = await askChatbot(question);
       const answer = response.answer || 'I could not find a relevant answer in the live inventory state.';
-      setMessages((current) => [...current, { id: crypto.randomUUID(), role: 'assistant', text: answer }]);
+      setMessages((current) => [...current, { id: crypto.randomUUID(), role: 'assistant', text: answer, kind: response.kind, sources: response.sources ?? [] }]);
     } catch (error) {
       setMessages((current) => [
         ...current,
@@ -99,9 +103,10 @@ export default function Chatbot({ products }: { products?: Product[] }) {
               {messages.map((message) => (
                 <div key={message.id} className={`chat-bubble ${message.role}`}>
                   {message.text}
+                  {message.role === 'assistant' && message.kind && <small className="chat-answer-meta">{message.kind}{message.sources?.length ? ` · ${message.sources.join(', ')}` : ''}</small>}
                 </div>
               ))}
-              {isLoading && <div className="chat-bubble assistant">Checking live inventory state...</div>}
+              {isLoading && <div className="chat-bubble assistant" aria-live="polite">Checking live inventory and system state…</div>}
             </div>
 
             <div className="chat-input-row">

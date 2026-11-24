@@ -1,33 +1,49 @@
 from __future__ import annotations
 
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 
 
 class DbLatency(BaseModel):
-    p50_ms: float = 0
-    p95_ms: float = 0
-    p99_ms: float = 0
-    slow_query_count: int = 0
-    threshold_ms: int = 200
-    samples: int = 0
+    p50_ms: float = Field(default=0, ge=0)
+    p95_ms: float = Field(default=0, ge=0)
+    p99_ms: float = Field(default=0, ge=0)
+    slow_query_count: int = Field(default=0, ge=0)
+    threshold_ms: int = Field(default=200, ge=1, le=60000)
+    samples: int = Field(default=0, ge=0)
 
 
 class NetworkStats(BaseModel):
-    retransmits: int = 0
-    resets: int = 0
-    connection_failures: int = 0
-    connection_rate: float = 0
-    tcp_rtt_p95_ms: float = 0
+    retransmits: int = Field(default=0, ge=0)
+    resets: int = Field(default=0, ge=0)
+    connection_failures: int = Field(default=0, ge=0)
+    connection_rate: float = Field(default=0, ge=0)
+    tcp_rtt_p95_ms: float = Field(default=0, ge=0)
+
+
+class CpuMetrics(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    process_percent: float | None = Field(default=None, ge=0)
+    rss_bytes: int | None = Field(default=None, ge=0)
+    runq_p95_us: float | None = Field(default=None, ge=0)
+
+
+class SyscallMetrics(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    counts: dict[Annotated[str, StringConstraints(max_length=16)], int] = Field(default_factory=dict, max_length=512)
+    latency_histogram_log2_us: dict[Annotated[str, StringConstraints(max_length=8)], int] = Field(default_factory=dict, max_length=64)
+    p95_us: float | None = Field(default=None, ge=0)
 
 
 class SecurityEvent(BaseModel):
-    timestamp: str
-    pid: int
-    comm: str
-    type: str
-    details: str
+    timestamp: str = Field(max_length=64)
+    pid: int = Field(ge=0)
+    comm: str = Field(max_length=32)
+    type: str = Field(max_length=64)
+    details: str = Field(max_length=256)
     severity: Literal["low", "medium", "high", "critical"]
 
 
@@ -52,9 +68,9 @@ class ObservabilityMetrics(BaseModel):
 
 class ObservabilityIngest(BaseModel):
     collector: Literal["ebpf", "fallback"] = "ebpf"
-    cpu: dict[str, Any] = Field(default_factory=dict)
-    syscalls: dict[str, Any] = Field(default_factory=dict)
-    db_latency: dict[str, Any] = Field(default_factory=dict)
-    network: dict[str, Any] = Field(default_factory=dict)
-    security_events: list[SecurityEvent] = Field(default_factory=list)
-    probes_loaded: list[str] = Field(default_factory=list)
+    cpu: CpuMetrics = Field(default_factory=CpuMetrics)
+    syscalls: SyscallMetrics = Field(default_factory=SyscallMetrics)
+    db_latency: DbLatency = Field(default_factory=DbLatency)
+    network: NetworkStats = Field(default_factory=NetworkStats)
+    security_events: list[SecurityEvent] = Field(default_factory=list, max_length=100)
+    probes_loaded: list[Annotated[str, StringConstraints(max_length=100)]] = Field(default_factory=list, max_length=64)

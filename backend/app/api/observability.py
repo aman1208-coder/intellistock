@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import secrets
+import re
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, status
 from pydantic import ValidationError
 
@@ -16,6 +18,11 @@ from app.services.observability import observability_store
 
 
 router = APIRouter(prefix="/api/observability", tags=["Observability"])
+_PLACEHOLDER_SECRET = re.compile(r"^(replace[-_]|change[-_]?me|changeme|example|placeholder)", re.IGNORECASE)
+
+
+def _ingest_secret_is_configured(secret: str) -> bool:
+    return len(secret) >= 32 and _PLACEHOLDER_SECRET.match(secret) is None
 
 
 @router.get("/status", response_model=ObservabilityStatus)
@@ -57,9 +64,10 @@ def ingest(
     payload: ObservabilityIngest,
     x_ingest_secret: str | None = Header(default=None, alias="X-Ingest-Secret"),
 ) -> dict:
-    if not settings.observability_ingest_secret:
+    configured_secret = settings.observability_ingest_secret.strip()
+    if not _ingest_secret_is_configured(configured_secret):
         raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Ingest secret is not configured")
-    if x_ingest_secret != settings.observability_ingest_secret:
+    if not secrets.compare_digest(x_ingest_secret or "", configured_secret):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid ingest secret")
     observability_store.ingest(payload.model_dump())
     return {"accepted": True}

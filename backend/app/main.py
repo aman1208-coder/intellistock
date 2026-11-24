@@ -51,7 +51,11 @@ async def observability_middleware(request: Request, call_next):
     started = time.perf_counter()
     response = await call_next(request)
     latency_ms = (time.perf_counter() - started) * 1000
-    observability_store.record_request(request.url.path, latency_ms)
+    route = request.scope.get("route")
+    observability_store.record_request(getattr(route, "path", "unmatched"), latency_ms)
+    response.headers.setdefault("X-Content-Type-Options", "nosniff")
+    response.headers.setdefault("X-Frame-Options", "DENY")
+    response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
     return response
 
 

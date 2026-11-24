@@ -13,6 +13,7 @@ The project now includes a complete operational dashboard and backend service la
 - Priority Queue Scheduler: non-preemptive priority queue with emergency stockout jumps to the front
 - AI Demand Forecaster: 14-day demand prediction using regression-based forecasting logic
 - Live Database Chatbot: natural-language inventory assistance for stock, capacity, and reorder questions
+- Observability: authenticated app, database timing and optional Linux eBPF telemetry with a cross-platform fallback
 
 ## System Architecture
 
@@ -68,6 +69,8 @@ npm install
 npm run dev -- --host 0.0.0.0
 ```
 
+If Docker/PostgreSQL is unavailable and you only need a local feature walkthrough, set `DATABASE_URL=sqlite:///./intellistock.db` in `backend/.env`, then run the backend install, seed, and Uvicorn commands above without starting Compose. The app can start against SQLite, but SQLite ignores the row-level `SELECT ... FOR UPDATE` lock, so do not use this fallback to demonstrate the safe-vs-unsafe PostgreSQL concurrency result. This does not avoid downloading Python/npm dependencies on a fresh machine.
+
 For a VS Code dev tunnel, expose the frontend port. Set `VITE_API_BASE_URL=` (empty) and restart Vite to send browser requests through its same-origin `/api` proxy; this avoids requiring the browser to reach the workspace's `localhost:8000`. If you expose the API separately and set `VITE_API_BASE_URL` to that tunnel URL instead, `CORS_ORIGINS` must include the frontend origin (the `https://*.devtunnels.ms` pattern is allowed by default).
 
 ### Concurrency Demo Notes
@@ -85,6 +88,12 @@ npm run build
 ```
 
 The two database row-lock integration tests skip unless `TEST_DATABASE_URL` points to a dedicated PostgreSQL test database.
+
+### Observability and chatbot
+
+The backend uses application timing and best-effort process sampling by default. See [docs/EBPF_INTEGRATION.md](docs/EBPF_INTEGRATION.md) for the optional Linux/WSL2 collector, its limitations, and demo steps. Keep `OBSERVABILITY_INGEST_SECRET` private and configure the same value for the API and collector. The optional BCC sidecar is not required for Windows/macOS or normal API startup.
+
+The chatbot classifier is an offline scikit-learn model. Rebuild it with `python ml_models/chatbot/train.py` from the repository root; the model is shipped with the backend image. `model.joblib` is a pickle-based artifact: only load a copy produced from this trusted repository and training script, never an externally supplied model file.
 
 ## Project Workflow
 
