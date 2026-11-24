@@ -1,5 +1,6 @@
 """Inventory sale operations with and without row-level locking."""
 
+from sqlalchemy import update
 from sqlalchemy.orm import Session
 
 from app.models import Product, Transaction, TransactionType
@@ -33,7 +34,46 @@ def _record_sale(db: Session, product: Product, quantity: int) -> Transaction:
 
 
 def transact_safe(db: Session, product_id: int, quantity: int) -> Transaction:
-    """Deduct stock while holding the product row lock through commit."""
+    """Deduct stock safely using the active database's concurrency primitive."""
+    if quantity <= 0:
+        raise ValueError("Sale quantity must be greater than zero.")
+
+    if db.get_bind().dialect.name == "sqlite":
+        try:
+            # SQLite has no row-level SELECT FOR UPDATE. The predicate and
+            # decrement execute atomically while SQLite serializes the writer.
+            result = db.execute(
+                update(Product)
+                .where(
+                    Product.id == product_id,
+                    Product.stock_quantity >= quantity,
+                )
+                .values(stock_quantity=Product.stock_quantity - quantity)
+                .execution_options(synchronize_session=False)
+            )
+            if result.rowcount == 0:
+                if db.get(Product, product_id) is None:
+                    raise ProductNotFoundException("Product not found.")
+                raise InsufficientStockException("Sale exceeds available stock.")
+
+            product = db.get(Product, product_id)
+            if product is None:
+                raise ProductNotFoundException("Product not found.")
+            transaction = Transaction(
+                product_id=product.id,
+                warehouse_id=product.warehouse_id,
+                type=TransactionType.SALE,
+                quantity=quantity,
+            )
+            db.add(transaction)
+            db.commit()
+            db.refresh(transaction)
+            return transaction
+        except Exception:
+            db.rollback()
+            raise
+
+    # Preserve PostgreSQL's row-level lock implementation.
     try:
         product = (
             db.query(Product)

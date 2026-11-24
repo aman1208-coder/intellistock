@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import inspect
 import os
 import sys
+import tempfile
 import unittest
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -11,7 +13,6 @@ from threading import Barrier
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
-from sqlalchemy.pool import StaticPool
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
 if str(BACKEND_DIR) not in sys.path:
@@ -37,10 +38,11 @@ class InventoryConcurrencySqliteTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
+        cls.temp_dir = tempfile.TemporaryDirectory(prefix="intellistock-concurrency-")
+        database_path = Path(cls.temp_dir.name) / "concurrency.sqlite3"
         cls.engine = create_engine(
-            "sqlite://",
-            connect_args={"check_same_thread": False},
-            poolclass=StaticPool,
+            f"sqlite:///{database_path.as_posix()}",
+            connect_args={"check_same_thread": False, "timeout": 5},
         )
         Base.metadata.create_all(bind=cls.engine)
         cls.SessionLocal = sessionmaker(bind=cls.engine, expire_on_commit=False)
@@ -48,6 +50,7 @@ class InventoryConcurrencySqliteTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls) -> None:
         cls.engine.dispose()
+        cls.temp_dir.cleanup()
 
     def setUp(self) -> None:
         with self.SessionLocal() as db:
@@ -100,6 +103,61 @@ class InventoryConcurrencySqliteTests(unittest.TestCase):
             ).count()
             self.assertEqual(product.stock_quantity, 1)
             self.assertEqual(transaction_count, 0)
+
+    def test_eight_parallel_safe_sqlite_sales_decrement_and_record_once(self) -> None:
+        with self.SessionLocal() as db:
+            product = db.get(Product, self.product_id)
+            product.stock_quantity = 8
+            db.commit()
+
+        def attempt_sale(_index: int) -> bool:
+            with self.SessionLocal() as db:
+                try:
+                    transact_safe(db, self.product_id, 1)
+                    return True
+                except InsufficientStockException:
+                    return False
+
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            results = list(executor.map(attempt_sale, range(8)))
+
+        self.assertEqual(sum(results), 8)
+        with self.SessionLocal() as db:
+            product = db.get(Product, self.product_id)
+            transaction_count = db.query(Transaction).filter_by(
+                product_id=self.product_id
+            ).count()
+            self.assertEqual(product.stock_quantity, 0)
+            self.assertEqual(transaction_count, 8)
+
+    def test_failed_safe_sale_rolls_back_stock_and_transaction(self) -> None:
+        def fail_transaction_flush(session, _flush_context, _instances) -> None:
+            if any(isinstance(item, Transaction) for item in session.new):
+                raise RuntimeError("simulated transaction-record failure")
+
+        event.listen(Session, "before_flush", fail_transaction_flush)
+        try:
+            with self.SessionLocal() as db:
+                with self.assertRaisesRegex(
+                    RuntimeError, "simulated transaction-record failure"
+                ):
+                    transact_safe(db, self.product_id, 1)
+        finally:
+            event.remove(Session, "before_flush", fail_transaction_flush)
+
+        with self.SessionLocal() as db:
+            product = db.get(Product, self.product_id)
+            transaction_count = db.query(Transaction).filter_by(
+                product_id=self.product_id
+            ).count()
+            self.assertEqual(product.stock_quantity, 1)
+            self.assertEqual(transaction_count, 0)
+
+    def test_unsafe_path_keeps_read_then_write_without_row_lock(self) -> None:
+        source = inspect.getsource(transact_unsafe)
+        self.assertIn("db.query(Product).filter(Product.id == product_id).first()", source)
+        self.assertIn("_record_sale(db, product, quantity)", source)
+        self.assertNotIn("with_for_update", source)
 
 
 @unittest.skipUnless(

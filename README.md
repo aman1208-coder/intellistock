@@ -108,7 +108,7 @@ Requirements: Python, Node.js/npm, and PowerShell. Run the commands below from t
 
 6. Open `http://localhost:5173` and sign in with username `admin` and the `INITIAL_ADMIN_PASSWORD` stored in `backend/.env`.
 
-SQLite does not support row-level locking. The safe-vs-unsafe concurrency comparison is meaningful only with PostgreSQL; use Option B for that demo. The SQLite path remains suitable for the inventory, forecast, chatbot, and fallback observability walkthrough.
+The SQLite safe sale path uses an atomic conditional stock update, so concurrent safe sales preserve inventory correctly. SQLite does not support row-level `SELECT ... FOR UPDATE`; the row-locking comparison and the deliberately racy unsafe lost-update demonstration are meaningful only with PostgreSQL. Use Option B for that concurrency demo.
 
 ### Option B: PostgreSQL with Docker Compose
 
@@ -156,7 +156,7 @@ For a VS Code dev tunnel, expose the frontend port. Set `VITE_API_BASE_URL=` (em
 
 ### Concurrency Demo Notes
 
-Safe and unsafe modes send eight parallel requests to the real sale endpoints. SQLite ignores row-level `SELECT ... FOR UPDATE`, so the locking comparison (including the unsafe lost-update race) is meaningful only on PostgreSQL. The UI displays each request's measured latency and HTTP status.
+Safe and unsafe modes send eight parallel requests to the real sale endpoints. On SQLite, safe mode uses an atomic conditional update and prevents overselling; SQLite ignores row-level `SELECT ... FOR UPDATE`, so the row-locking comparison and unsafe lost-update race are meaningful only on PostgreSQL. The UI displays each request's measured latency and HTTP status.
 
 ### Running tests
 
