@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import secrets
-import re
 from fastapi import APIRouter, Depends, Header, HTTPException, Query, status
 from pydantic import ValidationError
 
-from app.core.config import settings
+from app.core.config import is_placeholder_secret, settings
 from app.core.security import get_current_user
 from app.models import User
 from app.schemas.observability import (
@@ -18,11 +17,8 @@ from app.services.observability import observability_store
 
 
 router = APIRouter(prefix="/api/observability", tags=["Observability"])
-_PLACEHOLDER_SECRET = re.compile(r"^(replace[-_]|change[-_]?me|changeme|example|placeholder)", re.IGNORECASE)
-
-
 def _ingest_secret_is_configured(secret: str) -> bool:
-    return len(secret) >= 32 and _PLACEHOLDER_SECRET.match(secret) is None
+    return len(secret) >= 32 and not is_placeholder_secret(secret)
 
 
 @router.get("/status", response_model=ObservabilityStatus)

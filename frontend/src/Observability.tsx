@@ -85,6 +85,10 @@ export default function Observability({ products }: { products: Product[] }) {
         </span>
       </div>
 
+      <div className="fallback-notice">
+        Active database: {status?.active_database ?? 'checking…'}
+      </div>
+
       {status?.collector === 'fallback' && (
         <div className="fallback-notice">
           eBPF is not available here, so IntelliStock is using psutil and app-level timing.

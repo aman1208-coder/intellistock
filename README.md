@@ -47,6 +47,10 @@ Edit `backend/.env`: set a unique `SECRET_KEY`, `INITIAL_ADMIN_PASSWORD` (before
 
 `ALLOW_PUBLIC_REGISTRATION` defaults to `false`. New accounts must be created through `POST /api/auth/register` by an authenticated ADMIN. Set `ALLOW_PUBLIC_REGISTRATION=true` only when intentional; unauthenticated sign-ups can create STAFF accounts only. The request cannot assign a role. The sign-in screen directs users without accounts to an administrator.
 
+`APP_ENV` defaults to `development`. Development warns when example secrets are still configured; observability ingest returns `503` until `OBSERVABILITY_INGEST_SECRET` is replaced with a random value of at least 32 characters. In `APP_ENV=production`, the service refuses to start unless `SECRET_KEY` (explicit, at least 32 characters), `INITIAL_ADMIN_PASSWORD` (at least 12 characters), and `OBSERVABILITY_INGEST_SECRET` (at least 32 characters) are non-placeholder values. Generate these values locally with a password manager or secure secret generator and put them in your local `.env`; do not paste them into chat or commit them.
+
+`ALLOW_SQLITE_FALLBACK` defaults to true in development and false in production. If enabled and PostgreSQL is unavailable during startup, the backend logs a warning and reports `active_database: sqlite` in `/health` and `/api/observability/status`; writes then go to the local SQLite file. In production with fallback disabled, startup fails with a clear error instead. For a deterministic SQLite-only demo, set `DATABASE_URL=sqlite:///./intellistock.db` and `ALLOW_SQLITE_FALLBACK=true` in the backend environment.
+
 2. Start PostgreSQL from the project root:
 
 ```powershell

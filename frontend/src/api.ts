@@ -126,6 +126,7 @@ export interface ChatbotResponse {
 
 export interface ObservabilityStatus {
   collector: 'ebpf' | 'fallback';
+  active_database: 'postgresql' | 'sqlite';
   kernel_version: string;
   probes_loaded: string[];
   last_update: string | null;

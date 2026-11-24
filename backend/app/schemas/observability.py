@@ -49,6 +49,7 @@ class SecurityEvent(BaseModel):
 
 class ObservabilityStatus(BaseModel):
     collector: Literal["ebpf", "fallback"]
+    active_database: Literal["postgresql", "sqlite"]
     kernel_version: str
     probes_loaded: list[str]
     last_update: str | None

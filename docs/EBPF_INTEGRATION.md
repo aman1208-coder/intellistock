@@ -12,6 +12,8 @@ flowchart LR
 
 ## Setup
 
+For the API runtime, see the README's [environment and SQLite fallback notes](../README.md#local-setup). In development, placeholder ingest secrets disable the ingest endpoint with `503`; use the same non-placeholder secret in the API and collector. Production startup requires explicit non-placeholder JWT, initial-admin, and ingest secrets. The active database is reported by `/health` and the authenticated observability status endpoint.
+
 Follow [the eBPF collector README](../ebpf/README.md). On WSL2, verify `uname -r` and `sudo bpftool feature probe kernel` before installing packages. Install with `sudo apt install bpfcc-tools python3-bpfcc linux-headers-$(uname -r) clang`; configure matching `OBSERVABILITY_INGEST_SECRET` values and launch the sidecar with `sudo -E python3 ebpf/collector.py` after setting `BACKEND_PID`.
 
 `docker-compose.ebpf.yml` is an optional development override. It grants host PID visibility and privileged kernel mounts; this is for local demos only. Production should use a dedicated node agent with the smallest possible capabilities and a private authenticated socket.

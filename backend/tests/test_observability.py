@@ -56,6 +56,17 @@ class ObservabilityTests(unittest.TestCase):
         self.assertEqual(raised.exception.status_code, 503)
         self.assertFalse(_ingest_secret_is_configured("short"))
 
+    def test_ingest_accepts_a_configured_random_secret(self) -> None:
+        payload = ObservabilityIngest(collector="ebpf")
+        secret = "r" * 48
+        with patch("app.api.observability.settings.observability_ingest_secret", secret), patch(
+            "app.api.observability.observability_store.ingest"
+        ) as store_ingest:
+            result = ingest(payload, secret)
+
+        self.assertEqual(result, {"accepted": True})
+        store_ingest.assert_called_once()
+
     def test_ingest_schema_rejects_invalid_security_severity(self) -> None:
         with self.assertRaises(ValueError):
             ObservabilityIngest.model_validate({"security_events": [{

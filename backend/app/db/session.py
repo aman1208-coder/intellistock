@@ -1,6 +1,7 @@
 """Database engine and request-scoped session setup."""
 
 from collections.abc import Generator
+import logging
 
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
@@ -11,6 +12,7 @@ from app.core.config import settings
 
 
 SQLITE_URL = "sqlite:///./intellistock.db"
+logger = logging.getLogger(__name__)
 
 
 def _create_engine(database_url: str) -> Engine:
@@ -42,10 +44,20 @@ def _get_engine() -> Engine:
             return candidate
     except SQLAlchemyError:
         candidate.dispose()
+        if not settings.allow_sqlite_fallback:
+            raise RuntimeError(
+                "PostgreSQL is unavailable and SQLite fallback is disabled. "
+                "Check DATABASE_URL/PostgreSQL or explicitly enable ALLOW_SQLITE_FALLBACK."
+            ) from None
+        logger.warning(
+            "PostgreSQL connection failed; using local SQLite fallback. "
+            "Writes will be stored in intellistock.db, not PostgreSQL."
+        )
         return _create_engine(SQLITE_URL)
 
 
 engine = _get_engine()
+active_database = "postgresql" if engine.dialect.name == "postgresql" else "sqlite"
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

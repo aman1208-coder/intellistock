@@ -12,7 +12,7 @@ from app.api.products import router as products_router
 from app.api.transactions import router as transactions_router
 from app.api.warehouses import router as warehouses_router
 from app.db.init_db import init_db
-from app.db.session import SessionLocal
+from app.db.session import SessionLocal, active_database
 from app.core.config import settings
 from app.api.observability import router as observability_router
 from app.services.observability import observability_store
@@ -61,4 +61,4 @@ async def observability_middleware(request: Request, call_next):
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
-    return {"status": "ok", "service": "IntelliStock API"}
+    return {"status": "ok", "service": "IntelliStock API", "active_database": active_database}

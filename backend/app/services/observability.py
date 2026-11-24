@@ -10,6 +10,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from app.core.config import settings
+from app.db.session import active_database
 
 
 def utc_now() -> str:
@@ -186,6 +187,7 @@ class ObservabilityStore:
             self._refresh_collector_state()
             return {
                 "collector": self.collector,
+                "active_database": active_database,
                 "kernel_version": platform.release(),
                 "probes_loaded": list(self.probes_loaded),
                 "last_update": self.last_update,
