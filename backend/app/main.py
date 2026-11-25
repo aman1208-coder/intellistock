@@ -1,11 +1,13 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 import time
 from fastapi import Request
 
 from app.api.auth import router as auth_router
+from app.api.users import router as users_router
 from app.api.ai import assistant_router, router as ai_router
 from app.api.concurrency import router as concurrency_router
 from app.api.products import router as products_router
@@ -14,6 +16,7 @@ from app.api.warehouses import router as warehouses_router
 from app.db.init_db import init_db
 from app.db.session import SessionLocal, active_database
 from app.core.config import settings
+from app.core.validation import request_validation_exception_handler
 from app.api.observability import router as observability_router
 from app.services.observability import observability_store
 
@@ -26,6 +29,10 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="IntelliStock API", lifespan=lifespan)
+app.add_exception_handler(
+    RequestValidationError,
+    request_validation_exception_handler,
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -37,6 +44,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(users_router)
 app.include_router(ai_router)
 app.include_router(assistant_router)
 app.include_router(concurrency_router)

@@ -1,42 +1,26 @@
+import logging
+from datetime import datetime, timezone
+
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy import or_
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.core.config import settings
-from app.core.security import bearer_scheme, create_access_token, get_current_user, get_password_hash, verify_password
+from app.core.security import create_access_token, get_current_user, get_password_hash, require_role, verify_password
 from app.db.session import get_db
 from app.models import User, UserRole
 from app.schemas.user import LoginRequest, TokenResponse, UserCreate, UserRead
 
 
 router = APIRouter(prefix="/api/auth", tags=["Authentication"])
-
-
-def require_registration_permission(
-    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
-    db: Session = Depends(get_db),
-) -> User | None:
-    if credentials is None:
-        if settings.allow_public_registration:
-            return None
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Administrator authentication is required to create users",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
-    current_user = get_current_user(credentials, db)
-    if current_user.role is not UserRole.ADMIN:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Insufficient permissions")
-    return current_user
+logger = logging.getLogger(__name__)
 
 
 @router.post("/register", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def register(
     payload: UserCreate,
     db: Session = Depends(get_db),
-    _creator: User | None = Depends(require_registration_permission),
+    creator: User = Depends(require_role(["ADMIN"])),
 ) -> User:
     existing_user = (
         db.query(User)
@@ -54,8 +38,21 @@ def register(
         is_active=True,
     )
     db.add(user)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="Email or username is already registered",
+        ) from None
     db.refresh(user)
+    logger.info(
+        "Account audit actor_user_id=%s action=created target_user_id=%s at=%s",
+        creator.id,
+        user.id,
+        datetime.now(timezone.utc).isoformat(),
+    )
     return user
 
 

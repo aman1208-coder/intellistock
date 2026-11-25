@@ -108,6 +108,17 @@ Requirements: Python, Node.js/npm, and PowerShell. Run the commands below from t
 
 6. Open `http://localhost:5173` and sign in with username `admin` and the `INITIAL_ADMIN_PASSWORD` stored in `backend/.env`.
 
+### Member account management
+
+Visitors cannot self-register. Sign in as an ADMIN and use the dashboard's
+Members panel to create STAFF accounts, activate or deactivate them, or issue
+a password reset. New accounts require a username (3–32 letters, digits, dots,
+underscores, or hyphens), a valid email address, and a password of at least 12
+characters. Account creation always assigns the STAFF role; role values in the
+request are rejected. A reset password is shown once, so copy it before closing
+the dialog. `ALLOW_PUBLIC_REGISTRATION` defaults to `false`; even if set to
+`true`, it does not permit anonymous registration.
+
 The SQLite safe sale path uses an atomic conditional stock update, so concurrent safe sales preserve inventory correctly. SQLite does not support row-level `SELECT ... FOR UPDATE`; the row-locking comparison and the deliberately racy unsafe lost-update demonstration are meaningful only with PostgreSQL. Use Option B for that concurrency demo.
 
 ### Option B: PostgreSQL with Docker Compose
@@ -188,4 +199,3 @@ The project is organized for phased development and validation. Each feature set
 ## Notes
 
 The dashboard is intentionally designed to demonstrate both ideal safe behavior and risky unsafe states so the user can compare system behavior under concurrency pressure, deadlock risk, and scheduling stress in a controlled visual environment.
-

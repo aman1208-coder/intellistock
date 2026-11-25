@@ -8,6 +8,11 @@ From the repository root, run `.\start_demo.ps1`. Forward ports 8000, 5173,
 and 5174 in VS Code; use 5173 for ADMIN and 5174 for STAFF. Stop only the demo
 processes launched by that script with `.\stop_demo.ps1`.
 
+There is no public registration. An authenticated ADMIN creates STAFF member
+accounts from the Members panel; admins can activate or deactivate accounts
+and issue a one-time temporary password reset. `ALLOW_PUBLIC_REGISTRATION`
+defaults to `false` and never bypasses the administrator requirement.
+
 | Feature | ADMIN | STAFF (`demo_member`) |
 | --- | --- | --- |
 | Products | View products and recommendations; add, adjust, and delete products (subject to inventory/history constraints). | View products and recommendations. Product changes are not available. |

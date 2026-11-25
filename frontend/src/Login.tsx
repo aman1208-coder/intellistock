@@ -58,7 +58,7 @@ export default function Login({ onDone }: { onDone: (username: string, role: Use
           <motion.button className="lg-primary" disabled={busy} whileHover={calm ? undefined : { scale: 1.02 }} whileTap={calm ? undefined : { scale: 0.98 }}>
             {busy ? 'Please wait' : 'Sign in'}
           </motion.button>
-          <p className="lg-account-note">New accounts are created by an administrator. Contact your administrator to request access.</p>
+          <p className="lg-account-note">Accounts are created by an administrator.</p>
         </motion.form>
       </motion.section>
     </main>

@@ -8,6 +8,15 @@ export interface Warehouse {
 
 export type UserRole = 'ADMIN' | 'WAREHOUSE_MANAGER' | 'STAFF';
 
+export interface ManagedUser {
+  id: number;
+  username: string;
+  email: string;
+  role: UserRole;
+  is_active: boolean;
+  created_at: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -271,11 +280,27 @@ export async function login(username: string, password: string): Promise<{ acces
   return payload;
 }
 
-export async function register(email: string, username: string, password: string): Promise<{ id: number } | unknown> {
-  return fetchJson('/api/auth/register', {
+export async function register(email: string, username: string, password: string): Promise<ManagedUser> {
+  return fetchJson<ManagedUser>('/api/auth/register', {
     method: 'POST',
     headers: authHeaders(),
     body: JSON.stringify({ email, username, password }),
+  });
+}
+
+export async function listManagedUsers(): Promise<ManagedUser[]> {
+  return fetchJson<ManagedUser[]>('/api/users');
+}
+
+export async function setManagedUserActive(userId: number, active: boolean): Promise<ManagedUser> {
+  return fetchJson<ManagedUser>(`/api/users/${userId}/${active ? 'activate' : 'deactivate'}`, {
+    method: 'PATCH',
+  });
+}
+
+export async function resetManagedUserPassword(userId: number): Promise<{ temporary_password: string }> {
+  return fetchJson<{ temporary_password: string }>(`/api/users/${userId}/reset-password`, {
+    method: 'POST',
   });
 }
 

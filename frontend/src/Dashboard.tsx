@@ -8,6 +8,7 @@ import { ForecastPanel, TransactionsPanel } from './LiveDataPanels';
 import ProductsTable from './ProductsTable';
 import Observability from './Observability';
 import BrandMark from './components/BrandMark';
+import MembersPanel from './MembersPanel';
 
 type NavItem = [string, string];
 
@@ -723,11 +724,14 @@ export default function Dashboard({ onLogout, username, role }: { onLogout: () =
               {label}
             </a>
           ))}
+          {role === 'ADMIN' ? <a href="#members">Members</a> : null}
         </nav>
 
       </motion.header>
 
       {apiError && <div className="api-error-banner" role="alert">{apiError}</div>}
+
+      {role === 'ADMIN' ? <MembersPanel currentUsername={username} /> : null}
 
       <motion.div className="system-hud glass-panel" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
         <div className="hud-row">
